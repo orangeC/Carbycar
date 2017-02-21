@@ -1,20 +1,90 @@
 /* pages/details/details.wxss */
+page {
+  width: 100%;
+  overflow: hidden;
+  background-color: #eeedf3;
+}
 .container {
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
   padding: 0 30rpx;
-  font-family: '华文细黑 Regular', '华文细黑';
+  font-family: '黑体';
+  color: #747474;
+  font-size: 0.8em;
 }
-.header{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    padding: 30rpx;
-    justify-content: space-between;
-    font-size: 0.8em;
-    align-items: center;
-    background-color: #fff;
+.flexLeft{
+  flex: 0.1;
 }
-.header>view{
+.flexCenter{
+  flex: 1.5;
+  display: flex;
+  flex-direction: column;
+}
+.flexRight{
+  color: #b9b9b9;
+  flex: 0.1;
+}
+.header {
+  width: 100%;
+  display: flex;
+  padding: 25rpx 30rpx;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+}
+
+.header>view {
   display: flex;
   justify-content: space-between;
   flex: 0.4;
+}
+.publishTime{
+  width: 100%;
+  display: flex;
+  padding: 25rpx 30rpx;
+  margin-top: 10rpx;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: #fff;
+}
+.site{
+  width: 100%;
+  display: flex;
+  padding: 20rpx 30rpx;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2em;
+}
+.siteLeft{
+  display: flex;
+}
+.siteRight{
+  font-size: 0.8em;
+}
+.siteRight>text{
+  font-size: 1.2em;
+  color: #fd7028;  
+}
+.tips{
+  width: 100%;
+  padding: 15rpx 30rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3089dd;
+  background-color: #fff;
+}
+
+.carInfo{
+  width: 100%;
+  padding: 25rpx 30rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f41;
+  font-size: 1.2em;
+  background-color: #e9edee;
 }

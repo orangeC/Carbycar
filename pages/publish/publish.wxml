@@ -1,0 +1,48 @@
+<!--pages/publish/publish.wxml-->
+<view class="title">
+    <view><image src="../../pic/火箭.png"></image><text>发布需求</text></view>
+    -
+    <view><image src="../../pic/钱.png"></image><text>商家报价</text></view>
+    -
+    <view><image src="../../pic/银行卡.png"></image><text>选择付款</text></view>
+    -
+    <view><image src="../../pic/车.png"></image><text>提车配送</text></view>
+    -
+    <view><image src="../../pic/快速收款.png"></image><text>安全送达</text></view>
+</view>
+
+<view class="pullOut">
+    <view><image src="../../pic/始.png"></image><text>始发</text></view>
+    <view><image src="../../pic/终.png"></image><text>终点</text></view>
+    <view><image src="../../pic/日历.png"></image><text>选择发车时间</text></view>
+</view>
+
+<view class="price">
+    <view class="prices">
+        <view>竞价</view>
+        <switch type="switch" color="orange"/>
+        <view>定价</view>
+    </view>
+    <view>
+        <text>发布后等待报价</text>
+    </view>
+</view>
+
+<view class="detail">
+    <view><image src="../../pic/加号.png"></image><text>添加需要托运的车辆信息</text></view>
+</view>
+
+<view class="require"><image src="../../pic/公路运输(1).png"></image>运输要求</view>
+<view class="requireDetail">
+    <view><image src="../../pic/勾.png"></image>上门提车</view>
+    <view><image src="../../pic/发票.png"></image>需要发票</view>
+</view>
+
+<view class="carInfo"><image src="../../pic/发票(3).png"></image>提车信息</view>
+<view class="carInfoDet">
+    <input placeholder="联系人"/>
+    <input placeholder="手机号"/>
+    <input placeholder="备注"/>
+</view>
+
+<view><button type="primary">发布委托</button></view>

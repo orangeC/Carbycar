@@ -1,0 +1,67 @@
+/* pages/mine/mine.wxss */
+.user{
+    background-color: white;
+    width: 100%;
+    height: 80px;
+    margin-top: 10px;
+    
+}
+
+.userleft{
+    display: inline-block;
+    height: 80px;
+}
+
+.head{
+    width: 30px;
+    height: 30px;
+    margin-top: 20px;  
+}
+
+.userright{
+    display: inline-block;
+    height: 80px;
+    margin-left: 20px;
+    
+}
+.text{
+    
+   
+}
+
+.order{
+    height: 100px;
+    width: 100%;
+    background-color: white;
+    margin-top: 10px;
+}
+
+.allorder{
+    height: 30px;
+    
+}
+
+.status{
+    height:70px;
+}
+
+.statusicon{
+    display: inline-block;
+    height: 70px;
+    width: 25%;
+}
+
+.help{
+    height: 50px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: white;
+    
+}
+
+.about{
+    height: 50px;
+    width: 100%;
+    margin-top: 10px;
+    background-color: white;
+}

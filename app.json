@@ -2,27 +2,38 @@
   "pages":[
     "pages/details/details",
     "pages/index/index",
-    "pages/logs/logs"
+    "pages/logs/logs",
+    "pages/mine/mine",
+    "pages/city/city",
+    "pages/publish/publish"
   ],
   "window":{
-    "backgroundColor":"white",
+    "backgroundColor":"#4093ee",
     "backgroundTextStyle":"white",
-    "navigationBarBackgroundColor": "lightblue",
-    "navigationBarTitleText": "服务",
-    "navigationBarTextStyle":"black",
-    "enablePullDownRefresh":"true"
+    "navigationBarTitleText": "车拉车",
+    "enablePullDownRefresh":"true",
+    "navigationBarBackgroundColor": "#4093ee",
+    "navigationBarTextStyle":"white"
   },
   "tabBar": {
     "color":"#636363",
-    "selectedColor": "#ffd300",
+    "selectedColor": "black",
     "backgroundColor": "#ffffff",
     "borderStyle":"white",
     "list": [{
       "pagePath": "pages/index/index",
-      "text": "发车"
-    }, {
-      "pagePath": "pages/logs/logs",
-      "text": "我的"
+      "text": "发车",
+      "iconPath":"images/u177.png",
+      "selectedIconPath":"images/u177.png"
+    },{
+      "pagePath": "pages/mine/mine",
+      "text": "我的",
+      "iconPath":"images/u177.png",
+      "selectedIconPath":"images/u177.png"     
+    }, {"pagePath": "pages/logs/logs",
+      "text": "log",
+      "iconPath":"images/u177.png",
+      "selectedIconPath":"images/u177.png"
     }]
   }
 }

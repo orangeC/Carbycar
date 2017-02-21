@@ -1,0 +1,137 @@
+/* pages/publish/publish.wxss */
+
+/**
+title
+**/
+.title{
+  padding: 15rpx 15rpx;
+  background-color: #4093ee;
+  font-size: 10pt;
+  color: #ffffff;
+  display: flex;
+  flex-direction: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.title>view{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+}
+.title>view image{
+    width:80rpx;
+    height: 80rpx;
+}
+.title>view text{
+    display: block;
+}
+/**
+pullOut
+**/
+.pullOut{
+    background-color: white;
+    padding: 15rpx 15rpx;
+    border-top: 4px solid #b2b2b2;
+    border-bottom: 4px solid #b2b2b2;
+    font-size: 12pt;
+}
+.pullOut>view{
+    border-bottom: 1px solid #ededec;
+    width: 100%;
+    padding: 20rpx 0;
+    display: flex;
+    align-items: center;
+}
+.pullOut>view image{
+    width: 50rpx;
+    height: 50rpx;
+}
+.pullOut>view text{
+    margin-left: 15rpx;
+}
+/**
+price
+**/
+.price{
+    padding: 15rpx 15rpx;
+    font-size: 10pt;
+    display: flex;
+    flex-direction: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 4px solid #b2b2b2;
+}
+.prices{
+    display: flex;
+    flex-direction: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/**
+detail
+**/
+.detail{
+    font-size: 11pt;
+    color: #707070;
+    padding: 15rpx 15rpx;
+}
+.detail>view image{
+    width: 25rpx;
+    height: 25rpx;
+}
+/**
+require
+**/
+.require{
+    font-size: 12pt;
+    padding: 15rpx 15rpx;
+    background-color: #b2b2b2;
+    display: flex;
+    align-items: center;
+}
+.require image{
+    width: 40rpx;
+    height: 40rpx;
+}
+
+.requireDetail{
+    display: flex;
+    flex-direction: row;
+    font-size: 10pt;
+    color: #707070;
+    padding: 15rpx 15rpx;
+}
+.requireDetail>view{
+    display: flex;
+    align-items: center;
+    border: 1px solid #b2b2b2;
+    border-radius: 50px;
+    padding: 15rpx
+}
+.requireDetail>view image{
+    width: 30rpx;
+    height: 30rpx;
+}
+/**
+carInfo
+**/
+.carInfo{
+    font-size: 12pt;
+    padding: 15rpx 15rpx;
+    display: flex;
+    align-items: center;
+    background-color: #b2b2b2;
+}
+.carInfo image{
+    width: 40rpx;
+    height: 40rpx;
+}
+.carInfoDet{
+    font-size: 10pt;
+    padding: 15rpx 15rpx;
+}
+.carInfoDet input{
+    border-bottom: 1rpx solid #ebebec
+}

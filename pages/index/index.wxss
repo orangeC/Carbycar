@@ -1,1 +1,25 @@
 /* pages/index/index.wxss */
+.order{
+    margin-top: 5px;
+    width: 90%;
+    height: 200px;
+    border-radius: 10px;
+    margin: auto;
+    
+}
+
+.header{
+    height: 20%;
+    background-color: white;
+}
+
+.middle{
+    height: 60%;
+    background-color: white;
+}
+
+.bottom{
+    height: 20%;
+    border-top: 1px solid gray;
+    background-color: gray;  
+}

@@ -1,7 +1,49 @@
+
 <!--pages/details/details.wxml-->
 <view class="container">
-         <view class="header">
-            <text>订单号：{{order}}</text>
-            <view>|<text>报价中</text></view>
-         </view>
+  <view class="header">
+    <text>订单号：{{order}}</text>
+    <view>|
+      <text>报价中</text>
+    </view>
+  </view>
+  <view class="publishTime">
+    <text>发布时间：{{publish}}</text>
+  </view>
+  <view class="site">
+    <view class="siteLeft">
+      <text>{{start}}</text>
+      <view>→</view>
+      <text>{{end}}</text>
+    </view>
+    <view class="siteRight">总价：
+      <text>￥{{money}}</text>
+    </view>
+  </view>
+  <view class=" tips">
+    <text class="flexLeft">*</text>
+    <view class="flexCenter">
+      <text>{{tipsInfo}}</text>
+      <text>{{tipsTime}}</text>
+    </view>
+    <text class="flexRight">></text>
+  </view>
+  <view class="carInfo">
+    <text class="flexLeft">*</text>
+    <text class="flexCenter">车辆信息</text>
+    <text class="flexRight">∨</text>
+
+    <!--<text>∧</text>-->
+  </view>
+  <block wx:for="{{Cars}}" wx:for-item="Cars" wx:key="i">
+    <view class="carDetail">
+      <text>*</text>
+      <view>
+        <text>{{Cars.Brand}}【{{Cars.Style}}】</text>
+        <text>汽车状态： {{Cars.NewCar}}/{{Cars.CanDrive}} 单车估值：{{Cars.Valuation}}万</text>
+        <text>保险：{{Cars.NeedInsurance}}</text>
+      </view>
+      <text></text>
+    </view>
+  </block>
 </view>

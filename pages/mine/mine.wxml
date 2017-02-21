@@ -1,0 +1,32 @@
+<!--pages/mine/mine.wxml-->
+<view class="user">
+    <view class="userleft">
+        <image src="/images/u177.png" class="head"></image>
+    </view>
+    <view class="userright">
+        <text>未登录</text>
+        <text>游客</text>
+    </view>   
+</view>
+
+<view class="order">
+    <view class="allorder">
+        <text>我的订单</text>
+        <text>全部订单</text>
+    </view>
+    <view class="status">
+        <view class="statusicon">报价中</view>
+        <view class="statusicon">待付款</view>
+        <view class="statusicon">待发货</view>
+        <view class="statusicon">待收货</view>
+    </view>
+</view>
+
+<view class="help">
+    <text>交易帮助</text>
+</view>
+
+<view class="about">
+    <text>关于车拉车</text>
+</view>
+

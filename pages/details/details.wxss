@@ -1,9 +1,11 @@
 /* pages/details/details.wxss */
+
 page {
   width: 100%;
   overflow: hidden;
   background-color: #eeedf3;
 }
+
 .container {
   box-sizing: border-box;
   display: flex;
@@ -15,18 +17,22 @@ page {
   color: #747474;
   font-size: 0.8em;
 }
-.flexLeft{
+
+.flexLeft {
   flex: 0.1;
 }
-.flexCenter{
-  flex: 1.5;
+
+.flexCenter {
+  flex: 1.3;
   display: flex;
   flex-direction: column;
 }
-.flexRight{
-  color: #b9b9b9;
+
+.flexRight {
+  color: #8e8f93;
   flex: 0.1;
 }
+
 .header {
   width: 100%;
   display: flex;
@@ -41,7 +47,8 @@ page {
   justify-content: space-between;
   flex: 0.4;
 }
-.publishTime{
+
+.publishTime {
   width: 100%;
   display: flex;
   padding: 25rpx 30rpx;
@@ -50,7 +57,8 @@ page {
   align-items: center;
   background-color: #fff;
 }
-.site{
+
+.site {
   width: 100%;
   display: flex;
   padding: 20rpx 30rpx;
@@ -58,17 +66,21 @@ page {
   align-items: center;
   font-size: 1.2em;
 }
-.siteLeft{
+
+.siteLeft {
   display: flex;
 }
-.siteRight{
+
+.siteRight {
   font-size: 0.8em;
 }
-.siteRight>text{
+
+.siteRight>text {
   font-size: 1.2em;
-  color: #fd7028;  
+  color: #fd7028;
 }
-.tips{
+
+.tips {
   width: 100%;
   padding: 15rpx 30rpx;
   display: flex;
@@ -78,7 +90,7 @@ page {
   background-color: #fff;
 }
 
-.carInfo{
+.carInfo {
   width: 100%;
   padding: 25rpx 30rpx;
   display: flex;
@@ -87,4 +99,59 @@ page {
   color: #3f3f41;
   font-size: 1.2em;
   background-color: #e9edee;
+}
+.carInfoRight{
+  font-size: 0.6em;
+  font-weight: bold;
+}
+.carDetail {
+  width: 100%;
+  padding: 20rpx 30rpx;
+  display: flex;
+  justify-content: flex-start;
+  color: #3f3f41;
+  font-size: 1em;
+  background-color: #fff;
+  border-top: 1px solid #ececec;
+}
+.carDetail-text{
+  padding-top: 8rpx;
+  font-size: 0.9em;
+  color: #979797;
+}
+.consignInfo{
+  width: 100%;
+  padding: 25rpx 30rpx;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  color: #3f3f41;
+  font-size: 1.2em;
+  background-color: #e9edee;
+}
+.consignInfoX{
+  width: 100%;
+  padding: 20rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  color: #989898;
+  font-size: 0.9em;
+  background-color: #fff;
+}
+.consignInfoX>text,view{
+  padding-top: 8rpx;
+}
+.consignInfoX-car{
+  width: 30%;
+  padding: 8rpx;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  color: #fc7229;
+  font-size: 1.3em;
+  border: 1px solid #fc7229;
+  border-radius: 25px; 
+}
+.consignInfoX-name{
+  color: #328bdd;
 }

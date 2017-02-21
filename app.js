@@ -7,6 +7,9 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
+    this.send("/order/consign/","GET",{},function(res){
+      console.log(res)
+    })
   },
   getUserInfo:function(cb){
     var that = this

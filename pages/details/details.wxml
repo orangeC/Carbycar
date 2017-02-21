@@ -76,7 +76,7 @@
   </view>
   <view class="pricing normal">
     <text class="flexLeft">*</text>
-    <text class="flexCenter">当前报价{{}}条（价格仅车主可见）</text>
+    <text class="flexCenter">当前报价{{QuoteInfos.length}}条（价格仅车主可见）</text>
     <text class="flexRight carInfoRight" bindtap="bindHiddenThree" wx:if="{{switchTabThree}}">∨</text>
     <text class="flexRight carInfoRight" bindtap="bindHiddenThree" wx:else>∧</text>
   </view>

@@ -20,12 +20,13 @@ Page({
     Info:{
       TakeAddress:""
     },
-    Remark:""
+    Remark:"",
+    QuoteInfos:[]
   },
   onLoad: function () {
     console.log("onload");
     var that = this;
-    app.send("/order/consign/", "GET", { code: 50308608 }, function (res) {
+    app.send("/order/consign/", "GET", { code: 49582080 }, function (res) {
       if(res){
         console.log(res.data);
         var apply = res.data;
@@ -33,14 +34,14 @@ Page({
         var arr = apply.Cars;
         var arrC = JSON.parse(arr);
         var arrI = JSON.parse(apply.Info);
-        that.setData({ OrderNo: apply.OrderNo , CreateTime: apply.CreateTime, Starting: apply.Starting, Ending: apply.Ending, Price:apply.Price, Title:apply.TraceInfo.Title, tipsTime: apply.TraceInfo.CreateTime, DepartTime: apply.DepartTime, ContactName: apply.ContactName, Info:arrI, Remark:apply.Remark, Cars:arrC})
+        that.setData({ OrderNo: apply.OrderNo , CreateTime: apply.CreateTime, Starting: apply.Starting, Ending: apply.Ending, Price:apply.Price, Title:apply.TraceInfo.Title, tipsTime: apply.TraceInfo.CreateTime, DepartTime: apply.DepartTime, ContactName: apply.ContactName, Info:arrI, Remark:apply.Remark, QuoteInfos:apply.QuoteInfos, Cars:arrC})
       }
     })
   },
   onReady: function () {
     console.log("onReady");
     console.log(this.data.CreateTime.length);
-    console.log(this.data.Info);
+    console.log(this.data.QuoteInfos.length);
   },
   onShow: function () {
     console.log("onshow");

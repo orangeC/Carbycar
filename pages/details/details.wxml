@@ -28,7 +28,7 @@
     </view>
     <text class="flexRight">></text>
   </view>
-  <view class="carInfo">
+  <view class="carInfo normal">
     <text class="flexLeft">*</text>
     <text class="flexCenter">车辆信息</text>
     <text class="flexRight carInfoRight" bindtap="bindHiddenOne" wx:if="{{switchTabOne}}">∨</text>
@@ -54,7 +54,7 @@
       <text class="flexRight">{{Cars.Amount}}辆</text>
     </view>
   </block>
-  <view class="consignInfo">
+  <view class="consignInfo normal">
     <text class="flexLeft">*</text>
     <text class="flexCenter">托运基本信息</text>
     <text class="flexRight carInfoRight" bindtap="bindHiddenTwo" wx:if="{{switchTabTwo}}">∨</text>
@@ -73,5 +73,11 @@
     </view>
     <text wx:if="{{Remark == null}}">备注：无</text>
     <text wx:else>备注：{{Remark}}</text>
+  </view>
+  <view class="pricing normal">
+    <text class="flexLeft">*</text>
+    <text class="flexCenter">当前报价{{}}条（价格仅车主可见）</text>
+    <text class="flexRight carInfoRight" bindtap="bindHiddenThree" wx:if="{{switchTabThree}}">∨</text>
+    <text class="flexRight carInfoRight" bindtap="bindHiddenThree" wx:else>∧</text>
   </view>
 </view>

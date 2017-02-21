@@ -14,6 +14,7 @@ Page({
     hiddenConsignInfo:true,
     switchTabOne:true,
     switchTabTwo:true,
+    switchTabThree:true,
     DepartTime:"",
     ContactName:"",
     Info:{

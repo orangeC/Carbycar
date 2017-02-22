@@ -1,0 +1,49 @@
+/* pages/login/login.wxss */
+.username{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    background-color: white;
+    margin-top: 10px;
+}
+
+.password{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    background-color: white;
+    margin-top: 10px;
+}
+
+.login{
+    background-color: deepskyblue;
+    margin-top: 10px;
+}
+
+.button-hover{
+    background-color: lightblue;
+}
+
+.option{
+    display: flex;
+    align-items: center;
+}
+
+.register{
+    display: inline-block;
+    width: 47%;
+    margin-left: 3%;
+    margin-top:10px;
+    color: dodgerblue;
+}
+
+.forgetPassword{
+    display: inline-block;
+    width: 23%;
+    margin-left: 27%;
+    color: dodgerblue;
+}
+
+.navigator-hover{
+    color: blue;
+}

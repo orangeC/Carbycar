@@ -3,7 +3,6 @@ var cityObj = [{ "id": "35", "provincecode": "150000", "city": "\u963f\u62c9\u55
 //城市检索的首字母
 var searchLetter = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"]
 
-//空白小伙伴的作品.原文地址.http://www.wxapp-union.com/forum.php?mod=viewthread&tid=1644&extra=page%3D1
 function searchLetter() {
     return searchLetter;
 }

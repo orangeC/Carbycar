@@ -1,5 +1,5 @@
 <!--pages/mine/mine.wxml-->
-<view class="user">
+<view class="user" bindtap="goLogin">
     <view class="userleft">
         <image src="/images/u177.png" class="head"></image>
     </view>
@@ -23,10 +23,10 @@
 </view>
 
 <view class="help">
-    <text>交易帮助</text>
+    <text class="helptext">交易帮助</text>
 </view>
 
 <view class="about">
-    <text>关于车拉车</text>
+    <text class="abouttext">关于车拉车</text>
 </view>
 

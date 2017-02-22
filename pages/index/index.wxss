@@ -1,25 +1,42 @@
 /* pages/index/index.wxss */
 .order{
-    margin-top: 5px;
     width: 90%;
     height: 200px;
-    border-radius: 10px;
-    margin: auto;
-    
+    margin: auto;   
 }
 
 .header{
     height: 20%;
     background-color: white;
+    border-top-left-radius:10px;
+    border-top-right-radius:10px;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+    margin-top: 10px;
 }
 
 .middle{
     height: 60%;
     background-color: white;
+    padding-left: 5px;
+}
+
+.text{
+    display: block;
+}
+
+.time{
+    margin-left: 150px;
 }
 
 .bottom{
     height: 20%;
     border-top: 1px solid gray;
-    background-color: gray;  
+    background-color: gray;
+    border-bottom-left-radius:10px;
+    border-bottom-right-radius:10px;
+    display: flex;
+    align-items: center;
+    padding-left: 5px; 
 }

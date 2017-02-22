@@ -1,0 +1,28 @@
+<!--pages/register/register.wxml-->
+<view class="identity">
+    <text>选择身份</text><input value="托运方" disabled="true"/>
+</view>
+<view class="username">
+    <text>手机号码</text><input placeholder="请输入" focus="true" type="number" bindinput="userNameInput"/>
+</view>
+<view class="password">
+    <text>设置密码</text><input placeholder="请输入"  bindinput="userPasswordInput"/>
+</view>
+<view class="checknumber">
+    <view class="checkout">
+        <text>验证码</text><input placeholder="验证码" type="number" bindinput="validCodeInput"/>
+    </view>
+    <view bindtap="checkNumber" class="getValidCode">
+        <text>获取验证码</text>
+    </view>
+</view>
+<view>
+    <checkbox-group class="protocol" bindchange="checkboxChange">
+        <checkbox value="1"></checkbox>
+        <view>我已阅读</view>
+        <navigator url="url" class="protocolUrl">《用户协议》</navigator>
+    </checkbox-group>
+</view>
+<view>
+    <button class="registerButton" disabled="{{registerStatus}}" bindtap="register">注册</button>
+</view>

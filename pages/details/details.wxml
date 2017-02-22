@@ -79,7 +79,7 @@
     <view hidden="{{hiddenPricing}}" class="pricingH">
       <view>
         <text class="pricingH-topText">{{QuoteInfos.CarrierName}}</text>
-        <text>* {{QuoteInfos.QuoteTime}}</text>
+        <text>* {{QuoteInfos.ExpiredTime}}</text>
       </view>
       <view class="pricingC">
         <text>*****{{QuoteInfos.CarrierScore}}.0</text>

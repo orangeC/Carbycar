@@ -1,5 +1,4 @@
 /* pages/publish/publish.wxss */
-
 /**
 title
 **/
@@ -33,7 +32,6 @@ pullOut
     background-color: white;
     padding: 15rpx 15rpx;
     border-top: 4px solid #b2b2b2;
-    border-bottom: 4px solid #b2b2b2;
     font-size: 12pt;
 }
 .pullOut>view{
@@ -49,6 +47,25 @@ pullOut
 }
 .pullOut>view text{
     margin-left: 15rpx;
+}
+.departTime{
+    background-color: white;
+    padding: 15rpx 15rpx;
+    border-bottom: 4px solid #b2b2b2;
+    font-size: 11pt;
+    color: #b2b2b2;
+}
+.departTime>view{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+.departTime>view image{
+    width: 40rpx;
+    height: 40rpx;
+}
+.dateInput{
+    margin-left: 25rpx;
 }
 /**
 price
@@ -68,7 +85,9 @@ price
     justify-content: space-between;
     align-items: center;
 }
-
+.open{
+    color: orange;
+}
 /**
 detail
 **/
@@ -80,6 +99,9 @@ detail
 .detail>view image{
     width: 25rpx;
     height: 25rpx;
+}
+.carDetail{
+    border-bottom: 1rpx solid #b2b2b2;
 }
 /**
 require
@@ -106,13 +128,7 @@ require
 .requireDetail>view{
     display: flex;
     align-items: center;
-    border: 1px solid #b2b2b2;
-    border-radius: 50px;
-    padding: 15rpx
-}
-.requireDetail>view image{
-    width: 30rpx;
-    height: 30rpx;
+    padding: 15rpx;
 }
 /**
 carInfo

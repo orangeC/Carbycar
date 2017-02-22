@@ -1,4 +1,5 @@
 // pages/details/details.js
+var moment = require('../../utils/moment.js');
 var app = getApp();
 Page({
   data: {
@@ -35,7 +36,14 @@ Page({
         var arr = apply.Cars;
         var arrC = JSON.parse(arr);
         var arrI = JSON.parse(apply.Info);
-        that.setData({ OrderNo: apply.OrderNo, CreateTime: apply.CreateTime, Starting: apply.Starting, Ending: apply.Ending, Price: apply.Price, Title: apply.TraceInfo.Title, tipsTime: apply.TraceInfo.CreateTime, DepartTime: apply.DepartTime, ContactName: apply.ContactName, Info: arrI, Remark: apply.Remark, QuoteInfos: apply.QuoteInfos, Cars: arrC })
+        //时间转换(处理接收到的数据)
+        var QuoteData = apply.QuoteInfos;
+        for (var i = 0; i < QuoteData.length; i++) {
+          var fromTime = QuoteData[i].QuoteTime;
+          var newfromTime = moment.getFromnow(fromTime);
+          QuoteData[i].ExpiredTime = newfromTime;
+        }
+        that.setData({ OrderNo: apply.OrderNo, CreateTime: apply.CreateTime, Starting: apply.Starting, Ending: apply.Ending, Price: apply.Price, Title: apply.TraceInfo.Title, tipsTime: apply.TraceInfo.CreateTime, DepartTime: apply.DepartTime, ContactName: apply.ContactName, Info: arrI, Remark: apply.Remark, QuoteInfos: QuoteData, Cars: arrC })
       }
     })
   },
@@ -43,9 +51,10 @@ Page({
     var that = this;
     console.log("onReady");
     console.log(this.data.CreateTime.length);
-    console.log(this.data.QuoteInfos);
     var start = this.data.Starting;
     var end = this.data.Ending;
+
+
     //更改城市地址
     var getStart = app.getWhereyougo(start);
     var getEnd = app.getWhereyougo(end);

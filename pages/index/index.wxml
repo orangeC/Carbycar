@@ -1,15 +1,30 @@
 <!--index.wxml-->
 <view class="order">
     <view class="header">
-        <text>天津→北京</text><text>2小时前</text>
+        <text>天津→北京</text><text class="time">X小时前</text>
     </view>
     <view class="middle">
-        <text>要求发车时间\n车辆信息\n备注</text>   
+        <text class="text">要求发车时间</text>
+        <text class="text">车辆信息</text>
+        <text class="text">备注</text>   
     </view>
     <view class="bottom">
         <text>报价</text>
     </view>      
+</view>
 
+<view class="order">
+    <view class="header">
+        <text>天津→上海</text><text class="time">X小时前</text>
+    </view>
+    <view class="middle">
+        <text class="text">要求发车时间</text>
+        <text class="text">车辆信息</text>
+        <text class="text">备注</text>   
+    </view>
+    <view class="bottom">
+        <text>报价</text>
+    </view>      
 </view>
 
 

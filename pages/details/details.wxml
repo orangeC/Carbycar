@@ -39,16 +39,10 @@
       <text class="flexLeft">*</text>
       <view class="flexCenter">
         <text>{{Cars.Brand}}【{{Cars.Style}}】</text>
-        <view class="carDetail-text">汽车状态：
-          <text wx:if="{{Cars.NewCar}}">新车</text>
-          <text wx:else>二手车</text>/
-          <text wx:if="{{Cars.CanDrive}}">能开</text>
-          <text wx:else>不能开</text>
+        <view class="carDetail-text">汽车状态：<text wx:if="{{Cars.NewCar}}">新车</text><text wx:else>二手车</text>/<text wx:if="{{Cars.CanDrive}}">能开</text><text wx:else>不能开</text>
           单车估值：{{Cars.Valuation}}万
         </view>
-        <view class="carDetail-text">保险：
-          <text wx:if="{{Cars.NeedInsurance}}">需要单车险</text>
-          <text wx:else>不需要单车险</text>
+        <view class="carDetail-text">保险：<text wx:if="{{Cars.NeedInsurance}}">需要单车险</text><text wx:else>不需要单车险</text>
         </view>
       </view>
       <text class="flexRight">{{Cars.Amount}}辆</text>
@@ -66,8 +60,7 @@
       上门提车
     </view>
     <text>要求发车时间：{{DepartTime}}</text>
-    <text>联系人：
-      <text class="consignInfoX-name">{{ContactName}}</text>
+    <text>联系人：<text class="consignInfoX-name">{{ContactName}}</text>
     </text>
     <view>
       <text wx:if="{{Info.TakeAddress == null}}">提车地点：不需要上门提车</text>

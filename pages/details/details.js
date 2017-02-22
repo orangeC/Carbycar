@@ -12,7 +12,7 @@ Page({
     Cars: [],
     hiddenCarDetail: true,
     hiddenConsignInfo: true,
-    hiddenPricing:true,
+    hiddenPricing: true,
     switchTabOne: true,
     switchTabTwo: true,
     switchTabThree: true,
@@ -44,8 +44,15 @@ Page({
     console.log("onReady");
     console.log(this.data.CreateTime.length);
     console.log(this.data.QuoteInfos);
-    //请求城市地址
-    
+    var start = this.data.Starting;
+    var end = this.data.Ending;
+    //更改城市地址
+    var getStart = app.getWhereyougo(start);
+    var getEnd = app.getWhereyougo(end);
+    this.setData({
+      Starting: getStart,
+      Ending: getEnd
+    })
   },
   onShow: function () {
     console.log("onshow");

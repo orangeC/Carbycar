@@ -28,11 +28,11 @@
     </view>
     <text class="flexRight">></text>
   </view>
-  <view class="carInfo normal">
+  <view class="carInfo normal" bindtap="bindHiddenOne">
     <text class="flexLeft">*</text>
     <text class="flexCenter">车辆信息</text>
-    <text class="flexRight carInfoRight" bindtap="bindHiddenOne" wx:if="{{switchTabOne}}">∨</text>
-    <text class="flexRight carInfoRight" bindtap="bindHiddenOne" wx:else>∧</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabOne}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
   </view>
   <block wx:for="{{Cars}}" wx:for-item="Cars" wx:key="i">
     <view hidden="{{hiddenCarDetail}}" class="carDetail">
@@ -54,11 +54,11 @@
       <text class="flexRight">{{Cars.Amount}}辆</text>
     </view>
   </block>
-  <view class="consignInfo normal">
+  <view class="consignInfo normal" bindtap="bindHiddenTwo">
     <text class="flexLeft">*</text>
     <text class="flexCenter">托运基本信息</text>
-    <text class="flexRight carInfoRight" bindtap="bindHiddenTwo" wx:if="{{switchTabTwo}}">∨</text>
-    <text class="flexRight carInfoRight" bindtap="bindHiddenTwo" wx:else>∧</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabTwo}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
   </view>
   <view hidden="{{hiddenConsignInfo}}" class="consignInfoX">
     <view class="consignInfoX-car">
@@ -66,7 +66,9 @@
       上门提车
     </view>
     <text>要求发车时间：{{DepartTime}}</text>
-    <text>联系人：<text class="consignInfoX-name">{{ContactName}}</text></text>
+    <text>联系人：
+      <text class="consignInfoX-name">{{ContactName}}</text>
+    </text>
     <view>
       <text wx:if="{{Info.TakeAddress == null}}">提车地点：不需要上门提车</text>
       <text wx:else>提车地点：{{Info.TakeAddress}}</text>
@@ -74,10 +76,25 @@
     <text wx:if="{{Remark == null}}">备注：无</text>
     <text wx:else>备注：{{Remark}}</text>
   </view>
-  <view class="pricing normal">
+  <view class="pricing normal" bindtap="bindHiddenThree">
     <text class="flexLeft">*</text>
     <text class="flexCenter">当前报价{{QuoteInfos.length}}条（价格仅车主可见）</text>
-    <text class="flexRight carInfoRight" bindtap="bindHiddenThree" wx:if="{{switchTabThree}}">∨</text>
-    <text class="flexRight carInfoRight" bindtap="bindHiddenThree" wx:else>∧</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabThree}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
   </view>
+  <block wx:for="{{QuoteInfos}}" wx:for-item="QuoteInfos" wx:key="i">
+    <view hidden="{{hiddenPricing}}" class="pricingH">
+      <view>
+        <text class="pricingH-topText">{{QuoteInfos.CarrierName}}</text>
+        <text>* {{QuoteInfos.QuoteTime}}</text>
+      </view>
+      <view class="pricingC">
+        <text>*****{{QuoteInfos.CarrierScore}}.0</text>
+        <text class="pricingC-center">承运：{{QuoteInfos.CarryTimes}}单</text>
+        <text class="pricingC-right">￥{{QuoteInfos.QuoteAmount}}元</text>
+      </view>
+    </view>
+    <view hidden="{{hiddenPricing}}" class="pricingB">
+      <text>发车点：</text>{{QuoteInfos.TakePlace}}</view>
+  </block>
 </view>

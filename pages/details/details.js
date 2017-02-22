@@ -10,38 +10,42 @@ Page({
     Title: "",
     tipsTime: "",
     Cars: [],
-    hiddenCarDetail:true,
-    hiddenConsignInfo:true,
-    switchTabOne:true,
-    switchTabTwo:true,
-    switchTabThree:true,
-    DepartTime:"",
-    ContactName:"",
-    Info:{
-      TakeAddress:""
+    hiddenCarDetail: true,
+    hiddenConsignInfo: true,
+    hiddenPricing:true,
+    switchTabOne: true,
+    switchTabTwo: true,
+    switchTabThree: true,
+    DepartTime: "",
+    ContactName: "",
+    Info: {
+      TakeAddress: ""
     },
-    Remark:"",
-    QuoteInfos:[]
+    Remark: "",
+    QuoteInfos: []
   },
   onLoad: function () {
     console.log("onload");
     var that = this;
-    app.send("/order/consign/", "GET", { code: 49582080 }, function (res) {
-      if(res){
+    app.send("/order/consign/", "GET", { code: 49146880 }, function (res) {
+      if (res) {
         console.log(res.data);
         var apply = res.data;
         //解析车辆信息
         var arr = apply.Cars;
         var arrC = JSON.parse(arr);
         var arrI = JSON.parse(apply.Info);
-        that.setData({ OrderNo: apply.OrderNo , CreateTime: apply.CreateTime, Starting: apply.Starting, Ending: apply.Ending, Price:apply.Price, Title:apply.TraceInfo.Title, tipsTime: apply.TraceInfo.CreateTime, DepartTime: apply.DepartTime, ContactName: apply.ContactName, Info:arrI, Remark:apply.Remark, QuoteInfos:apply.QuoteInfos, Cars:arrC})
+        that.setData({ OrderNo: apply.OrderNo, CreateTime: apply.CreateTime, Starting: apply.Starting, Ending: apply.Ending, Price: apply.Price, Title: apply.TraceInfo.Title, tipsTime: apply.TraceInfo.CreateTime, DepartTime: apply.DepartTime, ContactName: apply.ContactName, Info: arrI, Remark: apply.Remark, QuoteInfos: apply.QuoteInfos, Cars: arrC })
       }
     })
   },
   onReady: function () {
+    var that = this;
     console.log("onReady");
     console.log(this.data.CreateTime.length);
-    console.log(this.data.QuoteInfos.length);
+    console.log(this.data.QuoteInfos);
+    //请求城市地址
+    
   },
   onShow: function () {
     console.log("onshow");
@@ -52,16 +56,22 @@ Page({
   onUnload: function () {
     // 页面关闭
   },
-  bindHiddenOne:function(){
+  bindHiddenOne: function () {
     this.setData({
-      hiddenCarDetail:!this.data.hiddenCarDetail,
-      switchTabOne:!this.data.switchTabOne
-      })
+      hiddenCarDetail: !this.data.hiddenCarDetail,
+      switchTabOne: !this.data.switchTabOne
+    })
   },
-  bindHiddenTwo:function(){
+  bindHiddenTwo: function () {
     this.setData({
-      hiddenConsignInfo:!this.data.hiddenConsignInfo,
-      switchTabTwo:!this.data.switchTabTwo
-      })
+      hiddenConsignInfo: !this.data.hiddenConsignInfo,
+      switchTabTwo: !this.data.switchTabTwo
+    })
+  },
+  bindHiddenThree: function () {
+    this.setData({
+      hiddenPricing: !this.data.hiddenPricing,
+      switchTabThree: !this.data.switchTabThree
+    })
   }
 })

@@ -41,7 +41,12 @@ page {
   color: #8e8f93;
   flex: 0.1;
 }
-
+.blue{
+  color: #3089dd;  
+}
+.black{
+  color: #636363;
+}
 .header {
   width: 100%;
   display: flex;
@@ -204,4 +209,42 @@ page {
 }
 .pricingB>text{
   color: #727272;
+}
+.acceptInfoX{
+  width: 100%;
+  padding: 20rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  color: #989898;
+  font-size: 0.9em;
+  background-color: #fff;
+}
+.acceptInfoX>view{
+  padding-top: 6rpx;
+}
+.getCarX{
+  width: 100%;
+  padding: 0rpx 30rpx;
+  display: flex;
+  flex-direction: column;
+  color: #989898;
+  font-size: 0.9em;
+  background-color: #fff;
+}
+.getCarX>view{
+  padding: 10rpx 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.getCarX text{
+  padding-top: 8rpx;
+}
+.getCarX-header{
+  display: flex;
+  flex-direction: column;
+}
+.getCarX-img{
+  width: 30px;
+  height: 30px;
 }

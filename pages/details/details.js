@@ -15,22 +15,33 @@ Page({
     hiddenCarDetail: true,
     hiddenConsignInfo: true,
     hiddenPricing: true,
+    hiddenAcceptInfo: true,
+    hiddenGetCar:true,
     switchTabOne: true,
     switchTabTwo: true,
     switchTabThree: true,
+    switchTabFour: true,
+    switchTabFive: true,
     DepartTime: "",
     ContactName: "",
     Info: {
       TakeAddress: ""
     },
     Remark: "",
-    QuoteInfos: []
+    QuoteInfos: [],
+    CarryInfo: {},
+    QuoteInfo: [],
+    TakePlace: "",
+    Checker:[],
+    Driver:[],
+    CheckerPhone:"",
+    DriverPhone:""
   },
   onLoad: function () {
     console.log("onload");
     var that = this;
     //50425344
-    app.send("/order/consign/", "GET", { code: 49020416 }, function (res) {
+    app.send("/order/consign/", "GET", { code: 50425344 }, function (res) {
       if (res) {
         console.log(res.data);
         var apply = res.data;
@@ -39,6 +50,8 @@ Page({
         var arrC = JSON.parse(arr);
         var arrI = JSON.parse(apply.Info);
         var QuoteData = apply.QuoteInfos;
+        var CarryData = apply.CarryInfo;
+
         if (QuoteData) {
           //时间转换(处理接收到的数据多少小时前)
           for (var i = 0; i < QuoteData.length; i++) {
@@ -46,6 +59,13 @@ Page({
             var newfromTime = moment.getFromnow(fromTime);
             QuoteData[i].ExpiredTime = newfromTime;
           }
+        }
+        if (CarryData) {
+          //String转json
+          var arrQ = JSON.parse(CarryData.QuoteInfo);
+          var arrChecker = JSON.parse(CarryData.Checker);
+          var arrDriver = JSON.parse(CarryData.Driver);
+          console.log(arrDriver)
         }
 
         //时间转换(年月日 时间)
@@ -56,7 +76,7 @@ Page({
         timeTraceInfo = moment.getFormat(timeTraceInfo, "yyyy-MM-dd hh:mm");
         timeDepart = moment.getFormat(timeDepart, "yyyy-MM-dd");
         //设置data值
-        that.setData({ OrderNo: apply.OrderNo, Status: apply.Status, CreateTime: timeCreate, Starting: apply.Starting, Ending: apply.Ending, Price: apply.Price, Title: apply.TraceInfo.Title, tipsTime: timeTraceInfo, DepartTime: timeDepart, ContactName: apply.ContactName, Info: arrI, Remark: apply.Remark, QuoteInfos: QuoteData, Cars: arrC })
+        that.setData({ OrderNo: apply.OrderNo, Status: apply.Status, CreateTime: timeCreate, Starting: apply.Starting, Ending: apply.Ending, Price: apply.Price,  Cars: arrC, Title: apply.TraceInfo.Title, tipsTime: timeTraceInfo, DepartTime: timeDepart, ContactName: apply.ContactName, Info: arrI, Remark: apply.Remark, QuoteInfos: QuoteData, CarryInfo: CarryData, TakePlace: apply.TakePlace, QuoteInfo: arrQ, Checker: arrChecker,Driver: arrDriver, CheckerPhone: arrChecker.Phone, DriverPhone: arrDriver.Phone })
       }
     })
   },
@@ -64,6 +84,7 @@ Page({
     var that = this;
     console.log("onReady");
     console.log(this.data.CreateTime.length);
+    console.log(this.data.CarryInfo);
     //设置状态
     var thatStatus = this.data.Status;
     switch (thatStatus) {
@@ -133,6 +154,30 @@ Page({
     this.setData({
       hiddenPricing: !this.data.hiddenPricing,
       switchTabThree: !this.data.switchTabThree
+    })
+  },
+  bindHiddenFour: function () {
+    this.setData({
+      hiddenAcceptInfo: !this.data.hiddenAcceptInfo,
+      switchTabFour: !this.data.switchTabFour
+    })
+  },
+  bindHiddenFive: function () {
+    this.setData({
+      hiddenGetCar: !this.data.hiddenGetCar,
+      switchTabFive: !this.data.switchTabFive
+    })
+  },
+  bindCallsb: function () {
+    var that = this;
+    wx.makePhoneCall({
+      phoneNumber: that.data.CheckerPhone
+    })
+  },
+  bindCallDriver: function () {
+    var that = this;
+    wx.makePhoneCall({
+      phoneNumber: that.data.DriverPhone
     })
   }
 })

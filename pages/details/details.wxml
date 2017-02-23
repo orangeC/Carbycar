@@ -41,10 +41,19 @@
       <text class="flexLeft">*</text>
       <view class="flexCenter">
         <text>{{Cars.Brand}}【{{Cars.Style}}】</text>
-        <view class="carDetail-text">汽车状态：<text wx:if="{{Cars.NewCar}}">新车</text><text wx:else>二手车</text>/<text wx:if="{{Cars.CanDrive}}">能开</text><text wx:else>不能开</text>
+        <view class="carDetail-text">
+          <text>汽车状态：</text>
+          <text wx:if="{{Cars.NewCar}}">新车</text>
+          <text wx:else>二手车</text>
+          <text>/</text>
+          <text wx:if="{{Cars.CanDrive}}">能开</text>
+          <text wx:else>不能开</text>
           单车估值：{{Cars.Valuation}}万
         </view>
-        <view class="carDetail-text">保险：<text wx:if="{{Cars.NeedInsurance}}">需要单车险</text><text wx:else>不需要单车险</text>
+        <view class="carDetail-text">
+          <text>保险：</text>
+          <text wx:if="{{Cars.NeedInsurance}}">需要单车险</text>
+          <text wx:else>不需要单车险</text>
         </view>
       </view>
       <text class="flexRight">{{Cars.Amount}}辆</text>
@@ -58,11 +67,15 @@
   </view>
   <view hidden="{{hiddenConsignInfo}}" class="consignInfoX">
     <view class="consignInfoX-head">
-      <view class="consignInfoX-car"><text>*</text>上门提车</view>
-      <view class="consignInfoX-car"><text>*</text>需要发票</view>
+      <view class="consignInfoX-car">
+        <text>*</text>上门提车</view>
+      <view class="consignInfoX-car">
+        <text>*</text>需要发票</view>
     </view>
     <text>要求发车时间：{{DepartTime}}</text>
-    <text>联系人：<text class="consignInfoX-name">{{ContactName}}</text>
+    <text>
+      <text>联系人：</text>
+      <text class="consignInfoX-name">{{ContactName}}</text>
     </text>
     <view class="consignInfoX-site">
       <text wx:if="{{Info.TakeAddress == null}}">提车地点：不需要上门提车</text>
@@ -73,7 +86,10 @@
   </view>
   <view class="pricing normal" bindtap="bindHiddenThree">
     <text class="flexLeft">*</text>
-    <text class="flexCenter">当前报价<text wx:if="{{QuoteInfos}}">{{QuoteInfos.length}}</text><text wx:else>0</text>条（价格仅车主可见）</text>
+    <text class="flexCenter">
+      <text>当前报价</text>
+      <text wx:if="{{QuoteInfos}}">{{QuoteInfos.length}}</text>
+      <text wx:else>0</text>条（价格仅车主可见）</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabThree}}">∨</text>
     <text class="flexRight carInfoRight" wx:else>∧</text>
   </view>
@@ -97,5 +113,46 @@
     <text class="flexCenter">承运信息</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabFour}}">∨</text>
     <text class="flexRight carInfoRight" wx:else>∧</text>
+  </view>
+  <view hidden="{{hiddenAcceptInfo}}" class="acceptInfoX">
+    <view>承运公司：
+      <text class="blue">{{CarryInfo.Name}}</text>
+    </view>
+    <view>联系电话：
+      <text class="blue">{{CarryInfo.Phone}}</text>
+    </view>
+    <view>中标价格：￥{{Price}}</view>
+    <view>保险：{{QuoteInfo.Insurance}}</view>
+    <view>提车时间：{{QuoteInfo.TakeTime}}</view>
+    <view>发车地点：{{QuoteInfo.DepartPlace}}</view>
+    <view>到达时间：{{QuoteInfo.ArriveTime}}</view>
+    <view>到达地点：{{QuoteInfo.DeliveryPlace}}</view>
+    <view>板车类型：{{QuoteInfo.LorryType}}</view>
+    <view wx:if="{{QuoteInfo.Remark == null}}">备注：无</view>
+    <view wx:else>备注：{{QuoteInfo.Remark}}</view>
+  </view>
+  <view class="getCar normal" bindtap="bindHiddenFive">
+    <text class="flexLeft">*</text>
+    <text class="flexCenter">提车信息</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabFive}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
+  </view>
+  <view hidden="{{hiddenGetCar}}" class="getCarX">
+    <view>
+      <view class="getCarX-header">
+        <text>
+          <text class="black">提车人：</text>{{Checker.Name}} {{Checker.Phone}}</text>
+        <text>
+          <text class="black">身份证：</text>{{Checker.Number}}</text>
+      </view>
+      <view>
+        <image class="getCarX-img" src="/images/phone.png" mode="scaleToFill" bindtap="bindCallsb"></image>
+      </view>
+    </view>
+    <view>
+      <text>
+        <text class="black">板车司机：</text>{{Driver.Name}} {{Driver.Phone}}</text>
+      <image class="getCarX-img" src="/images/phone.png" mode="scaleToFill" bindtap="bindCallDriver"></image>
+    </view>
   </view>
 </view>

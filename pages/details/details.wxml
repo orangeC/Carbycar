@@ -18,11 +18,12 @@
       <view>→</view>
       <text>{{Ending}}</text>
     </view>
-    <view class="siteRight">总价：
-      <text>￥{{Price}}</text>
+    <view class="siteRight">
+      <text>总价：</text>
+      <text class="siteRight-text">￥{{Price}}</text>
     </view>
   </view>
-  <view class=" tips">
+  <view class="tips" bindtap="bindTips">
     <text class="flexLeft">*</text>
     <view class="flexCenter">
       <text>{{Title}}</text>
@@ -108,7 +109,7 @@
     <view hidden="{{hiddenPricing}}" class="pricingB">
       <text>发车点：</text>{{QuoteInfos.TakePlace}}</view>
   </block>
-  <view class="acceptInfo normal" bindtap="bindHiddenFour">
+  <view hidden="{{hiddenQuote}}" class="acceptInfo normal" bindtap="bindHiddenFour">
     <text class="flexLeft">*</text>
     <text class="flexCenter">承运信息</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabFour}}">∨</text>
@@ -131,7 +132,7 @@
     <view wx:if="{{QuoteInfo.Remark == null}}">备注：无</view>
     <view wx:else>备注：{{QuoteInfo.Remark}}</view>
   </view>
-  <view class="getCar normal" bindtap="bindHiddenFive">
+  <view hidden="{{hiddenQuote}}" class="getCar normal" bindtap="bindHiddenFive">
     <text class="flexLeft">*</text>
     <text class="flexCenter">提车信息</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabFive}}">∨</text>
@@ -141,7 +142,8 @@
     <view>
       <view class="getCarX-header">
         <text>
-          <text class="black">提车人：</text>{{Checker.Name}} {{Checker.Phone}}</text>
+          <text class="black">提车人：</text>{{Checker.Name}} {{Checker.Phone}}
+          </text>
         <text>
           <text class="black">身份证：</text>{{Checker.Number}}</text>
       </view>
@@ -151,11 +153,12 @@
     </view>
     <view>
       <text>
-        <text class="black">板车司机：</text>{{Driver.Name}} {{Driver.Phone}}</text>
+        <text class="black">板车司机：</text>{{Driver.Name}} {{Driver.Phone}}
+        </text>
       <image class="getCarX-img" src="/images/phone.png" mode="scaleToFill" bindtap="bindCallDriver"></image>
     </view>
   </view>
-  <view class="certificate normal" bindtap="bindHiddenSix">
+  <view hidden="{{hiddenQuote}}" class="certificate normal" bindtap="bindHiddenSix">
     <text class="flexLeft">*</text>
     <text class="flexCenter">物流凭证</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabSix}}">∨</text>

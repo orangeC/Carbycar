@@ -1,0 +1,12 @@
+
+<!--pages/status/status.wxml-->
+<view class="container">
+  <block wx:for="{{Status}}" wx:for-item="Status" wx:key="i">
+    <view class="main">
+      <text>{{Status.Title}}</text>
+      <view class="main-view">{{Status.newTime}}</view>
+      <view class="footer"></view>
+      <view class="circle"></view>
+    </view>
+  </block>
+</view>

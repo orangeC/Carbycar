@@ -155,4 +155,32 @@
       <image class="getCarX-img" src="/images/phone.png" mode="scaleToFill" bindtap="bindCallDriver"></image>
     </view>
   </view>
+  <view class="certificate normal" bindtap="bindHiddenSix">
+    <text class="flexLeft">*</text>
+    <text class="flexCenter">物流凭证</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabSix}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
+  </view>
+  <view hidden="{{hiddenCertificate}}" class="certificateX">
+    <view>
+      <view class="certificateX-circle">{{arrContracts.length}}</view>
+      <image src="{{arrContractsImg}}"></image>
+      <text>合同</text>
+    </view>
+    <view>
+      <view class="certificateX-circle">{{arrCheckouts.length}}</view>
+      <image src="{{arrCheckoutsImg}}"></image>
+      <text>验车单</text>
+    </view>
+    <view>
+      <view class="certificateX-circle">{{arrInsurances.length}}</view>
+      <image src="{{arrInsurancesImg}}"></image>
+      <text>保险单</text>
+    </view>
+    <view>
+      <view class="certificateX-circle">{{arrDeliveries.length}}</view>
+      <image src="{{arrDeliveriesImg}}"></image>
+      <text>交车单</text>
+    </view>
+  </view>
 </view>

@@ -10,13 +10,13 @@ Page({
   },
   
   onLoad:function(){
-    wx.getStorage({
-      key: 'id_token',
-      success: function(res) {
-          console.log(res.data)
+    // wx.getStorage({
+    //   key: 'id_token',
+    //   success: function(res) {
+    //       console.log(res.data)
           
-      } 
-    })
+    //   } 
+    // })
   },
 
   userNameInput:function(e){  
@@ -40,7 +40,10 @@ Page({
             username: this.data.userName,  
             password: this.data.userPassword,
             version:'WMP'  
-        },  
+        }, 
+        header: { 
+            'content-type': 'application/json'
+        }, 
         method: 'GET',  
         success: function (res) {  
             that.setData({  

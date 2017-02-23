@@ -1,12 +1,12 @@
 {
   "pages":[
     "pages/details/details",
+    "pages/index/index",
     "pages/publish/publish",
     "pages/publish/brand/brand",
     "pages/publish/consignCar/consignCar",
     "pages/city/start/start",
     "pages/city/end/end",
-    "pages/index/index",
     "pages/logs/logs",
     "pages/mine/mine",
     "pages/login/login",

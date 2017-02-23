@@ -17,11 +17,13 @@ Page({
     hiddenPricing: true,
     hiddenAcceptInfo: true,
     hiddenGetCar:true,
+    hiddenCertificate:true,
     switchTabOne: true,
     switchTabTwo: true,
     switchTabThree: true,
     switchTabFour: true,
     switchTabFive: true,
+    switchTabSix: true,
     DepartTime: "",
     ContactName: "",
     Info: {
@@ -35,10 +37,15 @@ Page({
     Checker:[],
     Driver:[],
     CheckerPhone:"",
-    DriverPhone:""
+    DriverPhone:"",
+    arrContractsImg:"",
+    arrCheckoutsImg:"",
+    arrInsurancesImg:"",
+    arrDeliveriesImg:""
   },
-  onLoad: function () {
+  onLoad: function (e) {
     console.log("onload");
+    console.log(e)
     var that = this;
     //50425344
     app.send("/order/consign/", "GET", { code: 50425344 }, function (res) {
@@ -65,7 +72,16 @@ Page({
           var arrQ = JSON.parse(CarryData.QuoteInfo);
           var arrChecker = JSON.parse(CarryData.Checker);
           var arrDriver = JSON.parse(CarryData.Driver);
-          console.log(arrDriver)
+          var arrCheckouts = JSON.parse(CarryData.Checkouts);
+          var arrContracts = JSON.parse(CarryData.Contracts);
+          var arrDeliveries = JSON.parse(CarryData.Deliveries);
+          var arrInsurances = JSON.parse(CarryData.Insurances);
+          var arrContractsImg = "http://image.3vcar.com" + arrContracts[0].Url;
+          var arrCheckoutsImg = "http://image.3vcar.com" + arrCheckouts[0].Url;
+          var arrInsurancesImg = "http://image.3vcar.com" + arrInsurances[0].Url;
+          var arrDeliveriesImg = "http://image.3vcar.com" + arrDeliveries[0].Url;
+          
+          console.log(arrCheckouts)
         }
 
         //时间转换(年月日 时间)
@@ -76,7 +92,8 @@ Page({
         timeTraceInfo = moment.getFormat(timeTraceInfo, "yyyy-MM-dd hh:mm");
         timeDepart = moment.getFormat(timeDepart, "yyyy-MM-dd");
         //设置data值
-        that.setData({ OrderNo: apply.OrderNo, Status: apply.Status, CreateTime: timeCreate, Starting: apply.Starting, Ending: apply.Ending, Price: apply.Price,  Cars: arrC, Title: apply.TraceInfo.Title, tipsTime: timeTraceInfo, DepartTime: timeDepart, ContactName: apply.ContactName, Info: arrI, Remark: apply.Remark, QuoteInfos: QuoteData, CarryInfo: CarryData, TakePlace: apply.TakePlace, QuoteInfo: arrQ, Checker: arrChecker,Driver: arrDriver, CheckerPhone: arrChecker.Phone, DriverPhone: arrDriver.Phone })
+        that.setData({ OrderNo: apply.OrderNo, Status: apply.Status, CreateTime: timeCreate, Starting: apply.Starting, Ending: apply.Ending, Price: apply.Price,  Cars: arrC, Title: apply.TraceInfo.Title, tipsTime: timeTraceInfo, DepartTime: timeDepart, ContactName: apply.ContactName, Info: arrI, Remark: apply.Remark, QuoteInfos: QuoteData, CarryInfo: CarryData, TakePlace: apply.TakePlace, QuoteInfo: arrQ, Checker: arrChecker,Driver: arrDriver, CheckerPhone: arrChecker.Phone, DriverPhone: arrDriver.Phone ,arrContractsImg: arrContractsImg, arrCheckoutsImg: arrCheckoutsImg, arrInsurancesImg:arrInsurancesImg,arrDeliveriesImg:arrDeliveriesImg , arrCheckouts: arrCheckouts,
+        arrContracts:arrContracts ,arrDeliveries:arrDeliveries, arrInsurances:arrInsurances })
       }
     })
   },
@@ -84,7 +101,7 @@ Page({
     var that = this;
     console.log("onReady");
     console.log(this.data.CreateTime.length);
-    console.log(this.data.CarryInfo);
+    console.log(this.data.arrCheckouts);
     //设置状态
     var thatStatus = this.data.Status;
     switch (thatStatus) {
@@ -166,6 +183,12 @@ Page({
     this.setData({
       hiddenGetCar: !this.data.hiddenGetCar,
       switchTabFive: !this.data.switchTabFive
+    })
+  },
+  bindHiddenSix: function () {
+    this.setData({
+      hiddenCertificate: !this.data.hiddenCertificate,
+      switchTabSix: !this.data.switchTabSix
     })
   },
   bindCallsb: function () {

@@ -23,5 +23,10 @@ Page({
       wx.navigateTo({
           url: '../login/login',
       })
+  },
+  publish:function(){
+    wx.navigateTo({
+          url: '../publish/publish',
+      })
   }
 })

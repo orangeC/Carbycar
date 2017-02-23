@@ -32,7 +32,7 @@ App({
     for (var i = 0; i < arrCity.length; i++) {
       var arrInfo = arrCity[i].cityInfo;
       for (var j = 0; j < arrInfo.length; j++) {
-        if (arrInfo[j].code == start) {
+        if (arrInfo[j].code == start || arrInfo[j].provincecode== start) {
           return arrInfo[j].city
         }
       }
@@ -58,6 +58,9 @@ App({
   },
   globalData: {
     userInfo: null,
-    city: {}
+    city: {},
+    consignCar:[],
+    starting:'始发',
+    ending:'终点'
   }
 })

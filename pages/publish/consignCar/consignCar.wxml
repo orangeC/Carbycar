@@ -1,0 +1,32 @@
+<!--pages/publish/consignCar/consignCar.wxml-->
+<view class="warning" wx:if="{{warning}}">确认估值单位是万</view>
+<view class="container">
+    <view>
+        <view>品牌型号</view>
+        <text class="font" data-index="{{brand}}" bindtap="brand">{{brand}}</text>
+    </view>
+    <view>
+        <view>单车估值（万）</view>
+        <input placeholder="未填写" class="input" bindinput="valuation"/>
+    </view>
+    <view>
+        <view>数量（辆）</view>
+        <input placeholder="未填写" value="{{amount}}" class="input" bindinput="amount"/>
+    </view>
+    <view>
+        <view>汽车状态</view>
+        <view class="carStatus">
+            <view class="font">二手车<switch type="switch" color="#4093ee" bindchange="newCar" checked="{{newCar}}"/>新车</view>
+            <view class="font">不能开<switch type="switch" color="#4093ee" bindchange="canDrive" checked="{{canDrive}}"/>能开</view>
+        </view>
+    </view>
+    <view>
+        <view>单车险</view>
+        <view class="font">需要单车险？<switch type="checkbox" bindchange="needInsurance"/></view>
+    </view>
+    <view>
+        说明：XXXXXXXXXXXXXXXXXX
+    </view>
+</view>
+
+<button type="primary" bindtap="save">保存</button>

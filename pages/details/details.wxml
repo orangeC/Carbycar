@@ -4,11 +4,13 @@
   <view class="header">
     <text>订单号：{{OrderNo}}</text>
     <view>|
-      <text>报价中</text>
+      <text>*</text>
+      <text class="header-text">{{Status}}</text>
     </view>
   </view>
   <view class="publishTime">
-    <text>发布时间：{{CreateTime}}</text>
+    <text class="flexLeft">*</text>
+    <text class="flexCenter">发布时间：{{CreateTime}}</text>
   </view>
   <view class="site">
     <view class="siteLeft">
@@ -55,14 +57,14 @@
     <text class="flexRight carInfoRight" wx:else>∧</text>
   </view>
   <view hidden="{{hiddenConsignInfo}}" class="consignInfoX">
-    <view class="consignInfoX-car">
-      <text>*</text>
-      上门提车
+    <view class="consignInfoX-head">
+      <view class="consignInfoX-car"><text>*</text>上门提车</view>
+      <view class="consignInfoX-car"><text>*</text>需要发票</view>
     </view>
     <text>要求发车时间：{{DepartTime}}</text>
     <text>联系人：<text class="consignInfoX-name">{{ContactName}}</text>
     </text>
-    <view>
+    <view class="consignInfoX-site">
       <text wx:if="{{Info.TakeAddress == null}}">提车地点：不需要上门提车</text>
       <text wx:else>提车地点：{{Info.TakeAddress}}</text>
     </view>
@@ -71,7 +73,7 @@
   </view>
   <view class="pricing normal" bindtap="bindHiddenThree">
     <text class="flexLeft">*</text>
-    <text class="flexCenter">当前报价{{QuoteInfos.length}}条（价格仅车主可见）</text>
+    <text class="flexCenter">当前报价<text wx:if="{{QuoteInfos}}">{{QuoteInfos.length}}</text><text wx:else>0</text>条（价格仅车主可见）</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabThree}}">∨</text>
     <text class="flexRight carInfoRight" wx:else>∧</text>
   </view>
@@ -90,4 +92,10 @@
     <view hidden="{{hiddenPricing}}" class="pricingB">
       <text>发车点：</text>{{QuoteInfos.TakePlace}}</view>
   </block>
+  <view class="acceptInfo normal" bindtap="bindHiddenFour">
+    <text class="flexLeft">*</text>
+    <text class="flexCenter">承运信息</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabFour}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
+  </view>
 </view>

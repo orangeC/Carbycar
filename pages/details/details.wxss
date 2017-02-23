@@ -56,7 +56,9 @@ page {
   justify-content: space-between;
   flex: 0.4;
 }
-
+.header-text{
+  color: #ff722b;
+}
 .publishTime {
   width: 100%;
   display: flex;
@@ -133,11 +135,17 @@ page {
   font-size: 0.9em;
   background-color: #fff;
 }
-.consignInfoX>text,view{
+.consignInfoX>text{
   padding-top: 8rpx;
+}
+.consignInfoX-head{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
 }
 .consignInfoX-car{
   width: 30%;
+  margin-right: 15rpx;
   padding: 8rpx;
   display: flex;
   justify-content: space-around;
@@ -146,6 +154,9 @@ page {
   font-size: 1.3em;
   border: 1px solid #fc7229;
   border-radius: 25px; 
+}
+.consignInfoX-site{
+  padding-top: 8rpx;
 }
 .consignInfoX-name{
   color: #328bdd;

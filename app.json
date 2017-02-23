@@ -1,14 +1,17 @@
 {
   "pages":[
     "pages/details/details",
+    "pages/publish/publish",
+    "pages/publish/brand/brand",
+    "pages/publish/consignCar/consignCar",
+    "pages/city/start/start",
+    "pages/city/end/end",
     "pages/index/index",
     "pages/logs/logs",
     "pages/mine/mine",
     "pages/login/login",
     "pages/register/register",
-    "pages/editpassword/editpassword",
-    "pages/publish/publish"
-
+    "pages/editpassword/editpassword"
   ],
   "window":{
     "backgroundColor":"#4093ee",

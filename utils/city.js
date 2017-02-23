@@ -9,7 +9,6 @@ function searchLetter() {
 
 //对城市信息进行分组
 function cityList() {
-    
     var tempObj=[];
     for (var i = 0; i < searchLetter.length; i++) {
         var initial = searchLetter[i];

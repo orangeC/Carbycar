@@ -1,4 +1,4 @@
-﻿(function() {
+(function() {
     "use strict";
     // 数据源
     var citys = [
@@ -341,7 +341,6 @@
 {"code":659000,"initial":"Z","name":"自治区"},
 {"code":520300,"initial":"Z","name":"遵义"}
     ];
-
     // 输出对象
     var exports = {};
 	// 获得所有城市
@@ -360,8 +359,5 @@
 		}
 		return name;
     };
-
-    
-
-    window.AUTO = exports;
+    module.exports = exports;
 })();

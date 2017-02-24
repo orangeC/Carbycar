@@ -1,8 +1,9 @@
 {
   "pages":[
+    "pages/index/index",
+    "pages/city/shi/shi",
     "pages/details/details",
     "pages/status/status",
-    "pages/index/index",
     "pages/publish/publish",
     "pages/publish/brand/brand",
     "pages/publish/consignCar/consignCar",
@@ -39,6 +40,10 @@
       "selectedIconPath":"images/u177.png"     
     }, {"pagePath": "pages/logs/logs",
       "text": "log",
+      "iconPath":"images/u177.png",
+      "selectedIconPath":"images/u177.png"
+    },{"pagePath": "pages/publish/publish",
+      "text": "发布委托",
       "iconPath":"images/u177.png",
       "selectedIconPath":"images/u177.png"
     }]

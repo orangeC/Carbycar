@@ -11,7 +11,8 @@ Page({
     cityList: [],
     isShowLetter: false,
     scrollTop: 0,
-    city: ""
+    city: "",
+    code:''
   },
   onLoad: function (options) {
     // 生命周期函数--监听页面加载
@@ -150,13 +151,17 @@ Page({
   },
   bindCity: function (e) {
     var city = e.currentTarget.dataset.city;
-    this.setData({ city: city });
-    wx.redirectTo({
+    var code = e.currentTarget.dataset.code
+    this.setData({ city: city,
+                  code:code
+    });
+    wx.navigateBack({
       url:'/pages/publish/publish',
       success:function(res){
           app.globalData.starting=e.currentTarget.dataset.city;
           // wx.setStorageSync('starting', e.currentTarget.dataset.city)
-          console.log('始发地：',e.currentTarget.dataset.city)
+          // app.globalData.cityCode=e.currentTarget.dataset.code;
+          console.log('始发地：',e.currentTarget.dataset.code)
       },
       fail:function(){
           console.log('error!!!!!!!')

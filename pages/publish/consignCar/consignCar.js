@@ -107,7 +107,7 @@ Page({
     });
     app.globalData.consignCar=this.data.consignCar
     console.log(app.globalData.consignCar);
-    wx.redirectTo({
+    wx.navigateBack({
       url: '/pages/publish/publish'
     });
 

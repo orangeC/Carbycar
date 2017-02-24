@@ -57,15 +57,15 @@
     </view>
 </view>
 <view wx:if="{{takeCar}}">
-    <text>请选择提车区域</text>
-    <input placeholder="请输入提车地点"/>
+    <view bindtap="takeDistrict">请选择提车区域</view>
+    <input placeholder="请输入提车地点" bindinput="takeAddress"/>
 </view>
 
 <view class="carInfo"><image src="../../pic/发票(3).png"></image>提车信息</view>
 <view class="carInfoDet">
-    <input placeholder="联系人"/>
-    <input placeholder="手机号"/>
-    <input placeholder="备注"/>
+    <input placeholder="联系人" bindinput="contactName"/>
+    <input placeholder="手机号" bindinput="contactPhone"/>
+    <input placeholder="备注" bindinput="remark"/>
 </view>
 
-<view><button type="primary">发布委托</button></view>
+<view><button type="primary" bindtap="submit">发布委托</button></view>

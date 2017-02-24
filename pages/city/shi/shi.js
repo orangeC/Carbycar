@@ -1,5 +1,6 @@
-// pages/city/end/end.js
+// pages/city/shi/shi.js
 var city = require('../../../utils/city.js');
+var cityCode=require('../../../utils/app.auto.js');
 var app = getApp();
 Page({
   data: {

@@ -5,6 +5,7 @@ Page({
   data: {
     OrderNo: "",
     Status: "",
+    whichType: true,
     CreateTime: "",
     Starting: "",
     Ending: "",
@@ -42,14 +43,21 @@ Page({
     arrContractsImg: "",
     arrCheckoutsImg: "",
     arrInsurancesImg: "",
-    arrDeliveriesImg: ""
+    arrDeliveriesImg: "",
+    arrInfo: [],
+    // 图片预览模式
+    previewModeOne: false,
+    previewModeTwo: false,
+    previewModeThree: false,
+    previewModeFour: false,
   },
   onLoad: function (e) {
     console.log("onload");
-    console.log(e)
+    console.log(e.Code)
+    var eCode = e.Code;
     var that = this;
     //50425344
-    app.send("/order/consign/", "GET", { code: 52611072 }, function (res) {
+    app.send("/order/consign/", "GET", { code: eCode }, function (res) {
       if (res) {
         console.log(res.data);
         var apply = res.data;
@@ -59,6 +67,8 @@ Page({
         var arrI = JSON.parse(apply.Info);
         var QuoteData = apply.QuoteInfos;
         var CarryData = apply.CarryInfo;
+        var arrInfo = JSON.parse(apply.Info);
+        console.log(arrInfo)
 
         if (QuoteData) {
           //时间转换(处理接收到的数据多少小时前)
@@ -94,8 +104,9 @@ Page({
         timeDepart = moment.getFormat(timeDepart, "yyyy-MM-dd");
         //设置data值
         that.setData({
-          OrderNo: apply.OrderNo, Status: apply.Status, CreateTime: timeCreate, Starting: apply.Starting, Ending: apply.Ending, Price: apply.Price, Cars: arrC, Title: apply.TraceInfo.Title, tipsTime: timeTraceInfo, DepartTime: timeDepart, ContactName: apply.ContactName, Info: arrI, Remark: apply.Remark, QuoteInfos: QuoteData, CarryInfo: CarryData, TakePlace: apply.TakePlace, QuoteInfo: arrQ, Checker: arrChecker, Driver: arrDriver, arrContractsImg: arrContractsImg, arrCheckoutsImg: arrCheckoutsImg, arrInsurancesImg: arrInsurancesImg, arrDeliveriesImg: arrDeliveriesImg, arrCheckouts: arrCheckouts,
-          arrContracts: arrContracts, arrDeliveries: arrDeliveries, arrInsurances: arrInsurances
+          OrderNo: apply.OrderNo, Status: apply.Status, Type: apply.Type, CreateTime: timeCreate, Starting: apply.Starting, Ending: apply.Ending, Price: apply.Price, Cars: arrC, Title: apply.TraceInfo.Title, tipsTime: timeTraceInfo, DepartTime: timeDepart, ContactName: apply.ContactName, Info: arrI, Remark: apply.Remark, QuoteInfos: QuoteData, CarryInfo: CarryData, TakePlace: apply.TakePlace, QuoteInfo: arrQ, Checker: arrChecker, Driver: arrDriver, arrContractsImg: arrContractsImg, arrCheckoutsImg: arrCheckoutsImg, arrInsurancesImg: arrInsurancesImg, arrDeliveriesImg: arrDeliveriesImg, arrCheckouts: arrCheckouts,
+          arrContracts: arrContracts, arrDeliveries: arrDeliveries, arrInsurances: arrInsurances, eCode: eCode,
+          arrInfo: arrInfo
         })
       }
     })
@@ -104,50 +115,78 @@ Page({
     var that = this;
     console.log("onReady");
     console.log(this.data.CreateTime.length);
-    console.log(this.data.arrCheckouts);
-    //设置状态
-    var thatStatus = this.data.Status;
-    switch (thatStatus) {
-      case "Publish":
-        that.setData({ Status: "发布中" });
-        break;
-      case "Quote":
-        that.setData({ Status: "报价中" });
-        break;
-      case "Refuse":
-        that.setData({ Status: "拒绝" });
-        break;
-      case "Confirm":
-        that.setData({ Status: "确认中" });
-        break;
-      case "Pay":
-        that.setData({ Status: "付款中", hiddenQuote: false });
-        break;
-      case "Send":
-        that.setData({ Status: "发货中", hiddenQuote: false });
-        break;
-      case "Delivery":
-        that.setData({ Status: "送达", hiddenQuote: false });
-        break;
-      case "Receipt":
-        that.setData({ Status: "收款", hiddenQuote: false });
-        break;
-      case "Finish":
-        that.setData({ Status: "结束", hiddenQuote: false });
-        break;
-      case "Cancel":
-        that.setData({ Status: "取消", hiddenQuote: false });
-        break;
-    }
-    var start = this.data.Starting;
-    var end = this.data.Ending;
-    //更改城市地址
-    var getStart = app.getWhereyougo(start);
-    var getEnd = app.getWhereyougo(end);
-    this.setData({
-      Starting: getStart,
-      Ending: getEnd
+    wx.showToast({
+      title: '玩命加载中',
+      icon: 'loading',
+      duration: 10000,
+      success: function (res) {
+        //设置状态
+        var thatStatus = that.data.Status;
+        switch (thatStatus) {
+          case "Publish":
+            that.setData({ Status: "发布中" });
+            break;
+          case "Quote":
+            that.setData({ Status: "报价中" });
+            break;
+          case "Refuse":
+            that.setData({ Status: "拒绝" });
+            break;
+          case "Confirm":
+            that.setData({ Status: "确认中" });
+            break;
+          case "Pay":
+            that.setData({ Status: "付款中", hiddenQuote: false });
+            break;
+          case "Send":
+            that.setData({ Status: "发货中", hiddenQuote: false });
+            break;
+          case "Delivery":
+            that.setData({ Status: "送达", hiddenQuote: false });
+            break;
+          case "Receipt":
+            that.setData({ Status: "收款", hiddenQuote: false });
+            break;
+          case "Finish":
+            that.setData({ Status: "结束", hiddenQuote: false });
+            break;
+          case "Cancel":
+            that.setData({ Status: "取消", hiddenQuote: false });
+            break;
+        };
+        if (that.data.Type == "Pricing") {
+          that.setData({
+            whichType: true
+          })
+        } else {
+          that.setData({
+            whichType: false
+          })
+        };
+        var start = that.data.Starting;
+        var end = that.data.Ending;
+        //更改城市地址
+        var getStart = app.getWhereyougo(start);
+        var getEnd = app.getWhereyougo(end);
+        that.setData({
+          Starting: getStart,
+          Ending: getEnd
+        })
+
+      },
+      fail: function (e) {
+        console.log(e);
+        wx.showModal({
+          title: '提示',
+          content: '打开失败',
+          showCancel: false
+        })
+      },
+      complete: function () {
+        wx.hideToast();  //隐藏Toast
+      }
     })
+
   },
   onShow: function () {
     console.log("onshow");
@@ -160,7 +199,7 @@ Page({
   },
   bindTips: function () {
     wx.navigateTo({
-      url: "/pages/status/status"
+      url: "/pages/status/status?code=" + this.data.eCode
     })
   },
   bindHiddenOne: function () {
@@ -210,5 +249,40 @@ Page({
     wx.makePhoneCall({
       phoneNumber: that.data.DriverPhone
     })
-  }
+  },
+  // 进入预览模式
+  enterPreviewModeOne(event) {
+    // let url = event.target.dataset.src;
+    // let urls = this.data.mediaList.map(media => media.content);
+    // console.log(this.data.mediaList);
+    // console.log(urls);
+    // let previewIndex = urls.indexOf(url);
+
+    this.setData({ previewModeOne: true, });
+  },
+  enterPreviewModeTwo(event) {
+    this.setData({
+      previewModeTwo: true,
+    });
+  },
+  enterPreviewModeThree(event) {
+    this.setData({
+      previewModeThree: true,
+    });
+  },
+  enterPreviewModeFour(event) {
+    this.setData({
+      previewModeFour: true,
+    });
+  },
+
+  // 退出预览模式
+  leavePreviewMode() {
+    this.setData({
+      previewModeOne: false,
+      previewModeTwo: false,
+      previewModeThree: false,
+      previewModeFour: false,
+    });
+  },
 })

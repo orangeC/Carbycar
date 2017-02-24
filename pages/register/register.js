@@ -104,7 +104,9 @@ Page({
                           'content-type': 'application/json'
                       }, 
                       success: function(res){
-                          console.log('chenggong')
+                          wx.redirectTo({
+                            url: '../login/login',
+                          })
                       },
                       fail: function() {
                           console.log('shibai')

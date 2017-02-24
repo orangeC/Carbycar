@@ -10,13 +10,7 @@ Page({
   },
   
   onLoad:function(){
-    // wx.getStorage({
-    //   key: 'id_token',
-    //   success: function(res) {
-    //       console.log(res.data)
-          
-    //   } 
-    // })
+      
   },
 
   userNameInput:function(e){  
@@ -39,35 +33,46 @@ Page({
         data: {  
             username: this.data.userName,  
             password: this.data.userPassword,
-            version:'WMP'  
+            version:'WMP1.0.3'  
         }, 
         header: { 
             'content-type': 'application/json'
         }, 
         method: 'GET',  
-        success: function (res) {  
-            that.setData({  
-                id_token: res.data.Token,  
-                response:res  
-            })  
-            try {  
-                wx.setStorageSync('id_token', res.data.Token)  
-            } catch (e) {  
-            }  
-            wx.switchTab({
-                url: '../mine/mine',
-                success: function(res){
-                  // success
-                },
-                fail: function() {
-                  // fail
-                }
-            })
+        success: function (res) {
+            var success = res.data.Success;
+            if(success == true){
+                that.setData({  
+                    id_token: res.data.Token,  
+                    response:res  
+                })  
+                try {  
+                    wx.setStorageSync('id_token', res.data.Token)
+                    wx.setStorageSync('userName', res.data.Name)  
+                } catch (e) {  
+                }  
+                wx.switchTab({
+                    url: '../mine/mine',
+                    success: function(res){
+                      
+                    },
+                    fail: function() {
+
+                    }
+                })
+            }else{
+                wx.showToast({
+                    title: '登陆失败请重新登录',  
+                    icon : 'loading',  
+                    duration : 1000
+                })
+            }
+            
             console.log(res.data);  
         },  
         fail: function (res) {
             wx.showToast({  
-                title: '登陆失败请重新登录',  
+                title: '网络有问题',  
                 icon : 'loading',  
                 duration : 1000  
             })  

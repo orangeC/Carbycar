@@ -1,19 +1,20 @@
 <!--index.wxml-->
 <view class="order" wx:for="{{apply}}" bindtap="toDetails" id="{{item.Code}}">
     <view class="header">
-        <text>{{item.Starting}}→{{item.Ending}}</text><text class="time">{{item.Code}}X小时前</text>
+        <text>{{item.Starting}}→{{item.Ending}}</text><text class="time" >{{item.Fromnow}}</text>
     </view>
     <view class="middle">
         <text class="text">要求发车时间:{{item.DepartTime}}</text>
         <text class="text">车辆信息:{{item.Car}}</text>
-        <text class="text">备注:{{item.Remark}}</text>   
+        <text class="text">备注:{{item.Remark}}</text>
+        {{item.Code}}
     </view>
     <view class="bottom">
         <text>{{item.OrderType}}|¥{{item.Price}}|{{item.QuoteAmount}}</text>
     </view>      
 </view>
 
-<view class="order">
+<!--<view class="order">
     <view class="header">
         <text>天津→北京</text><text class="time">X小时前</text>
     </view>
@@ -25,6 +26,6 @@
     <view class="bottom">
         <text>报价</text>
     </view>      
-</view>
+</view>-->
 
 

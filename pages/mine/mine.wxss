@@ -19,52 +19,88 @@
 }
 
 .userright{
-    display: inline-block;
     margin-left: 20px;
 }
 
-.text{
-    
-   
-}
-
 .order{
-    height: 100px;
+    height: 110px;
     width: 100%;
     background-color: white;
     margin-top: 10px;
+    margin-bottom: 10px;
     
 }
 
-.allorder{
-    height: 30px;
+.allOrder{
+    height: 40px;
     display: flex;
     align-items: center; 
-    margin-left: 10px;
+    background-color: #f8f8f8;
+}
+
+.myOrder{
+    width: 47%;
+    margin-left: 3%;
+}
+
+.allOfMyOrder{
+    width: 23%;
+    margin-left: 27%;
 }
 
 .status{
-    height:70px;
-    
+    padding: 15rpx 15rpx;
+    display: flex;
+    flex-direction: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .statusicon{
     display: inline-block;
     height: 70px;
     width: 25%;
-    text-align: center;
 }
 
-.help{
-    height: 50px;
-    width: 100%;
-    margin-top: 10px;
-    background-color: white;
+.statusiconN{
     display: flex;
-    align-items: center;  
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
 }
 
-.helptext{
+.statusIconImg{
+    width: 30px;
+    height: 30px;
+}
+
+.statusIconText{
+
+
+}
+
+.myEditPassword{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    margin-bottom: 10px;
+    background-color: white;
+}
+
+.myEditPasswordText{
+    margin-left: 10px;
+}
+
+.helpText{
+    display: flex;
+    align-items: center;
+    height: 40px;
+    width: 100%;
+    background-color: white;
+}
+
+.helpTextText{
     margin-left: 10px;
 }
 

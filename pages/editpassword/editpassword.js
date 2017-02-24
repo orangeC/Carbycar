@@ -4,8 +4,8 @@ Page({
       userName:'', 
       editPasswordStatus:false,
       validCode:'',
-      newPassword:'',
-      phone:''
+      newPassword:''
+      
   },
 
   onshow:function(){
@@ -36,10 +36,8 @@ Page({
   checkNumber:function(){
       var that = this;
       var length = this.data.userName.length;
-      console.log(length)
       if(length != ''){
             if(length == 11){
-                console.log(length)
                 wx.request({
                     url: 'http://open.3vcar.com/message/valid',
                     data: {
@@ -77,26 +75,31 @@ Page({
       var that = this;
       if(this.data.userName != '' && this.data.validCode != '' && this.data.newPassword != ''){
           if(this.data.userName.length == 11){
-              // wx.request({
-              //       url: 'http://open.3vcar.com/message/valid',
-              //       data: {
-              //         phone:this.data.userName,
-              //       },
-              //       method: 'GET',
-              //       header: { 
-              //           'content-type': 'application/json'
-              //       },
-              //       success: function(res){
-              //         console.log(res.data)
-
-              //       },
-              //       fail: function(res) {
-              //         console.log(res.data)
-              //       }
-              // })
+              wx.request({
+                    url: 'http://open.3vcar.com/system/findpassword',
+                    data: {
+                        UserName:this.data.userName,
+                        ValidCode:this.data.validCode,
+                        Password:this.data.newPassword
+                    },
+                    method: 'POST',
+                    header: { 
+                        'content-type': 'application/json'
+                    },
+                    success: function(res){
+                        console.log('chenggong')
+                        console.log(res.data)
+                        wx.redirectTo({
+                          url: '../login/login',
+                        })
+                    },
+                    fail: function(res) {
+                        console.log('shibai')
+                    }
+              })
           }else{
               wx.showToast({
-                  title   :'请填写相关信息',
+                  title   :'手机号码不完整',
                   icon    :'loading',
                   duration:1000
               })

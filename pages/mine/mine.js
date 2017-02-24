@@ -1,16 +1,39 @@
 // pages/mine/mine.js
 Page({
   data:{
-
+      token:'',
+      userName:'未登录'
   },
-  onLoad:function(options){
-    
+  onLoad:function(e){
+      var that = this;
+      try {
+          var value = wx.getStorageSync('id_token');
+          var name = wx.getStorageSync('userName');
+          if(value != ''){
+                that.setData({
+                    token:value,
+                    userName:name
+                });
+          }
+      } catch (e) {
+      }
   },
   onReady:function(){
     // 页面渲染完成
   },
   onShow:function(){
-    // 页面显示
+        var that = this;
+        try {
+            var value = wx.getStorageSync('id_token');
+            var name = wx.getStorageSync('userName');
+            if(value != ''){
+                    that.setData({
+                        token:value,
+                        userName:name
+                    });
+            }
+        } catch (e) {
+        }
   },
   onHide:function(){
     // 页面隐藏

@@ -2,15 +2,15 @@ var app = getApp();
 var date = require('../../utils/util.js');
 Page({
   data:{
-    starting:'始发',
-    ending:'终点',
-    date: '选择发车时间',
+    starting:app.globalData.starting,
+    ending:app.globalData.ending,
+    date:'请选择发车时间',
     bidding:'open',
     pricing:'',
     consignCar:[],
     offer:true,
-    orderType:'',
-    price:'',
+    Type:'Bidding',
+    price:0,
     startTime:'',
     takeCar:false,
     homeTake:false,
@@ -21,7 +21,9 @@ Page({
     contactName:'',
     contactphone:'',
     remark:'',
-    info:[]
+    info:[],
+    startingCode:'',
+    endingCode:''
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
@@ -32,43 +34,36 @@ Page({
     })
   },
   //页面显示
-  onShow:function(){
+  onShow:function(e){
     this.setData({
-      starting:app.globalData.starting
-    })
-    console.log(this.data.starting);
-    this.setData({
-      ending:app.globalData.ending
-    })
-    console.log(this.data.ending);
+      starting: app.globalData.starting,
+      ending: app.globalData.ending,
+      searchs: app.globalData.searchs,
+
+      startingCode:app.globalData.starting.Code.toString(),
+      endingCode:app.globalData.ending.Code.toString()
+    });
     this.setData({
       consignCar:app.globalData.consignCar
     })
     console.log(this.data.consignCar)
   },
-  //选择始发地
-  starting:function(){
+  //事件处理函数
+  starting: function () {
+    this.setData({
+      category: 'starting'
+    });
     wx.navigateTo({
-      url: '/pages/city/start/start',
-      success: function(res){
-        console.log('城市初始化成功')
-      },
-      fail: function() {
-        console.log('城市初始化失败')
-      }
-    })
+      url: '../city/city?category=starting'
+    });
   },
-  //选择终点地
-  ending:function(){
+  ending: function () {
+    this.setData({
+      category: 'ending'
+    });
     wx.navigateTo({
-      url: '/pages/city/end/end',
-      success: function(res){
-        console.log('城市初始化成功')
-      },
-      fail: function() {
-        console.log('城市初始化失败')
-      }
-    })
+      url: '../city/city?category=ending'
+    });
   },
   //时间选择器
   bindDateChange: function(e) {
@@ -85,21 +80,21 @@ Page({
         bidding:'',
         pricing:'open',
         offer:false,
-        orderType:'定价'
+        Type:'Pricing'
       })
     }else{
       this.setData({
         bidding:'open',
         pricing:'',
         offer:true,
-        orderType:'竞价',
+        Type:'Bidding',
         price:null
       })
     }
   },
   pricing:function(e){
     this.setData({
-      price:e.detail.value
+      price:parseInt(e.detail.value)
     })
     console.log('定价：',this.data.price,'元')
   },
@@ -195,33 +190,34 @@ Page({
     console.log('remark：',e.detail.value)
   },
 
-  submit:function(){
+  startingInput:function(e){
+    console.log('始发：',e.detail.value)
+  },
+
+  submit:function(e){
     var that=this;
     var apply = that.data
     this.setData({
-      info:[
-        {
-          homeTake:this.data.homeTake,
-          takeAddress:this.data.takeAddress,
-          takeDistrict:this.data.takeDistrict,
-          needInvoice:this.data.needInvoice
+      info:{
+          HomeTake:this.data.homeTake,
+          TakeAddress:this.data.takeAddress,
+          TakeDistrict:this.data.takeDistrict,
+          NeedInvoice:this.data.needInvoice
         }
-      ]
     });
-    console.log(this.data.info)
-    
-        console.log("始发 : " + apply.starting)
-        console.log("终点： " + apply.ending)
+    console.log('委托信息')
+        console.log("始发 : " + app.globalData.starting.Code)
+        console.log("终点： " + app.globalData.ending.Code)
         console.log("日期： " + apply.date)
-        console.log("车辆信息： " + apply.consignCar)
-        console.log("价格类型： " + apply.orderType)
+        console.log("车辆信息：",apply.consignCar)
+        console.log("价格类型： " + apply.Type)
         console.log("定价价格： " + apply.price)
         // console.log("上门提车： " + apply.homeTake)
         // console.log("提车区域： " + apply.takeDistrict)
         // console.log("提车地点： " + apply.takeAddress)
         // console.log('需要发票：',apply.needInvoice)
         console.log("联系人： " + apply.contactName)
-        console.log("电话： " + apply.contactphone)
+        console.log("电话： " + apply.contactPhone)
         console.log("备注： " + apply.remark)
         console.log("订单详情：",apply.info)
     wx.showToast({
@@ -233,16 +229,16 @@ Page({
         wx.request({
           url: 'http://open.3vcar.com/order/publish',
           data: {
-            starting:apply.starting,
-            ending:apply.ending,
-            date: apply.date,
-            orderType: apply.orderType,
-            price:apply.price,
-            contactName:apply.contactName,
-            contactPhone:apply.contactPhone,
-            remark:apply.remark,
-            consignCar:apply.consignCar,
-            info:apply.info
+            Starting:apply.startingCode,
+            Ending:apply.endingCode,
+            DepartTime: apply.date,
+            Type: apply.Type,
+            Price:apply.price,
+            ContactName:apply.contactName,
+            ContactPhone:apply.contactPhone,
+            Remark:apply.remark,
+            Cars:apply.consignCar,
+            Info:apply.info
           },
           method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
           header:{'authorization':'eyJWYWxpZCI6dHJ1ZX0.NTA0MDk0NzI.NzQ0YWU2ZmFiZmJlZDM1OWQ1ZjVmMDMxZDMxMmFjYzU2OTAzZmViNQ'

@@ -7,6 +7,7 @@
       <view class="main-view">{{Status.newTime}}</view>
       <view class="footer"></view>
       <view class="circle"></view>
+      <view class="circleOne"></view>
     </view>
   </block>
 </view>

@@ -54,3 +54,23 @@ page {
   top: -5%;
   left: -1.5%;
 }
+.circleOne{
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background-color: #328ddc;
+  border-radius: 50%;
+  top: -5%;
+  left: -1.5%;
+}
+.circleOne::after{
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  content: "";
+  background-color: #328ddc;
+  border: 4px solid #c2ddf2;
+  top: -4px;
+  left: -4px;
+}

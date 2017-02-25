@@ -1,33 +1,29 @@
 // pages/city/city.js
-var city = require('../../utils/city.js');
+// 城市列表
+var util = require('../../utils/citys.js')
+var app = getApp();
 
-//欢迎关注:http://www.wxapp-union.com/portal.php
-//CSDN微信小程序开发专栏:http://blog.csdn.net/column/details/13721.html
 Page({
   data: {
+    citys: [],
+    category: '',
+    // 搜索相关
     searchLetter: [],
+    isShowLetter: false,
     showLetter: "",
     winHeight: 0,
     tHeight: 0,
     bHeight: 0,
     startPageY: 0,
-    cityList: [],
-    isShowLetter: false,
-    scrollTop: 0,
-    city: ""
+    scrollTop: 0
   },
   onLoad: function (options) {
-    // 生命周期函数--监听页面加载
-    var searchLetter = city.searchLetter;
-    var cityList = city.cityList();
-    // console.log(cityInfo);
-
+    var searchLetter = util.getCityInitials();
+    // 获取系统信息
     var sysInfo = wx.getSystemInfoSync();
-    console.log(sysInfo);
     var winHeight = sysInfo.windowHeight;
 
     //添加要匹配的字母范围值
-    //1、更加屏幕高度设置子元素的高度
     var itemH = winHeight / searchLetter.length;
     var tempObj = [];
     for (var i = 0; i < searchLetter.length; i++) {
@@ -40,45 +36,12 @@ Page({
     }
 
     this.setData({
+      category: options.category,
       winHeight: winHeight,
       itemH: itemH,
       searchLetter: tempObj,
-      cityList: cityList
+      citys: util.getCityGroups()
     })
-
-    console.log(this.data.cityInfo);
-  },
-  onReady: function () {
-    // 生命周期函数--监听页面初次渲染完成
-
-  },
-  onShow: function () {
-    // 生命周期函数--监听页面显示
-
-  },
-  onHide: function () {
-    // 生命周期函数--监听页面隐藏
-
-  },
-  onUnload: function () {
-    // 生命周期函数--监听页面卸载
-
-  },
-  onPullDownRefresh: function () {
-    // 页面相关事件处理函数--监听用户下拉动作
-
-  },
-  onReachBottom: function () {
-    // 页面上拉触底事件的处理函数
-
-  },
-  onShareAppMessage: function () {
-    // 用户点击右上角分享
-    return {
-      title: 'title', // 分享标题
-      desc: 'desc', // 分享描述
-      path: 'path' // 分享路径
-    }
   },
   searchStart: function (e) {
     var showLetter = e.currentTarget.dataset.letter;
@@ -100,28 +63,23 @@ Page({
     console.log(pageY);
     if (startPageY - pageY > 0) { //向上移动
       if (pageY < tHeight) {
-        // showLetter=this.mateLetter(pageY,this);
         this.nowLetter(pageY, this);
       }
     } else {//向下移动
       if (pageY > bHeight) {
-        // showLetter=this.mateLetter(pageY,this);
         this.nowLetter(pageY, this);
       }
     }
   },
   searchEnd: function (e) {
-    // console.log(e);
-    // var showLetter=e.currentTarget.dataset.letter;
     var that = this;
     setTimeout(function () {
       that.setData({
         isShowLetter: false
       })
     }, 1000)
-
   },
-  nowLetter: function (pageY, that) {//当前选中的信息
+  nowLetter: function (pageY, that) {
     var letterData = this.data.searchLetter;
     var bHeight = 0;
     var tHeight = 0;
@@ -149,16 +107,16 @@ Page({
   },
   setScrollTop: function (that, showLetter) {
     var scrollTop = 0;
-    var cityList = that.data.cityList;
+    var citys = that.data.citys;
     var cityCount = 0;
     var initialCount = 0;
-    for (var i = 0; i < cityList.length; i++) {
-      if (showLetter == cityList[i].initial) {
+    for (var i = 0; i < citys.length; i++) {
+      if (showLetter == citys[i].initial) {
         scrollTop = initialCount * 30 + cityCount * 41;
         break;
       } else {
         initialCount++;
-        cityCount += cityList[i].cityInfo.length;
+        cityCount += citys[i].citys.length;
       }
     }
 
@@ -167,7 +125,9 @@ Page({
     })
   },
   bindCity: function (e) {
-    var city = e.currentTarget.dataset.city;
-    this.setData({ city: city })
+    var city = JSON.parse(e.target.dataset.json);
+    app.globalData[this.data.category].Name = city.name;
+    app.globalData[this.data.category].Code = city.code;
+    wx.navigateBack();
   }
 })

@@ -12,8 +12,8 @@
 </view>
 
 <view class="pullOut">
-    <view><image src="../../pic/始.png"></image><text bindtap="starting">{{starting}}</text></view>
-    <view><image src="../../pic/终.png"></image><text bindtap="ending">{{ending}}</text></view>
+    <view><image src="../../pic/始.png"></image><text bindtap="starting">{{starting.Name}}</text></view>
+    <view><image src="../../pic/终.png"></image><text bindtap="ending">{{ending.Name}}</text></view>
 </view>
 
 <view class="departTime">
@@ -40,9 +40,9 @@
 <view class="detail">
     <view class="carDetail">
         <view wx:for="{{consignCar}}" wx:key="">
-            <view>{{item.brand}}</view>
-            <view>汽车状态：{{item.newCar}}/{{item.canDrive}} 单车估值：{{item.valuation}}万</view>
-            <view>保险：{{item.needInsurance}}</view>
+            <view>{{item.Brand}}{{item.Style}}</view>
+            <view>汽车状态：{{item.NewCar}}/{{item.CanDrive}} 单车估值：{{item.Valuation}}万</view>
+            <view>保险：{{item.NeedInsurance}}</view>
         </view>
         <view></view>
     </view>

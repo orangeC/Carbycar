@@ -3,15 +3,15 @@
 <view class="container">
     <view>
         <view>品牌型号</view>
-        <text class="font" data-index="{{brand}}" bindtap="brand">{{brand}}</text>
+        <text class="font" data-index="{{brand}}" data-style="{{style}}">{{brand}}{{style}}</text>
     </view>
     <view>
         <view>单车估值（万）</view>
-        <input placeholder="未填写" class="input" bindinput="valuation"/>
+        <input placeholder="未填写" value="{{valuation}}" class="input" bindinput="valuation" type="number"/>
     </view>
     <view>
         <view>数量（辆）</view>
-        <input placeholder="未填写" value="{{amount}}" class="input" bindinput="amount"/>
+        <input placeholder="未填写" value="{{amount}}" class="input" bindinput="amount" type="number"/>
     </view>
     <view>
         <view>汽车状态</view>

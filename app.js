@@ -16,7 +16,13 @@ App({
     });
     this.send("/order/consign/", "GET", {}, function (res) {
       console.log(res)
-    })
+    });
+    //调用API从本地缓存中获取数据
+    var routes = wx.getStorageSync('route') || [];
+    this.globalData.searchs = routes;
+
+    var user = wx.getStorageSync('user') || { Code: '', Expires: 0 };
+    this.globalData.user = user;
   },
   //请求city文件中城市信息
   getcityList: function () {
@@ -56,11 +62,46 @@ App({
       })
     }
   },
+  search: function () {
+    if (this.globalData.starting.Code == 0 && this.globalData.ending.Code == 0) return;
+
+    var data = {
+      Name: this.globalData.starting.Name + '-' + this.globalData.ending.Name,
+      No: this.globalData.starting.Code.toString() + this.globalData.ending.Code.toString()
+    };
+
+    var has = false;
+    for (var i = 0; i < this.globalData.searchs.length; i++) {
+      var sear = this.globalData.searchs[i];
+      if (data.Name == sear.Name) {
+        has = true;
+        break;
+      }
+    }
+
+    if (!has) this.globalData.searchs.unshift(data);
+    if (this.globalData.searchs.length > 5) this.globalData.searchs.pop();
+
+    wx.setStorageSync('route', this.globalData.searchs);
+  },
+  user: function () {
+    wx.setStorageSync('user', this.globalData.user);
+  },
   globalData: {
     userInfo: null,
     city: {},
-    consignCar:[],
-    starting:'始发',
-    ending:'终点'
+    // consignCar:[{Brand:'',Style:'',Valuation:1,Amount:1,NewCar:true,CanDrive:true,NeedInsurance:false}],
+    starting: { Name: '始发', Code: 0 },
+    ending: { Name: '终点', Code: 0 },
+    searchs: [],
+    user: { Code: '', Expires: 0 },
+    consignCar:[]
+    // brand:'',
+    // style:'',
+    // valuation:'',
+    // amount:'',
+    // newCar:'',
+    // canDrive:'',
+    // needInsurance:''
   }
 })

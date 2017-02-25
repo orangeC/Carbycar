@@ -4,11 +4,12 @@ Page({
   data:{
     warning:false,
     brand:'Alpina',
-    valuation:'',
-    amount:'1',
-    newCar:'true',
-    canDrive:'true',
-    needInsurance:'false',
+    style:'B4 BITURBO',
+    valuation:null,
+    amount:1,
+    newCar:true,
+    canDrive:true,
+    needInsurance:false,
     consignCar:[]
   },
   onLoad:function(options){
@@ -53,15 +54,16 @@ Page({
       })
     };
     this.setData({
-      valuation:e.detail.value
+      valuation:parseInt(e.detail.value)
     });
-    console.log('获取输入价格为',e.detail.value);
-    console.log('获取输入品牌为',this.data.brand)
+    console.log('获取输入价格为',parseInt(e.detail.value));
+    console.log('获取输入品牌为',this.data.brand);
+    console.log('获取输入类型为',this.data.style)
   },
   //获取汽车数量
   amount:function(e){
     this.setData({
-      amount:e.detail.value
+      amount:parseInt(e.detail.value)
     });
   },
   //获取汽车状态
@@ -89,6 +91,7 @@ Page({
     var that = this;
     var apply = that.data;
     console.log("品牌： " + apply.brand);
+    console.log('类型： ' +apply.style)
     console.log("价格： " + apply.valuation);
     console.log("数量： " + apply.amount);
     console.log("新车： " + apply.newCar);
@@ -96,16 +99,24 @@ Page({
     console.log("车险： " + apply.needInsurance);
     this.setData({
       consignCar:[
-        {brand:apply.brand,
-         valuation:apply.valuation,
-         amount:apply.amount,
-         newCar:apply.newCar,
-         canDrive:apply.canDrive,
-         needInsurance:apply.needInsurance
+        {Brand:apply.brand,
+         Style:apply.style,
+         Valuation:apply.valuation,
+         Amount:apply.amount,
+         NewCar:apply.newCar,
+         CanDrive:apply.canDrive,
+         NeedInsurance:apply.needInsurance
         }
       ]
     });
-    app.globalData.consignCar=this.data.consignCar
+    // app.globalData.brand=apply.brand;
+    // app.globalData.style=apply.style;
+    // app.globalData.valuation=apply.valuation;
+    // app.globalData.amount=apply.amount;
+    // app.globalData.newCar=apply.newCar;
+    // app.globalData.canDrive=apply.canDrive;
+    // app.globalData.needInsurance=apply.needInsurance;
+    app.globalData.consignCar=apply.consignCar
     console.log(app.globalData.consignCar);
     wx.navigateBack({
       url: '/pages/publish/publish'

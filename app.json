@@ -1,14 +1,12 @@
 {
   "pages":[
-    "pages/index/index",
     "pages/details/details",
+    "pages/index/index",
     "pages/status/status",
-    "pages/city/shi/shi",
-    "pages/publish/publish",
     "pages/publish/brand/brand",
+    "pages/publish/publish",
     "pages/publish/consignCar/consignCar",
-    "pages/city/start/start",
-    "pages/city/end/end",
+    "pages/city/city",
     "pages/logs/logs",
     "pages/mine/mine",
     "pages/login/login",

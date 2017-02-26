@@ -1,4 +1,10 @@
-<!--index.wxml-->
+<!--pages/myalloforder/myalloforder.wxml-->
+<view class="category">
+    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="all">全部</view>
+    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB">进行中</view>
+    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB">已完成</view>
+    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB">已关闭</view>
+</view>
 <view class="order" wx:for="{{apply}}" bindtap="toDetails" id="{{item.Code}}">
     <view class="header">
         <text>{{item.Starting}}→{{item.Ending}}</text><text class="time" >{{item.Fromnow}}</text>
@@ -18,19 +24,3 @@
         <view wx:else class="quoteAmount">{{item.QuoteAmount}}家接单</view>
     </view>      
 </view>
-
-<!--<view class="order">
-    <view class="header">
-        <text>天津→北京</text><text class="time">X小时前</text>
-    </view>
-    <view class="middle">
-        <text class="text">要求发车时间</text>
-        <text class="text">车辆信息</text>
-        <text class="text">备注</text>   
-    </view>
-    <view class="bottom">
-        <text>报价</text>
-    </view>      
-</view>-->
-
-

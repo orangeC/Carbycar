@@ -1,8 +1,8 @@
 {
   "pages":[
-    "pages/details/details",
     "pages/index/index",
     "pages/status/status",
+    "pages/details/details",
     "pages/publish/brand/brand",
     "pages/publish/publish",
     "pages/publish/consignCar/consignCar",
@@ -11,7 +11,8 @@
     "pages/mine/mine",
     "pages/login/login",
     "pages/register/register",
-    "pages/editpassword/editpassword"
+    "pages/editpassword/editpassword",
+    "pages/myalloforder/myalloforder"
     
   ],
   "window":{

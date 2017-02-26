@@ -42,10 +42,19 @@ Page({
                     apply[i].DepartTime = moment.getFormat(apply[i].DepartTime,"yyyy-MM-dd");
                     apply[i].Fromnow;
                     apply[i].Fromnow = moment.getFromnow(apply[i].CreateTime);
+                    if(apply[i].Type == 'Bidding'){
+                        apply[i].Type = true;
+                    }else{
+                        apply[i].Type = false;
+                    }
                 }
                 that.setData({
                     apply:apply,
+<<<<<<< HEAD
+                });   
+=======
                 }); 
+>>>>>>> e109784a2f947c10cb689be15130fcadbe39db03
               } 
           },
           fail: function() {
@@ -78,5 +87,6 @@ Page({
         }
       })
   }
+  
   
 })

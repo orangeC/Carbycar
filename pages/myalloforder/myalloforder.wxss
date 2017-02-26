@@ -1,4 +1,23 @@
-/* pages/index/index.wxss */
+/* pages/myalloforder/myalloforder.wxss */
+.category{
+    display: flex;
+    align-items: center;
+    height: 25px;
+}
+
+.categoryB{
+    width: 25%;
+    height: 23px;
+    text-align: center;
+}
+
+.tapCategoryB{
+    color: deepskyblue;
+    border-bottom-color: deepskyblue;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+
 .order{
     width: 90%;
     height: 200px;

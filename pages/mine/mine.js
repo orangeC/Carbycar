@@ -19,7 +19,7 @@ Page({
       }
   },
   onReady:function(){
-    // 页面渲染完成
+      
   },
   onShow:function(){
         var that = this;
@@ -47,9 +47,34 @@ Page({
           url: '../login/login',
       })
   },
+
   publish:function(){
     wx.navigateTo({
           url: '../publish/publish',
       })
+  },
+
+  myAllOfOrder:function(){
+      wx.navigateTo({
+        url: '../myalloforder/myalloforder',
+        success: function(res){
+          // success
+        },
+        fail: function() {
+          // fail
+        },
+        complete: function() {
+          // complete
+        }
+      })
+  },
+
+  logOut:function(){
+        try {
+            wx.clearStorageSync()
+        } catch(e) {
+
+        }
+
   }
 })

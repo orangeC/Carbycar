@@ -14,7 +14,7 @@
 </view>
 
 <view class="order">
-    <view class="allOrder">
+    <view class="allOrder" bindtap="myAllOfOrder">
         <text class="myOrder">我的订单</text>
         <text class="allOfMyOrder">全部订单</text>
     </view>
@@ -28,17 +28,17 @@
        
             <view class="statusiconN">
                 <image src="/images/u177.png" class="statusIconImg"></image>
-                <text class="statusIconText">报价中</text>
+                <text class="statusIconText">待付款</text>
             </view>
         
             <view class="statusiconN">
                 <image src="/images/u177.png" class="statusIconImg"></image>
-                <text class="statusIconText">报价中</text>
+                <text class="statusIconText">待发货</text>
             </view>
         
             <view class="statusiconN">
                 <image src="/images/u177.png" class="statusIconImg"></image>
-                <text class="statusIconText">报价中</text>
+                <text class="statusIconText">待收货</text>
             </view>
        
     </view>
@@ -55,5 +55,9 @@
 
 <view class="about">
     <text class="abouttext">关于车拉车</text>
+</view>
+
+<view class="logOut" wx:if="{{token}}">
+    <button bindtap="logOut">退出登录</button>
 </view>
 

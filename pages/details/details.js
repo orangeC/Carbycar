@@ -46,14 +46,10 @@ Page({
     arrDeliveriesImg: "",
     arrInfo: [],
     // 图片预览模式
-    previewMode: false,
-
-    // 当前预览索引
-    previewIndex: 0,
-
-    // 多媒体内容列表
-    mediaList: [],
-    // 图片预览模式
+    previewModeOne: false,
+    previewModeTwo: false,
+    previewModeThree: false,
+    previewModeFour: false,
   },
   onLoad: function (e) {
     console.log("onload");
@@ -61,7 +57,7 @@ Page({
     var eCode = e.Code;
     var that = this;
     //50425344
-    app.send("/order/consign/", "GET", { code: 50425344 }, function (res) {
+    app.send("/order/consign/", "GET", { code: eCode }, function (res) {
       if (res) {
         console.log(res.data);
         var apply = res.data;
@@ -91,10 +87,6 @@ Page({
           var arrContracts = JSON.parse(CarryData.Contracts);
           var arrDeliveries = JSON.parse(CarryData.Deliveries);
           var arrInsurances = JSON.parse(CarryData.Insurances);
-          console.log(arrCheckouts);
-          console.log(arrContracts);
-          console.log(arrDeliveries);
-          console.log(arrInsurances);
           var arrContractsImg = "http://image.3vcar.com" + arrContracts[0].Url;
           var arrCheckoutsImg = "http://image.3vcar.com" + arrCheckouts[0].Url;
           var arrInsurancesImg = "http://image.3vcar.com" + arrInsurances[0].Url;
@@ -258,31 +250,39 @@ Page({
       phoneNumber: that.data.DriverPhone
     })
   },
-  // 过滤出预览图片列表
-  getMediaList() {
-    if (typeof this.data.diary !== 'undefined' &&
-      this.data.diary.list.length) {
-      this.setData({
-        mediaList: this.data.diary.list.filter(
-          content => content.type === 'IMAGE'),
-      })
-    }
-  },
-
   // 进入预览模式
-  enterPreviewMode(event) {
-    let url = event.target.dataset.src;
-    let urls = this.data.mediaList.map(media => media.content);
-    console.log(this.data.mediaList);
-    console.log(this.data.diary);
-    console.log(urls);
-    let previewIndex = urls.indexOf(url);
+  enterPreviewModeOne(event) {
+    // let url = event.target.dataset.src;
+    // let urls = this.data.mediaList.map(media => media.content);
+    // console.log(this.data.mediaList);
+    // console.log(urls);
+    // let previewIndex = urls.indexOf(url);
 
-    this.setData({previewMode: true, previewIndex});
+    this.setData({ previewModeOne: true, });
+  },
+  enterPreviewModeTwo(event) {
+    this.setData({
+      previewModeTwo: true,
+    });
+  },
+  enterPreviewModeThree(event) {
+    this.setData({
+      previewModeThree: true,
+    });
+  },
+  enterPreviewModeFour(event) {
+    this.setData({
+      previewModeFour: true,
+    });
   },
 
   // 退出预览模式
   leavePreviewMode() {
-    this.setData({previewMode: false, previewIndex: 0});
+    this.setData({
+      previewModeOne: false,
+      previewModeTwo: false,
+      previewModeThree: false,
+      previewModeFour: false,
+    });
   },
 })

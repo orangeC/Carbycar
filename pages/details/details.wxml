@@ -116,7 +116,8 @@
           <text>{{QuoteInfos.CarrierScore}}.0</text>
         </view>
         <text class="pricingC-center">承运：{{QuoteInfos.CarryTimes}}单</text>
-        <text class="pricingC-right">￥{{QuoteInfos.QuoteAmount}}元</text>
+        <text wx:if="{{ConsignorCode == Code}}" class="pricingC-right">￥{{QuoteInfos.QuoteAmount}}元</text>
+        <text wx:else class="pricingC-right"></text>
       </view>
     </view>
     <view hidden="{{hiddenPricing}}" class="pricingB">

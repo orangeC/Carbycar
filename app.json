@@ -12,15 +12,17 @@
     "pages/login/login",
     "pages/register/register",
     "pages/editpassword/editpassword",
-    "pages/myalloforder/myalloforder"
+    "pages/myalloforder/myalloforder",
+    "pages/statuslist/statuslist",
+    "pages/mineeditpassword/mineeditpassword"
     
   ],
   "window":{
-    "backgroundColor":"#4093ee",
+    "backgroundColor":"#edeef2",
     "backgroundTextStyle":"white",
     "navigationBarTitleText": "车拉车",
     "enablePullDownRefresh":"true",
-    "navigationBarBackgroundColor": "#4093ee",
+    "navigationBarBackgroundColor": "#3d93e3",
     "navigationBarTextStyle":"white"
   },
   "tabBar": {

@@ -10,7 +10,7 @@ Page({
     var oCode = options.code
     var that = this;
     //50425344
-    app.send("/order/trace/", "GET", { code: oCode }, function (res) {
+    app.send("/order/trace/", "GET", { code: oCode },"", function (res) {
       if (res.data) {
         var apply = res.data;
         //时间转换(年月日 时间)

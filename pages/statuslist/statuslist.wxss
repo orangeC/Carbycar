@@ -1,26 +1,4 @@
-/* pages/myalloforder/myalloforder.wxss */
-.category{
-    display: flex;
-    align-items: center;
-    height: 35px;
-}
-
-.categoryB{
-    width: 25%;
-    height: 28px;
-    text-align: center;
-    margin-top: 7px;
-    font-size: 13pt;
-    vertical-align: center;
-}
-
-.tapCategoryB{
-    color: deepskyblue;
-    border-bottom-color: deepskyblue;
-    border-bottom-style: solid;
-    border-bottom-width: 2px;
-}
-
+/* pages/statuslist/statuslist.wxss */
 .order{
     width: 90%;
     height: 200px;
@@ -53,8 +31,8 @@
 }
 
 .time{
-    width: 25%;
-    margin-left: 25%
+    width: 30%;
+    margin-left: 20%
 }
 
 .bottom{

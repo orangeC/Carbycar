@@ -14,7 +14,8 @@ App({
         that.globalData.city = res.data;
       }
     });
-    this.send("/order/consign/", "GET", {}, function (res) {
+
+    this.send("/order/consign/", "GET", {}, "", function (res) {
       console.log(res)
     });
     //调用API从本地缓存中获取数据
@@ -95,7 +96,7 @@ App({
     ending: { Name: '终点', Code: 0 },
     searchs: [],
     user: { Code: '', Expires: 0 },
-    consignCar:[]
+    consignCar: []
     // brand:'',
     // style:'',
     // valuation:'',

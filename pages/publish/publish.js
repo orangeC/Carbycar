@@ -27,9 +27,7 @@ Page({
   },
   onLoad:function(options){
     // 页面初始化 options为页面跳转所带来的参数
-    console.log(date.formatTime(new Date));
-    var that = this;
-    that.setData({
+    this.setData({
       startTime:date.formatTime(new Date)
     })
   },
@@ -38,12 +36,8 @@ Page({
     this.setData({
       starting: app.globalData.starting,
       ending: app.globalData.ending,
-      searchs: app.globalData.searchs,
-
       startingCode:app.globalData.starting.Code.toString(),
-      endingCode:app.globalData.ending.Code.toString()
-    });
-    this.setData({
+      endingCode:app.globalData.ending.Code.toString(),
       consignCar:app.globalData.consignCar
     })
     console.log(this.data.consignCar)
@@ -54,7 +48,7 @@ Page({
       category: 'starting'
     });
     wx.navigateTo({
-      url: '../city/city?category=starting'
+      url: '../city/city?category='+ this.data.category
     });
   },
   ending: function () {
@@ -88,7 +82,7 @@ Page({
         pricing:'',
         offer:true,
         Type:'Bidding',
-        price:null
+        price:0
       })
     }
   },
@@ -115,7 +109,7 @@ Page({
   },
   //订单信息
   homeTake:function(e){
-    if(e.detail.value==true){
+    if(e.detail.value){
       this.setData({
         takeCar:true
       })
@@ -205,23 +199,8 @@ Page({
           NeedInvoice:this.data.needInvoice
         }
     });
-    console.log('委托信息')
-        console.log("始发 : " + app.globalData.starting.Code)
-        console.log("终点： " + app.globalData.ending.Code)
-        console.log("日期： " + apply.date)
-        console.log("车辆信息：",apply.consignCar)
-        console.log("价格类型： " + apply.Type)
-        console.log("定价价格： " + apply.price)
-        // console.log("上门提车： " + apply.homeTake)
-        // console.log("提车区域： " + apply.takeDistrict)
-        // console.log("提车地点： " + apply.takeAddress)
-        // console.log('需要发票：',apply.needInvoice)
-        console.log("联系人： " + apply.contactName)
-        console.log("电话： " + apply.contactPhone)
-        console.log("备注： " + apply.remark)
-        console.log("订单详情：",apply.info)
     wx.showToast({
-      title: '已提交，请等待审核',
+      title: '正在提交',
       icon: 'loading',
       duration: 3000,
       success: function (res) {

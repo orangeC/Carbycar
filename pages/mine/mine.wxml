@@ -8,7 +8,8 @@
             <text class="loginStatus">{{userName}}</text>
         </view>
         <view>
-            <text class="identity">游客账户</text>        
+            <text class="identity" wx:if="{{token}}">个人账户</text>             
+            <text class="identity" wx:else>游客账户</text>   
         </view>
     </view>   
 </view>
@@ -19,37 +20,33 @@
         <text class="allOfMyOrder">全部订单</text>
     </view>
     <view class="status">
-        
-            <view class="statusiconN">
+            <view class="statusiconN" bindtap="statusList" id='1'>
                 <image src="/images/u177.png" class="statusIconImg"></image>
                 <text class="statusIconText">报价中</text>
             </view>
-        
-       
-            <view class="statusiconN">
+            <view class="statusiconN" bindtap="statusList" id='2'>
                 <image src="/images/u177.png" class="statusIconImg"></image>
                 <text class="statusIconText">待付款</text>
             </view>
         
-            <view class="statusiconN">
+            <view class="statusiconN" bindtap="statusList" id='3'>
                 <image src="/images/u177.png" class="statusIconImg"></image>
                 <text class="statusIconText">待发货</text>
             </view>
         
-            <view class="statusiconN">
+            <view class="statusiconN" bindtap="statusList" id='4'>
                 <image src="/images/u177.png" class="statusIconImg"></image>
                 <text class="statusIconText">待收货</text>
             </view>
-       
     </view>
 </view>
 
 <view class="help">
-    <view class="myEditPassword" wx:if="{{token}}">
-        <text class="myEditPasswordText">修改密码</text>
+    <view class="myEditPassword" wx:if="{{token}}" bindtap="mineEditPassword">
+            <text class="myEditPasswordText">修改密码</text>
     </view>
     <view class="helpText">
-        <text class="helpTextText">交易帮助</text>
+            <text class="helpTextText">交易帮助</text>
     </view>
 </view>
 

@@ -50,11 +50,7 @@ Page({
                 }
                 that.setData({
                     apply:apply,
-<<<<<<< HEAD
                 });   
-=======
-                }); 
->>>>>>> e109784a2f947c10cb689be15130fcadbe39db03
               } 
           },
           fail: function() {

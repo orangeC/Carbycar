@@ -5,7 +5,7 @@ Page({
     warning:false,
     brand:'Alpina',
     style:'B4 BITURBO',
-    valuation:null,
+    valuation:0,
     amount:1,
     newCar:true,
     canDrive:true,
@@ -90,13 +90,6 @@ Page({
   save:function(){
     var that = this;
     var apply = that.data;
-    console.log("品牌： " + apply.brand);
-    console.log('类型： ' +apply.style)
-    console.log("价格： " + apply.valuation);
-    console.log("数量： " + apply.amount);
-    console.log("新车： " + apply.newCar);
-    console.log("能开： " + apply.canDrive);
-    console.log("车险： " + apply.needInsurance);
     this.setData({
       consignCar:[
         {Brand:apply.brand,
@@ -109,13 +102,6 @@ Page({
         }
       ]
     });
-    // app.globalData.brand=apply.brand;
-    // app.globalData.style=apply.style;
-    // app.globalData.valuation=apply.valuation;
-    // app.globalData.amount=apply.amount;
-    // app.globalData.newCar=apply.newCar;
-    // app.globalData.canDrive=apply.canDrive;
-    // app.globalData.needInsurance=apply.needInsurance;
     app.globalData.consignCar=apply.consignCar
     console.log(app.globalData.consignCar);
     wx.navigateBack({

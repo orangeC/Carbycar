@@ -3,6 +3,7 @@ var moment = require('../../utils/moment.js');
 var app = getApp();
 Page({
   data: {
+    ConsignorCode: "",
     OrderNo: "",
     Status: "",
     whichType: true,
@@ -50,14 +51,24 @@ Page({
     previewModeTwo: false,
     previewModeThree: false,
     previewModeFour: false,
+    Code: ""
   },
   onLoad: function (e) {
-    console.log("onload");
-    console.log(e.Code)
     var eCode = e.Code;
     var that = this;
+    //获取token
+    wx.getStorage({
+      key: 'id_token',
+      success: function (res) {
+        app.send("/consignor/profile/", "GET", {}, res.data, function (res) {
+          that.setData({
+            Code: res.data.Code
+          })
+        });
+      }
+    });
     //50425344
-    app.send("/order/consign/", "GET", { code: eCode }, function (res) {
+    app.send("/order/consign/", "GET", { code: eCode }, "", function (res) {
       if (res) {
         console.log(res.data);
         var apply = res.data;
@@ -104,8 +115,36 @@ Page({
         timeDepart = moment.getFormat(timeDepart, "yyyy-MM-dd");
         //设置data值
         that.setData({
-          OrderNo: apply.OrderNo, Status: apply.Status, Type: apply.Type, CreateTime: timeCreate, Starting: apply.Starting, Ending: apply.Ending, Price: apply.Price, Cars: arrC, Title: apply.TraceInfo.Title, tipsTime: timeTraceInfo, DepartTime: timeDepart, ContactName: apply.ContactName, Info: arrI, Remark: apply.Remark, QuoteInfos: QuoteData, CarryInfo: CarryData, TakePlace: apply.TakePlace, QuoteInfo: arrQ, Checker: arrChecker, Driver: arrDriver, arrContractsImg: arrContractsImg, arrCheckoutsImg: arrCheckoutsImg, arrInsurancesImg: arrInsurancesImg, arrDeliveriesImg: arrDeliveriesImg, arrCheckouts: arrCheckouts,
-          arrContracts: arrContracts, arrDeliveries: arrDeliveries, arrInsurances: arrInsurances, eCode: eCode,
+          ConsignorCode: apply.ConsignorCode,
+          OrderNo: apply.OrderNo,
+          Status: apply.Status,
+          Type: apply.Type,
+          CreateTime: timeCreate,
+          Starting: apply.Starting,
+          Ending: apply.Ending,
+          Price: apply.Price,
+          Cars: arrC,
+          Title: apply.TraceInfo.Title,
+          tipsTime: timeTraceInfo,
+          DepartTime: timeDepart,
+          ContactName: apply.ContactName,
+          Info: arrI,
+          Remark: apply.Remark,
+          QuoteInfos: QuoteData,
+          CarryInfo: CarryData,
+          TakePlace: apply.TakePlace,
+          QuoteInfo: arrQ,
+          Checker: arrChecker,
+          Driver: arrDriver,
+          arrContractsImg: arrContractsImg,
+          arrCheckoutsImg: arrCheckoutsImg,
+          arrInsurancesImg: arrInsurancesImg,
+          arrDeliveriesImg: arrDeliveriesImg,
+          arrCheckouts: arrCheckouts,
+          arrContracts: arrContracts,
+          arrDeliveries: arrDeliveries,
+          arrInsurances: arrInsurances,
+          eCode: eCode,
           arrInfo: arrInfo
         })
       }
@@ -186,7 +225,7 @@ Page({
         wx.hideToast();  //隐藏Toast
       }
     })
-
+    console.log(this.data.ConsignorCode)
   },
   onShow: function () {
     console.log("onshow");

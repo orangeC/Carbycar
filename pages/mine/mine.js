@@ -4,22 +4,22 @@ Page({
       token:'',
       userName:'未登录'
   },
-  onLoad:function(e){
-      var that = this;
-      try {
-          var value = wx.getStorageSync('id_token');
-          var name = wx.getStorageSync('userName');
-          if(value != ''){
-                that.setData({
-                    token:value,
-                    userName:name
-                });
-          }
-      } catch (e) {
-      }
+  onLoad:function(){
+    //   var that = this;
+    //   try {
+    //       var value = wx.getStorageSync('id_token');
+    //       var name = wx.getStorageSync('userName');
+    //       if(value != ''){
+    //             that.setData({
+    //                 token:value,
+    //                 userName:name
+    //             });
+    //       }
+    //   } catch (e) {
+    //   }
   },
   onReady:function(){
-      
+        
   },
   onShow:function(){
         var that = this;
@@ -36,16 +36,33 @@ Page({
         }
   },
   onHide:function(){
-    // 页面隐藏
+        var that = this;
+        try {
+            var value = wx.getStorageSync('id_token');
+            var name = wx.getStorageSync('userName');
+            if(value != ''){
+                    that.setData({
+                        token:value,
+                        userName:name
+                    });
+            }
+        } catch (e) {
+
+        }
   },
   onUnload:function(){
     // 页面关闭
   },
 
   goLogin:function(){
-      wx.navigateTo({
-          url: '../login/login',
-      })
+      var that = this;
+      if(that.data.token){
+            
+      }else{
+            wx.navigateTo({
+                url: '../login/login',
+            })
+      }
   },
 
   publish:function(){
@@ -55,26 +72,49 @@ Page({
   },
 
   myAllOfOrder:function(){
-      wx.navigateTo({
-        url: '../myalloforder/myalloforder',
-        success: function(res){
-          // success
-        },
-        fail: function() {
-          // fail
-        },
-        complete: function() {
-          // complete
-        }
-      })
+      var that = this;
+      if(that.data.token){
+            wx.navigateTo({
+                url: '../myalloforder/myalloforder',
+            })
+      }else{
+            wx.navigateTo({
+                url: '../login/login',
+            })
+      }
   },
 
   logOut:function(){
         try {
-            wx.clearStorageSync()
+            wx.clearStorageSync();
         } catch(e) {
 
         }
+        wx.navigateTo({
+            url: '../login/login',
+        })
+        
+  },
 
+  statusList:function(e){
+        var that = this;
+        var id = e.currentTarget.id;
+        if(that.data.token){
+            wx.navigateTo({
+                url: '../statuslist/statuslist?id=' + id,
+            })
+        }else{
+            wx.navigateTo({
+                url: '../login/login',
+            })
+        }
+  },
+
+  mineEditPassword:function(){
+        var that = this;
+        wx.navigateTo({
+          url: '../mineeditpassword/mineeditpassword',
+        })
   }
+  
 })

@@ -1,10 +1,4 @@
-<!--pages/myalloforder/myalloforder.wxml-->
-<view class="category">
-    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id='0'>全部</view>
-    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id="1">进行中</view>
-    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id="2">已完成</view>
-    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id="3">已关闭</view>
-</view>
+<!--pages/statuslist/statuslist.wxml-->
 <view class="order" wx:for="{{apply}}" bindtap="toDetails" id="{{item.Code}}">
     <view class="header">
         <text class="city">{{item.Starting}}→{{item.Ending}}</text><text class="time" >{{item.Status}}</text>
@@ -24,3 +18,4 @@
         <view wx:else class="quoteAmount">{{item.QuoteAmount}}家接单</view>
     </view>      
 </view>
+

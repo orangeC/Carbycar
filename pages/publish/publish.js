@@ -40,12 +40,11 @@ Page({
       endingCode:app.globalData.ending.Code.toString(),
       consignCar:app.globalData.consignCar
     })
-    console.log(this.data.consignCar)
   },
   //事件处理函数
   starting: function () {
     this.setData({
-      category: 'starting'
+      Category: 'starting'
     });
     wx.navigateTo({
       url: '../city/city?category='+ this.data.category
@@ -53,7 +52,7 @@ Page({
   },
   ending: function () {
     this.setData({
-      category: 'ending'
+      Category: 'ending'
     });
     wx.navigateTo({
       url: '../city/city?category=ending'
@@ -134,26 +133,29 @@ Page({
   //提车区域(待修改)
   takeDistrict:function(){
     var that=this;
-    wx.request({
-      url: 'http://open.3vcar.com/system/city',
-      data: {
-        name:this.data.starting
-      },
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      header: {'content-type': 'application/json'}, // 设置请求的 header
-      success: function(res){
-        that.setData({
-          cityName:res.data
-        });
-        console.log(res.data)
-      },
-      fail: function() {
-        // fail
-      },
-      complete: function() {
-        // complete
-      }
-    })
+    if(app.globalData.starting.Code!==0){
+        wx.request({
+          url: 'http://open.3vcar.com/system/city',
+          data: {
+            code:app.globalData.starting.Code
+          },
+          method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+          header: {'content-type': 'application/json'}, // 设置请求的 header
+          success: function(res){
+            that.setData({
+              cityName:res.data
+            });
+            console.log(res.data)
+          },
+          
+        })
+    }else{
+      wx.showToast({
+        title: '请选择提车区域',
+        duration: 2000
+      });
+    }
+    
   },
   //提车地点
   takeAddress:function(e){
@@ -199,6 +201,20 @@ Page({
           NeedInvoice:this.data.needInvoice
         }
     });
+
+            wx.showToast({
+              title: '234',
+              duration: 2000
+            });
+          this.setData({
+      info:{
+          HomeTake:this.data.homeTake,
+          TakeAddress:this.data.takeAddress,
+          TakeDistrict:this.data.takeDistrict,
+          NeedInvoice:this.data.needInvoice
+        }
+    });
+
     wx.showToast({
       title: '正在提交',
       icon: 'loading',
@@ -234,6 +250,6 @@ Page({
         })
       }
       });
-  }
-
+    }
+      
 })

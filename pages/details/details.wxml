@@ -180,23 +180,23 @@
   </view>
   <view hidden="{{hiddenCertificate}}" class="certificateX">
     <view>
-      <view class="certificateX-circle">{{arrContracts.length}}</view>
-      <image src="{{arrContractsImg}}" bindtap="enterPreviewModeOne"></image>
+      <view hidden="{{imgOneLength == 0}}" class="certificateX-circle">{{imgOneLength}}</view>
+      <image src="{{imgSrcOne}}" bindtap="enterPreviewModeOne"></image>
       <text>合同</text>
     </view>
     <view>
-      <view class="certificateX-circle">{{arrCheckouts.length}}</view>
-      <image src="{{arrCheckoutsImg}}" bindtap="enterPreviewModeTwo"></image>
+      <view hidden="{{imgTwoLength == 0}}" class="certificateX-circle">{{imgTwoLength}}</view>
+      <image src="{{imgSrcTwo}}" bindtap="enterPreviewModeTwo"></image>
       <text>验车单</text>
     </view>
     <view>
-      <view class="certificateX-circle">{{arrInsurances.length}}</view>
-      <image src="{{arrInsurancesImg}}" bindtap="enterPreviewModeThree"></image>
+      <view hidden="{{imgThreeLength == 0}}" class="certificateX-circle">{{imgThreeLength}}</view>
+      <image src="{{imgSrcThree}}" bindtap="enterPreviewModeThree"></image>
       <text>保险单</text>
     </view>
     <view>
-      <view class="certificateX-circle">{{arrDeliveries.length}}</view>
-      <image src="{{arrDeliveriesImg}}" bindtap="enterPreviewModeFour"></image>
+      <view hidden="{{imgFourLength == 0}}" class="certificateX-circle">{{imgFourLength}}</view>
+      <image src="{{imgSrcFour}}" bindtap="enterPreviewModeFour"></image>
       <text>交车单</text>
     </view>
   </view>
@@ -204,28 +204,28 @@
   <!-- 预览模式1 -->
   <swiper class="swiper-container" duration="400" current="{{previewIndex}}" bindtap="leavePreviewMode" style="display:{{previewModeOne ? 'block' : 'none'}};">
     <swiper-item>
-      <image src="{{arrContractsImg}}" mode="scaleToFill"></image>
+      <image src="{{imgOneLength}}" mode="scaleToFill"></image>
     </swiper-item>
   </swiper>
 
   <!-- 预览模式2 -->
   <swiper class="swiper-container" duration="400" current="{{previewIndex}}" bindtap="leavePreviewMode" style="display:{{previewModeTwo ? 'block' : 'none'}};">
     <swiper-item>
-      <image src="{{arrCheckoutsImg}}" mode="scaleToFill"></image>
+      <image src="{{imgTwoLength}}" mode="scaleToFill"></image>
     </swiper-item>
   </swiper>
 
   <!-- 预览模式3 -->
   <swiper class="swiper-container" duration="400" current="{{previewIndex}}" bindtap="leavePreviewMode" style="display:{{previewModeThree ? 'block' : 'none'}};">
     <swiper-item>
-      <image src="{{arrInsurancesImg}}" mode="scaleToFill"></image>
+      <image src="{{imgThreeLength}}" mode="scaleToFill"></image>
     </swiper-item>
   </swiper>
 
   <!-- 预览模式4 -->
   <swiper class="swiper-container" duration="400" current="{{previewIndex}}" bindtap="leavePreviewMode" style="display:{{previewModeFour ? 'block' : 'none'}};">
     <swiper-item>
-      <image src="{{arrDeliveriesImg}}" mode="scaleToFill"></image>
+      <image src="{{imgFourLength}}" mode="scaleToFill"></image>
     </swiper-item>
   </swiper>
 </view>

@@ -10,10 +10,16 @@ Page({
     newCar:true,
     canDrive:true,
     needInsurance:false,
-    consignCar:[]
+    consignCar:[],
+    hide:true,
+    id:0
   },
   onLoad:function(options){
-    // 页面初始化 options为页面跳转所带来的参数
+    if(this.data.id!==0){
+      this.setData({
+
+      })
+    }
   },
   onReady:function(){
     // 页面渲染完成
@@ -107,6 +113,24 @@ Page({
     wx.navigateBack({
       url: '/pages/publish/publish'
     });
-
+        this.setData({
+          id:apply.id,
+          consignCar:[
+            {Brand:apply.brand,
+            Style:apply.style,
+            Valuation:apply.valuation,
+            Amount:apply.amount,
+            NewCar:apply.newCar,
+            CanDrive:apply.canDrive,
+            NeedInsurance:apply.needInsurance
+            }
+          ]
+        });
+        app.globalData.id=apply.id;
+        app.globalData.consignCar=apply.consignCar;
+        console.log(app.globalData.consignCar);
+        wx.navigateBack({
+          url: '/pages/publish/publish'
+        });
   }
 })

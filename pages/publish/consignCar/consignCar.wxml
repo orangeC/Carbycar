@@ -29,4 +29,5 @@
     </view>
 </view>
 
-<button type="primary" bindtap="save">保存</button>
+<button type="primary" bindtap="save" wx:if="{{hide}}">保存</button>
+<button type="primary" bindtap="edit" wx:else>修改</button>

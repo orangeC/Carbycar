@@ -1,21 +1,19 @@
 {
   "pages":[
+    "pages/details/details",
     "pages/index/index",
     "pages/status/status",
-    "pages/details/details",
     "pages/publish/brand/brand",
-    "pages/publish/publish",
-    "pages/publish/consignCar/consignCar",
     "pages/city/city",
-    "pages/logs/logs",
-    "pages/mine/mine",
+    "pages/me/me",
     "pages/login/login",
     "pages/register/register",
-    "pages/editpassword/editpassword",
-    "pages/myalloforder/myalloforder",
+    "pages/forgetpassword/forgetpassword",
+    "pages/myorder/myorder",
     "pages/statuslist/statuslist",
-    "pages/mineeditpassword/mineeditpassword"
-    
+    "pages/editpassword/editpassword",
+    "pages/publish/publish",
+    "pages/publish/consignCar/consignCar" 
   ],
   "window":{
     "backgroundColor":"#edeef2",
@@ -36,19 +34,10 @@
       "iconPath":"images/u177.png",
       "selectedIconPath":"images/u177.png"
     },{
-      "pagePath": "pages/mine/mine",
+      "pagePath": "pages/me/me",
       "text": "我的",
       "iconPath":"images/u177.png",
       "selectedIconPath":"images/u177.png"     
-    }, {"pagePath": "pages/logs/logs",
-      "text": "log",
-      "iconPath":"images/u177.png",
-      "selectedIconPath":"images/u177.png"
-    },{
-      "pagePath": "pages/publish/publish",
-      "text": "发布委托",
-      "iconPath":"images/u177.png",
-      "selectedIconPath":"images/u177.png"
     }]
   }
 }

@@ -5,13 +5,8 @@ var moment = require('../../utils/moment.js');
 Page({
   data:{
       apply:'',
-      userName:'',
       token:'',
-      category:0,
-      quote:[],
-      confirm:[],
-      pay:[],
-      send:[],
+      Pricing:'',
       id:''
   },
   onLoad:function(e){
@@ -22,11 +17,9 @@ Page({
       });
       try {
           var value = wx.getStorageSync('id_token');
-          var name = wx.getStorageSync('userName');
           if(value != ''){
                 that.setData({
                     token:value,
-                    userName:name
                 });
           }
       } catch (e) {
@@ -34,7 +27,7 @@ Page({
       wx.request({
         url: 'http://open.3vcar.com/consignor/order',
         data: {
-            category:1,
+            category:this.data.id,
         },
         method: 'GET', 
         header: {
@@ -51,11 +44,7 @@ Page({
                     apply[i].Ending   = site.getCity(apply[i].Ending);
                     apply[i].DepartTime = moment.getFormat(apply[i].DepartTime,"yyyy-MM-dd");
                     apply[i].Fromnow = moment.getFromnow(apply[i].CreateTime);
-                    if(apply[i].Type == 'Bidding'){
-                        apply[i].Type = true;
-                    }else{
-                        apply[i].Type = false;
-                    };
+                    apply[i].Type == 'Bidding'?apply[i].Estimate = true:apply[i].Estimate = false;
                     switch(apply[i].Status){
                         case "Publish":
                             apply[i].Status = "发布中";
@@ -95,11 +84,7 @@ Page({
                 }
                 that.setData({
                     apply:apply,
-                });
-                console.log(that.data.quote)
-                console.log(that.data.confirm)
-                console.log(that.data.pay)
-                console.log(that.data.send)   
+                }); 
             } 
         },
         fail: function() {
@@ -125,12 +110,6 @@ Page({
       var Code = e.currentTarget.id;
       wx.navigateTo({
         url: '../details/details?Code='+ Code,
-        success: function(res){
-           
-        },
-        fail: function() {
-            
-        }
       })
   },
 })

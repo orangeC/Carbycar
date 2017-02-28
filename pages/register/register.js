@@ -65,9 +65,6 @@ Page({
                       console.log(res.data)
 
                     },
-                    fail: function(res) {
-                      console.log(res.data)
-                    }
                 })
             }else{
                 wx.showToast({  

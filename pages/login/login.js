@@ -12,20 +12,19 @@ Page({
   onLoad:function(){
       
   },
-
+//获取输入的用户名
   userNameInput:function(e){  
     this.setData({  
       userName: e.detail.value  
     })  
   },
-
+//获取输入的密码
   userPasswordInput:function(e){  
     this.setData({  
       userPassword: e.detail.value  
-    })  
-    // console.log(e.detail.value)  
+    })    
   },
-
+//登录方法
   logIn:function(){  
     var that = this  
     wx.request({  
@@ -41,7 +40,7 @@ Page({
         method: 'GET',  
         success: function (res) {
             var success = res.data.Success;
-            if(success == true){
+            if(success){
                 that.setData({  
                     id_token: res.data.Token,  
                     response:res  
@@ -52,13 +51,7 @@ Page({
                 } catch (e) {  
                 }  
                 wx.switchTab({
-                    url: '../mine/mine',
-                    success: function(res){
-                      
-                    },
-                    fail: function() {
-
-                    }
+                    url: '../me/me',
                 })
             }else{
                 wx.showToast({
@@ -66,8 +59,7 @@ Page({
                     icon : 'loading',  
                     duration : 1000
                 })
-            }
-            
+            }            
             console.log(res.data);  
         },  
         fail: function (res) {

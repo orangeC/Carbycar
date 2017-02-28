@@ -31,7 +31,6 @@ Page({
       temp.name = searchLetter[i];
       temp.tHeight = i * itemH;
       temp.bHeight = (i + 1) * itemH;
-
       tempObj.push(temp)
     }
 
@@ -103,7 +102,6 @@ Page({
     })
   },
   bindScroll: function (e) {
-    console.log(e.detail)
   },
   setScrollTop: function (that, showLetter) {
     var scrollTop = 0;
@@ -129,5 +127,15 @@ Page({
     app.globalData[this.data.category].Name = city.name;
     app.globalData[this.data.category].Code = city.code;
     wx.navigateBack();
+    // if (this.data.cartegory){
+    //   var pages = getCurrentPages();
+    //   var currPage = pages[pages.length - 1];
+    //   prevPage.setData({
+    //     Category:this.data.category
+    //   })
+    //   wx.navigateBack({
+    //     delta: 1, // 回退前 delta(默认为1) 页面
+    //   })
+    // }
   }
 })

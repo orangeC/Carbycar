@@ -1,4 +1,26 @@
-/* pages/index/index.wxss */
+/* pages/myalloforder/myalloforder.wxss */
+.category{
+    display: flex;
+    align-items: center;
+    height: 35px;
+}
+
+.categoryB{
+    width: 25%;
+    height: 28px;
+    text-align: center;
+    margin-top: 7px;
+    font-size: 13pt;
+    vertical-align: center;
+}
+
+.tapCategoryB{
+    color: deepskyblue;
+    border-bottom-color: deepskyblue;
+    border-bottom-style: solid;
+    border-bottom-width: 2px;
+}
+
 .order{
     width: 90%;
     height: 160px;

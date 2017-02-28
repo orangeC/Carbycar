@@ -1,109 +1,89 @@
-// pages/editpassword/editpassword.js
+// pages/mineeditpassword/mineeditpassword.js
 Page({
   data:{
-      userName:'', 
-      editPasswordStatus:false,
-      validCode:'',
-      newPassword:''
-      
+      oldPassword:'',
+      newPassword:'',
+      checkNewPassword:'',
+  },
+  onLoad:function(options){
+    // 页面初始化 options为页面跳转所带来的参数
+  },
+  onReady:function(){
+    // 页面渲染完成
+  },
+  onShow:function(){
+    // 页面显示
+  },
+  onHide:function(){
+    // 页面隐藏
+  },
+  onUnload:function(){
+    // 页面关闭
   },
 
-  onshow:function(){
-      
-  },
-
-  userNameInput:function(e){  
+  oldPasswordInput:function(e){
       this.setData({  
-          userName: e.detail.value  
+          oldPassword: e.detail.value,  
+      })      
+  },
+
+  newPasswordInput:function(e){
+      this.setData({  
+          newPassword: e.detail.value,  
       }) 
-      console.log(this.data.userName) 
   },
 
-  validCodeInput:function(e){
-      this.setData({
-          validCode:e.detail.value
-      })
-      console.log(this.data.validCode)
-  },
-
-  newPasswordInput:function(e){  
+  checkNewPasswordInput:function(e){
       this.setData({  
-          newPassword:e.detail.value  
-      })  
-      console.log(this.data.newPassword)  
+          checkNewPassword: e.detail.value, 
+      })
   },
 
-  checkNumber:function(){
+  saveNewPassword:function(){
       var that = this;
-      var length = this.data.userName.length;
-      if(length != ''){
-            if(length == 11){
-                wx.request({
-                    url: 'http://open.3vcar.com/message/valid',
-                    data: {
-                      phone:this.data.userName,
-                    },
-                    method: 'GET',
-                    header: { 
-                        'content-type': 'application/json'
-                    },
-                    success: function(res){
-                      console.log(res.data)
-
-                    },
-                    fail: function(res) {
-                      console.log(res.data)
-                    }
-                })
-            }else{
-                wx.showToast({  
-                    title: '手机号码有误请重新输入',  
-                    icon : 'loading',  
-                    duration : 1000  
-                })  
-            }
-      }else{
-            wx.showToast({
-              title:'请输入手机号码',
-              icon:'loading',
-              duration:1000
-            })
-      }    
-  },
-
-  editPassword:function(){
-      var that = this;
-      if(this.data.userName != '' && this.data.validCode != '' && this.data.newPassword != ''){
-          if(this.data.userName.length == 11){
+      if(that.data.oldPassword !='' && that.data.newPassword !='' && that.data.checkNewPassword !=''){
+          if(that.data.newPassword == that.data.checkNewPassword){
               wx.request({
-                    url: 'http://open.3vcar.com/system/findpassword',
-                    data: {
-                        UserName:this.data.userName,
-                        ValidCode:this.data.validCode,
-                        Password:this.data.newPassword
-                    },
-                    method: 'POST',
-                    header: { 
-                        'content-type': 'application/json'
-                    },
-                    success: function(res){
-                        console.log('chenggong')
-                        console.log(res.data)
-                        wx.redirectTo({
-                          url: '../login/login',
-                        })
-                    },
-                    fail: function(res) {
-                        console.log('shibai')
-                    }
+                  url: 'https://open.3vcar.com/account/password',
+                  data: {
+                      OldPassword:that.data.oldPassword,
+                      NewPassword:that.data.newPassword,
+                  },
+                  method: 'POST', 
+                  header: {
+                      'content-type': 'application/json'
+                  },
+                  success: function(res){
+                      if(res){
+                          wx.showToast({  
+                              title: '新密码与确认密码必须相同',  
+                              icon : 'loading',  
+                              duration : 1000,
+                              success:function(res){
+                                  wx.navigateTo({
+                                      url: '../mine/mine',
+                                  })
+                              }  
+                          })
+                      }
+                  },
+                  fail: function() {
+                      
+                  },
               })
           }else{
-              wx.showToast({
-                  title   :'手机号码不完整',
-                  icon    :'loading',
-                  duration:1000
+              wx.showToast({  
+                  title: '新密码与确认密码必须相同',  
+                  icon : 'loading',  
+                  duration : 1000  
               })
           }
+      }else{
+          wx.showToast({  
+              title: '请填写所有信息',  
+              icon : 'loading',  
+              duration : 1000  
+          })
       }
-  }    
+  }
 })

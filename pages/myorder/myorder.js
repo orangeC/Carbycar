@@ -94,18 +94,8 @@ Page({
       }else{
           wx.redirectTo({
             url: '../login/login',
-            success: function(res){
-              // success
-            },
-            fail: function() {
-              // fail
-            },
-            complete: function() {
-              // complete
-            }
           })
-      }
-         
+      }    
   },
   onReady:function(){
     // 页面渲染完成

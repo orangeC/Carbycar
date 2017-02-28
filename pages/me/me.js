@@ -11,7 +11,7 @@ Page({
         var that = this;
         try {
             var value = wx.getStorageSync('id_token');
-            var name = wx.getStorageSync('userName');
+            var name = wx.getStorageSync('name');
             if(value != ''){
                 that.setData({
                     token:value,
@@ -31,9 +31,12 @@ Page({
         var that = this;
         try {
             var value = wx.getStorageSync('id_token');
-            var name = wx.getStorageSync('userName');
+            var name = wx.getStorageSync('name');
             if(value != ''){
- 
+                that.setData({
+                    token:value,
+                    userName:name
+                });
             }else{
                 that.setData({
                     token:'',

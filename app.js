@@ -1,5 +1,6 @@
 var send = require('./utils/request.js');
 var cityList = require('./utils/city.js');
+var util = require('./utils/util.js')
 //app.js
 App({
   send: send.send,
@@ -25,17 +26,19 @@ App({
     var user = wx.getStorageSync('user') || { Code: '', Expires: 0 };
     this.globalData.user = user;
     //调用API将版本信息存入本地缓存
-    try {
-        wx.setStorageSync('version', 'WMP1.0.3');
-    } catch (e) {    
-    }
+    wx.setStorageSync('version', 'WMP1.0.3');
+    //用户访问版本信息,每天只要一次
+    var date = new Date();
+    wx.setStorageSync('versionDate',date);
+    
+    
   },
+
   //请求city文件中城市信息
   getcityList: function () {
     var that = this;
     //初始化缓存city
     var city = wx.getStorageSync('city') || {};
-    console.log("存入缓存");
     wx.setStorageSync('city', cityList.cityList());
   },
   //请求哪个城市(有点慢)

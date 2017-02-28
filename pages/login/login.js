@@ -44,12 +44,13 @@ Page({
                 that.setData({  
                     id_token: res.data.Token,  
                     response:res  
-                })  
-                try {  
-                    wx.setStorageSync('id_token', res.data.Token)
-                    wx.setStorageSync('userName', res.data.Name)  
-                } catch (e) {  
-                }  
+                })                 
+                wx.setStorageSync('id_token', res.data.Token)  
+                app.send("/consignor/profile/", "GET", {}, res.data.Token, function (res) {
+                    console.log(res.data)
+                    wx.setStorageSync('code', res.data.Code);
+                    wx.setStorageSync('name', res.data.Name);
+                });
                 wx.switchTab({
                     url: '../me/me',
                 })
@@ -69,8 +70,19 @@ Page({
                 duration : 1000  
             })  
         }  
-    })  
+    });
+    
   },
 
+  register:function(){
+        wx.navigateTo({
+          url: '../register/register',
+        })
+  },
   
+  forgetPassword:function(){
+        wx.navigateTo({
+          url: '../forgetpassword/forgetpassword',
+        })
+  }
 })

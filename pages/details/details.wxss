@@ -1,5 +1,4 @@
 /* pages/details/details.wxss */
-
 page {
   width: 100%;
   overflow: hidden;
@@ -226,18 +225,22 @@ page {
   font-size: 1.2em;
   color: #000;
 }
-.pricingC-header{
+
+.pricingC-header {
   width: 33%;
   display: flex;
   align-items: center;
 }
-.pricingC-header>text{
-  padding-left: 10rpx; 
+
+.pricingC-header>text {
+  padding-left: 10rpx;
 }
-.pricingC>text{
+
+.pricingC>text {
   width: 33%;
 }
-.pricingC image{
+
+.pricingC image {
   width: 17px;
   height: 17px;
   display: flex;
@@ -364,11 +367,13 @@ page {
   height: 100%;
   background-color: #000;
 }
-swiper-item{
+
+swiper-item {
   display: flex;
   justify-content: center;
   align-items: center;
 }
+
 .swiper-container image {
   width: 70%;
   height: 70%;

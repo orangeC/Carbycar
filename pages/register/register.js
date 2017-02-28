@@ -6,8 +6,10 @@ Page({
       userPassword:'',
       phone:'',//请求验证码的手机号
       validCode:'',
-      accountType:'Consignor'
-
+      accountType:'Consignor',
+      attrC:false,
+      attrR:true,
+      countTime:''
   },
 
   userNameInput:function(e){  
@@ -44,7 +46,22 @@ Page({
           })
       }
   },
-  
+
+  onshow:function(){
+      var that = this;
+    //   if(that.data.countTime >= 0){
+    //         console.log(that.data.countTime)
+    //         clearInterval(
+    //             countdown
+    //         );
+    //         that.setData({
+    //             countTime:60,
+    //             attrC:false,
+    //             attrR:true,
+    //         })
+    //   }
+  },
+  //获取验证码
   checkNumber:function(){
       var that = this;
       var length = this.data.userName.length;
@@ -52,6 +69,10 @@ Page({
       if(length != ''){
             if(length == 11){
                 console.log(length)
+                that.setData({
+                    attrC:true,
+                    attrR:false
+                })  
                 wx.request({
                     url: 'http://open.3vcar.com/message/valid',
                     data: {
@@ -62,10 +83,19 @@ Page({
                         'content-type': 'application/json'
                     },
                     success: function(res){
-                      console.log(res.data)
-
+                        console.log(res.data)
+                        that.setData({
+                            attrC:true,
+                            attrR:false
+                        })
+                        
+                        // var countdown = setInterval(function(){
+                        //     that.countdown();
+                        // },1000);
+                                              
                     },
                 })
+
             }else{
                 wx.showToast({  
                     title: '手机号码有误请重新输入',  
@@ -82,7 +112,7 @@ Page({
       }
       
   },
-
+//注册
   register:function(){
       var that = this;
       if(this.data.userPassword != ''){
@@ -132,6 +162,11 @@ Page({
       }
   },
   
-
+  //倒计时函数
+  countdown(){
+      this.setData({
+          countTime:this.data.countTime - 1, 
+      })
+  }
   
 })

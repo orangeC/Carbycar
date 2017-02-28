@@ -1,7 +1,7 @@
 {
   "pages":[
-    "pages/details/details",
     "pages/index/index",
+    "pages/details/details",
     "pages/status/status",
     "pages/publish/brand/brand",
     "pages/city/city",
@@ -16,7 +16,7 @@
     "pages/publish/consignCar/consignCar" 
   ],
   "window":{
-    "backgroundColor":"#edeef2",
+    "backgroundColor":"efeff4",
     "backgroundTextStyle":"white",
     "navigationBarTitleText": "车拉车",
     "enablePullDownRefresh":"true",

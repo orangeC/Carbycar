@@ -4,8 +4,10 @@ Page({
       userName:'', 
       editPasswordStatus:false,
       validCode:'',
-      newPassword:''
-      
+      newPassword:'',
+      attrC:false,
+      attrR:true,
+      countTime:''      
   },
 
   onshow:function(){
@@ -48,8 +50,10 @@ Page({
                         'content-type': 'application/json'
                     },
                     success: function(res){
-                      console.log(res.data)
-
+                        that.setData({
+                            attrC:true,
+                            attrR:false
+                        })
                     },
                     fail: function(res) {
                       console.log(res.data)

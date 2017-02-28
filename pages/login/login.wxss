@@ -8,12 +8,23 @@
     border-bottom: 1px solid #ececec; 
 }
 
+.usernameText{
+    width: 27%;
+    padding-left: 3%;
+}
+
 .password{
     display: flex;
     align-items: center;
     height: 40px;
     background-color: white;
 }
+
+.passwordText{
+    width: 27%;
+    padding-left: 3%;
+}
+
 .logInView{
     background-color: #ffffff;
     height: 50px;
@@ -50,8 +61,8 @@
 
 .forgetPassword{
     display: inline-block;
-    width: 23%;
-    margin-left: 27%;
+    width: 22%;
+    margin-left: 28%;
     color: dodgerblue;
 }
 

@@ -36,7 +36,7 @@ Page({
   checkNewPasswordInput:function(e){
       this.setData({  
           checkNewPassword: e.detail.value, 
-      })
+      }) 
   },
 
   saveNewPassword:function(){
@@ -44,7 +44,7 @@ Page({
       if(that.data.oldPassword !='' && that.data.newPassword !='' && that.data.checkNewPassword !=''){
           if(that.data.newPassword == that.data.checkNewPassword){
               wx.request({
-                  url: 'https://open.3vcar.com/account/password',
+                  url: 'http://open.3vcar.com/account/password',
                   data: {
                       OldPassword:that.data.oldPassword,
                       NewPassword:that.data.newPassword,
@@ -55,20 +55,21 @@ Page({
                   },
                   success: function(res){
                       if(res){
+                          console.log(res.data)
                           wx.showToast({  
-                              title: '新密码与确认密码必须相同',  
+                              title: '修改成功',  
                               icon : 'loading',  
                               duration : 1000,
                               success:function(res){
-                                  wx.navigateTo({
-                                      url: '../mine/mine',
+                                  wx.switchTab({
+                                      url: '../me/me',
                                   })
                               }  
                           })
                       }
                   },
-                  fail: function() {
-                      
+                  fail: function(res) {
+                      console.log(res.data)
                   },
               })
           }else{

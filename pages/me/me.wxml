@@ -17,7 +17,7 @@
 <view class="order">
     <view class="allOrder" bindtap="myOrder">
         <text class="myOrder">我的订单</text>
-        <text class="allOfMyOrder">全部订单</text>
+        <text class="allOfMyOrder">全部订单 ></text>
     </view>
     <view class="status">
             <view class="statusiconN" bindtap="statusList" id='11'>

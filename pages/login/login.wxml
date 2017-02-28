@@ -1,16 +1,16 @@
 <!--pages/login/login.wxml-->
 <view class="username">
-    <text>手机号码</text><input placeholder="请输入" focus="true" bindinput="userNameInput" type="number"/>
+    <text class="usernameText">手机号码</text><input placeholder="请输入" focus="true" bindinput="userNameInput" type="number"/>
 </view>
 <view class="password">
-    <text>登录密码</text><input placeholder="请输入" password="true" bindinput="userPasswordInput"/>
+    <text class="passwordText">登录密码</text><input placeholder="请输入" password="true" bindinput="userPasswordInput"/>
 </view>
 <view class="logInView">
     <button class="login" hover-class="button-hover" bindtap="logIn">登录</button>
 </view>
 <view>
-    <navigator url="../register/register" open-type="redirect" class="register" hover-class="navigator-hover">注册</navigator>
-    <navigator url="../forgetpassword/forgetpassword" class="forgetPassword" hover-class="navigator-hover">忘记密码</navigator>
+    <view class="register" hover-class="navigator-hover" bindtap="register">注册</view>
+    <view class="forgetPassword" hover-class="navigator-hover" bindtap="forgetPassword">忘记密码</view>
 </view> 
 
     

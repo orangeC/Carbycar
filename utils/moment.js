@@ -75,8 +75,8 @@ function getForm(dateStr) {
 };
 // 比较大小
 function getDiff(strBegin, strEnd, format) {
-    var begin = this.from(strBegin).getTime();
-    var end = this.from(strEnd).getTime();
+    var begin = this.getForm(strBegin).getTime();
+    var end = this.getForm(strEnd).getTime();
 
     var diff = end - begin;
     var seconds = Math.abs(diff / 1000);

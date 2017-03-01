@@ -1,5 +1,6 @@
 // pages/details/details.js
 var moment = require('../../utils/moment.js');
+var cityList = require('../../utils/citys.js');
 var app = getApp();
 Page({
   data: {
@@ -165,8 +166,8 @@ Page({
         var start = that.data.Starting;
         var end = that.data.Ending;
         //更改城市地址
-        var getStart = app.getWhereyougo(start);
-        var getEnd = app.getWhereyougo(end);
+        var getStart = cityList.getCity(start);
+        var getEnd = cityList.getCity(end);
         that.setData({
           Starting: getStart,
           Ending: getEnd

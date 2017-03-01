@@ -4,7 +4,7 @@
   <view class="header">
     <text>订单号：{{OrderNo}}</text>
     <view>|
-      <text>*</text>
+      <text class="iconfont icon-time"></text>
       <text class="header-text">{{Status}}</text>
     </view>
   </view>
@@ -16,7 +16,7 @@
   <view class="site">
     <view class="siteLeft">
       <text>{{Starting}}</text>
-      <view>→</view>
+      <view class="iconfont icon-arrow"></view>
       <text>{{Ending}}</text>
     </view>
     <view class="siteRight">
@@ -25,7 +25,9 @@
     </view>
   </view>
   <view class="tips" bindtap="bindTips">
-    <text class="flexLeft">*</text>
+    <view class="flexLeft">
+      <view class="circleOne"></view>
+    </view>
     <view class="flexCenter">
       <text>{{Title}}</text>
       <text>{{tipsTime}}</text>
@@ -33,14 +35,14 @@
     <text class="flexRight">></text>
   </view>
   <view class="carInfo normal" bindtap="bindHiddenOne">
-    <text class="flexLeft">*</text>
+    <text class="iconfont icon-car flexLeft"></text>
     <text class="flexCenter">车辆信息</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabOne}}">∨</text>
     <text class="flexRight carInfoRight" wx:else>∧</text>
   </view>
   <block wx:for="{{Cars}}" wx:for-item="Cars" wx:key="i">
     <view hidden="{{hiddenCarDetail}}" class="carDetail">
-      <text class="flexLeft">*</text>
+      <text class="iconfont icon-smallCar flexLeft"></text>
       <view class="flexCenter">
         <text>{{Cars.Brand}}【{{Cars.Style}}】</text>
         <view class="carDetail-text">
@@ -62,7 +64,7 @@
     </view>
   </block>
   <view class="consignInfo normal" bindtap="bindHiddenTwo">
-    <text class="flexLeft">*</text>
+    <text class="iconfont icon-truck flexLeft"></text>
     <text class="flexCenter">托运基本信息</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabTwo}}">∨</text>
     <text class="flexRight carInfoRight" wx:else>∧</text>
@@ -70,13 +72,13 @@
   <view hidden="{{hiddenConsignInfo}}" class="consignInfoX">
     <view class="consignInfoX-head">
       <view wx:if="{{arrInfo.HomeTake}}" class="consignInfoX-car">
-        <text>*</text>上门提车</view>
+        <text class="iconfont icon-yes-light"></text>上门提车</view>
       <view wx:else class="consignInfoX-car dark">
-        <text>*</text>上门提车</view>
+        <text class="iconfont icon-yes-dark"></text>上门提车</view>
       <view wx:if="{{arrInfo.NeedInvoice}}" class="consignInfoX-car">
-        <text>*</text>需要发票</view>
+        <text class="iconfont icon-yes-light"></text>需要发票</view>
       <view wx:else class="consignInfoX-car dark">
-        <text>*</text>需要发票</view>
+        <text class="iconfont icon-yes-dark"></text>需要发票</view>
     </view>
     <text>要求发车时间：{{DepartTime}}</text>
     <text>
@@ -91,7 +93,7 @@
     <text wx:else>备注：{{Remark}}</text>
   </view>
   <view class="pricing normal" bindtap="bindHiddenThree">
-    <text class="flexLeft">*</text>
+    <text class="iconfont icon-gift flexLeft"></text>
     <text class="flexCenter">
       <text>当前报价</text>
       <text wx:if="{{QuoteInfos}}">{{QuoteInfos.length}}</text>
@@ -103,7 +105,7 @@
     <view hidden="{{hiddenPricing}}" class="pricingH">
       <view>
         <text class="pricingH-topText">{{QuoteInfos.CarrierName}}</text>
-        <text>* {{QuoteInfos.ExpiredTime}}</text>
+        <text><text class="iconfont icon-smallTime"> </text> {{QuoteInfos.ExpiredTime}}</text>
       </view>
       <view class="pricingC">
         <view class="pricingC-header">
@@ -124,7 +126,7 @@
       <text>发车点：</text>{{QuoteInfos.TakePlace}}</view>
   </block>
   <view hidden="{{hiddenQuote}}" class="acceptInfo normal" bindtap="bindHiddenFour">
-    <text class="flexLeft">*</text>
+    <text class="iconfont icon-info flexLeft"></text>
     <text class="flexCenter">承运信息</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabFour}}">∨</text>
     <text class="flexRight carInfoRight" wx:else>∧</text>
@@ -147,7 +149,7 @@
     <view wx:else>备注：{{QuoteInfo.Remark}}</view>
   </view>
   <view hidden="{{hiddenQuote}}" class="getCar normal" bindtap="bindHiddenFive">
-    <text class="flexLeft">*</text>
+    <text class="iconfont icon-site flexLeft"></text>
     <text class="flexCenter">提车信息</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabFive}}">∨</text>
     <text class="flexRight carInfoRight" wx:else>∧</text>
@@ -173,7 +175,7 @@
     </view>
   </view>
   <view hidden="{{hiddenQuote}}" class="certificate normal" bindtap="bindHiddenSix">
-    <text class="flexLeft">*</text>
+    <text class="iconfont icon-camera flexLeft"></text>
     <text class="flexCenter">物流凭证</text>
     <text class="flexRight carInfoRight" wx:if="{{switchTabSix}}">∨</text>
     <text class="flexRight carInfoRight" wx:else>∧</text>

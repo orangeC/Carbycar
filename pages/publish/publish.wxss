@@ -24,13 +24,13 @@ title
 }
 .title>view text{
     display: block;
+    margin-top: 10rpx
 }
 /**
 pullOut
 **/
 .pullOut{
     background-color: white;
-    padding: 15rpx 15rpx;
     border-top: 4px solid #b2b2b2;
     font-size: 12pt;
 }
@@ -41,9 +41,32 @@ pullOut
     display: flex;
     align-items: center;
 }
-.pullOut>view image{
-    width: 50rpx;
-    height: 50rpx;
+.flexLeft {
+  flex: 0.1;
+  margin-right: 10rpx;
+}
+.start {
+  padding: 3rpx 0;
+  font-size: 0.875em;
+  color: #fff;
+  background-color: #ff732c;
+  border: 3px solid #fad0b8;
+  border-radius: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.end {
+  padding: 3rpx 0;
+  font-size: 0.875em;
+  color: #fff;
+  background-color: #60b2ec;
+  border: 3px solid #c9e3f2;
+  border-radius: 9px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .pullOut>view text{
     margin-left: 15rpx;
@@ -86,7 +109,7 @@ price
     align-items: center;
 }
 .open{
-    color: orange;
+    color: #ff732e;
 }
 /**
 detail
@@ -162,4 +185,59 @@ carInfo
 }
 .carInfoDet input{
     border-bottom: 1rpx solid #ebebec
+}
+/**IconFont**/
+.icon-rocket:before {
+  content: "\e617";
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.icon-prices:before {
+  content: "\e61d";
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.icon-cards:before {
+  content: "\e67c";
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.icon-drive:before {
+  content: "\e62e";
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.icon-money:before {
+  content: "\e697";
+  color: #ffffff;
+  font-size: 1.5em;
+}
+.border{
+    border-radius: 50%;
+    border:1px solid #ffffff;
+    padding: 15rpx;
+    
+}
+.icon-calen:before {
+  content: "\e65a";
+  color: #444;
+  font-size: 1.1em;
+}
+.icon-add:before {
+  content: "\e601";
+  color: #999;
+  font-size: 1.1em;
+}
+.add{
+    color: #999
+}
+.icon-car:before {
+  content: "\e608";
+  color: #000;
+  font-size: 1.1em;
+}
+.icon-doc:before {
+  content: "\e605";
+  color: #000;
+  font-size: 1.1em;
 }

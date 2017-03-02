@@ -18,12 +18,13 @@ Page({
   },
   onReady: function () {
     // 页面渲染完成
-    
+
   },
   onShow: function () {
     // 页面显示
+    
     this.setData({
-    brand:app.globalData.title
+      brand: app.globalData.title
     })
   },
   onHide: function () {
@@ -113,5 +114,10 @@ Page({
     wx.navigateBack({
       delta: 1
     });
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];
+    prevPage.setData({
+      setCategory: true
+    })
   }
 })

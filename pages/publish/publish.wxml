@@ -1,24 +1,24 @@
 <!--pages/publish/publish.wxml-->
 <view class="title">
-    <view><image src="../../pic/火箭.png"></image><text>发布需求</text></view>
+    <view><view class="iconfont icon-rocket border"></view><text>发布需求</text></view>
     -
-    <view><image src="../../pic/钱.png"></image><text>商家报价</text></view>
+    <view><view class="iconfont icon-prices border"></view><text>商家报价</text></view>
     -
-    <view><image src="../../pic/银行卡.png"></image><text>选择付款</text></view>
+    <view><view class="iconfont icon-cards border"></view><text>选择付款</text></view>
     -
-    <view><image src="../../pic/车.png"></image><text>提车配送</text></view>
+    <view><view class="iconfont icon-drive border"></view><text>提车配送</text></view>
     -
-    <view><image src="../../pic/快速收款.png"></image><text>安全送达</text></view>
+    <view><view class="iconfont icon-money border"></view><text>安全送达</text></view>
 </view>
 
 <view class="pullOut">
-    <view><image src="../../pic/始.png"></image><text bindtap="starting">{{starting.Name}}</text></view>
-    <view><image src="../../pic/终.png"></image><text bindtap="ending">{{ending.Name}}</text></view>
+    <view><text class="flexLeft start">始</text><text bindtap="starting">{{starting.Name}}</text></view>
+    <view><text class="flexLeft end">终</text><text bindtap="ending">{{ending.Name}}</text></view>
 </view>
 
 <view class="departTime">
     <view>
-        <image src="../../pic/日历.png"></image>
+        <view  class="iconfont icon-calen"></view>
         <picker mode="date" value="{{date}}" start="{{startTime}}" end="" bindchange="bindDateChange">
             <view class="dateInput">{{date}}</view>
         </picker>
@@ -28,7 +28,7 @@
 <view class="price">
     <view class="prices">
         <view class="{{bidding}}">竞价</view>
-        <switch type="switch" color="orange" bindchange="priceChange"/>
+        <switch type="switch" color="#ff732e" bindchange="priceChange"/>
         <view class="{{pricing}}">定价</view>
     </view>
     <view>
@@ -47,14 +47,14 @@
             </view>
             <view>
                 <text class="amount">{{item.Amount}}辆</text>
-                <text bindtap="deleteCar" data-id="{{index}}">删除</text>
+                <text bindtap="deleteCar" data-id="{{index}}">{{index}}删除</text>
             </view>
         </view>
     </view>
-    <view bindtap="addCar"><image src="../../pic/加号.png"></image><text>添加需要托运的车辆信息</text></view>
+    <view bindtap="addCar"><text class="iconfont icon-add add">添加需要托运的车辆信息</text></view>
 </view>
 
-<view class="require"><image src="../../pic/公路运输(1).png"></image>运输要求</view>
+<view class="require iconfont icon-car">运输要求</view>
 <view class="requireDetail">
     <view>
         <switch type="checkbox" bindchange="homeTake"/>上门提车
@@ -68,7 +68,7 @@
     <input placeholder="请输入提车地点" bindinput="takeAddress"/>
 </view>
 
-<view class="carInfo"><image src="../../pic/发票(3).png"></image>提车信息</view>
+<view class="carInfo iconfont icon-doc">提车信息</view>
 <view class="carInfoDet">
     <input placeholder="联系人" bindinput="contactName"/>
     <input placeholder="手机号" bindinput="contactPhone"/>

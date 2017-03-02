@@ -127,15 +127,10 @@ Page({
     app.globalData[this.data.category].Name = city.name;
     app.globalData[this.data.category].Code = city.code;
     wx.navigateBack();
-    // if (this.data.cartegory){
-    //   var pages = getCurrentPages();
-    //   var currPage = pages[pages.length - 1];
-    //   prevPage.setData({
-    //     Category:this.data.category
-    //   })
-    //   wx.navigateBack({
-    //     delta: 1, // 回退前 delta(默认为1) 页面
-    //   })
-    // }
+    var pages = getCurrentPages();
+    var prevPage = pages[pages.length - 2];
+    prevPage.setData({
+      setCategory: false
+    })
   }
 })

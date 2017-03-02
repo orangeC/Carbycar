@@ -21,7 +21,7 @@
 <view animation="{{animationData}}" class="drawer_attr_box" wx:if="{{showModalStatus}}">
   <view class="close_icon" bindtap="setModalStatus" data-status="0">×</view>
   <view class="drawer_attr_content">
-    <view class="drawer_desc" wx:for="{{style}}">
+    <view class="drawer_desc" wx:for="{{style}}" wx:key="">
       <view bindtap="brandStyle" data-code="{{item.code}}">{{item.name}}</view>
     </view>
   </view>

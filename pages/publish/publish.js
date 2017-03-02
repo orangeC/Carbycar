@@ -37,38 +37,43 @@ Page({
   },
   //页面显示
   onShow: function (e) {
-    for (var i = 0; i < app.globalData.consignCar.length; i++) {
-      this.data.cars.push(app.globalData.consignCar[i])
+    if (this.data.setCategory) {
+      for (var i = 0; i < app.globalData.consignCar.length; i++) {
+        this.data.cars.push(app.globalData.consignCar[i])
+      }
+      this.setData({
+        consignCar: this.data.cars
+      })
+
+      var that = this;
+      if (app.globalData.starting.Code !== 0) {
+        wx.request({
+          url: 'http://open.3vcar.com/system/city',
+          data: {
+            code: app.globalData.starting.Code
+          },
+          method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+          header: { 'content-type': 'application/json' }, // 设置请求的 header
+          success: function (res) {
+            var areas = new Array();
+            for (var i = 0; i < res.data.length; i++) {
+              areas.push(res.data[i].name);
+            };
+            that.setData({
+              area: areas
+            });
+            console.log(areas);
+          },
+        })
+      }
     }
     this.setData({
       starting: app.globalData.starting,
       ending: app.globalData.ending,
       startingCode: app.globalData.starting.Code.toString(),
-      endingCode: app.globalData.ending.Code.toString(),
-      consignCar: this.data.cars
+      endingCode: app.globalData.ending.Code.toString()
     })
 
-    var that = this;
-    if (app.globalData.starting.Code !== 0) {
-      wx.request({
-        url: 'http://open.3vcar.com/system/city',
-        data: {
-          code: app.globalData.starting.Code
-        },
-        method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-        header: { 'content-type': 'application/json' }, // 设置请求的 header
-        success: function (res) {
-          var areas = new Array();
-          for (var i = 0; i < res.data.length; i++) {
-            areas.push(res.data[i].name);
-          };
-          that.setData({
-            area: areas
-          });
-          console.log(areas);
-        },
-      })
-    }
   },
   //事件处理函数
   starting: function () {
@@ -126,7 +131,7 @@ Page({
   //   for (var i = 0; i < this.data.cars.length; i++) {
   //     if (i == e.currentTarget.dataset.id) {
   //       wx.navigateTo({
-  //         url: 'consignCar/consignCar?brand='+ this.data.cars[i].Brand +'&style='+ this.data.cars[i].Style +'&valuation='+ this.data.cars[i].Valuation +'&amount=' +this.data.cars[i].Amount +'&newCar='+ this.data.cars[i].NewCar +'&canDrive='+ this.data.cars[i].CanDrive +'&needInsurance='+ this.data.cars[i].NeedInsurance,
+  //         url: 'consignCar/consignCar?brand='+JSON.stringify(this.data.cars[i])
   //         // success:function(res){
   //         //   that.data.cars.splice(i, 1)
   //         // }
@@ -246,19 +251,30 @@ Page({
       icon: 'loading',
       duration: 3000,
       success: function (res) {
-        app.send("/order/publish", "POST", {
-          Starting: apply.startingCode,
-          Ending: apply.endingCode,
-          DepartTime: apply.date,
-          Type: apply.Type,
-          Price: apply.price,
-          ContactName: apply.contactName,
-          ContactPhone: apply.contactPhone,
-          Remark: apply.remark,
-          Cars: apply.consignCar,
-          Info: apply.info
-        }, "", function (res) {
-        })
+        //获取token
+        wx.getStorage({
+          key: 'id_token',
+          success: function (res) {
+            app.send("/order/publish", "POST", {
+              Starting: apply.startingCode,
+              Ending: apply.endingCode,
+              DepartTime: apply.date,
+              Type: apply.Type,
+              Price: apply.price,
+              ContactName: apply.contactName,
+              ContactPhone: apply.contactPhone,
+              Remark: apply.remark,
+              Cars: apply.consignCar,
+              Info: apply.info
+            }, res.data, function (res) { 
+              console.log('上传成功')
+              wx.switchTab({
+                url: '/pages/index/index',
+              })
+            })
+          }
+        });
+
       }
     });
   }

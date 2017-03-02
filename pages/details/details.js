@@ -64,7 +64,7 @@ Page({
     });
     //50425344
     //51723776
-    app.send("/order/consign/", "GET", { code: 50425344 }, "", function (res) {
+    app.send("/order/consign/", "GET", { code: eCode }, "", function (res) {
       if (res) {
         console.log(res.data);
         var apply = res.data;

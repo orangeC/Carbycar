@@ -38,13 +38,18 @@
 </view>
 
 <view class="detail">
-    <view class="carDetail">
-        <view wx:for="{{consignCar}}" wx:key="">
-            <view>{{item.Brand}}{{item.Style}}</view>
-            <view>汽车状态：{{item.NewCar}}/{{item.CanDrive}} 单车估值：{{item.Valuation}}万</view>
-            <view>保险：{{item.NeedInsurance}}</view>
+    <view wx:for="{{consignCar}}" wx:key="" class="carDetail">
+        <view class="detailList">
+            <view bindtap="editCar" data-id="{{index}}">
+                <view>{{item.Brand}}【{{item.Style}}】</view>
+                <view>汽车状态：<text wx:if="{{item.NewCar}}">能开</text><text wx:else>不能开</text>/<text wx:if="{{item.CanDrive}}">新车</text><text wx:else>二手车</text>   单车估值：{{item.Valuation}}万</view>
+                <view>保险：<text wx:if="{{item.NeedInsurance}}">需要保险</text><text wx:else>不需要保险</text></view>
+            </view>
+            <view>
+                <text class="amount">{{item.Amount}}辆</text>
+                <text bindtap="deleteCar" data-id="{{index}}">删除</text>
+            </view>
         </view>
-        <view></view>
     </view>
     <view bindtap="addCar"><image src="../../pic/加号.png"></image><text>添加需要托运的车辆信息</text></view>
 </view>
@@ -57,7 +62,9 @@
     </view>
 </view>
 <view wx:if="{{takeCar}}">
-    <view bindtap="takeDistrict">请选择提车区域</view>
+    <picker bindchange="takeDistrict" value="{{index}}" range="{{area}}">
+        <view>提车区域：{{area[index]}}</view>
+    </picker>
     <input placeholder="请输入提车地点" bindinput="takeAddress"/>
 </view>
 

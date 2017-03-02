@@ -16,26 +16,27 @@
 
 <view class="order">
     <view class="allOrder" bindtap="myOrder">
+        <text class="iconfont icon-info"></text>
         <text class="myOrder">我的订单</text>
         <text class="allOfMyOrder">全部订单 ></text>
     </view>
     <view class="status">
             <view class="statusiconN" bindtap="statusList" id='11'>
-                <image src="/images/u177.png" class="statusIconImg"></image>
+                <view class="iconfont icon-offer"></view>
                 <text class="statusIconText">报价中</text>
             </view>
             <view class="statusiconN" bindtap="statusList" id='12'>
-                <image src="/images/u177.png" class="statusIconImg"></image>
+                <view class="iconfont icon-pay"></view>
                 <text class="statusIconText">待付款</text>
             </view>
         
             <view class="statusiconN" bindtap="statusList" id='13'>
-                <image src="/images/u177.png" class="statusIconImg"></image>
+                <view class="iconfont icon-delivery"></view>
                 <text class="statusIconText">待发货</text>
             </view>
         
             <view class="statusiconN" bindtap="statusList" id='14'>
-                <image src="/images/u177.png" class="statusIconImg"></image>
+                <view class="iconfont icon-yes"></view>
                 <text class="statusIconText">待收货</text>
             </view>
     </view>
@@ -54,6 +55,7 @@
 </view>
 
 <view class="about">
+    <text class="iconfont icon-plaint"></text>
     <text class="abouttext">关于车拉车</text>
 </view>
 

@@ -2,8 +2,8 @@
 var app = getApp();
 Page({
   data: {
-    brand:'',
     brands: [],
+    brand: '',
     category: '',
     // 搜索相关
     searchLetter: [],
@@ -13,27 +13,28 @@ Page({
     tHeight: 0,
     bHeight: 0,
     startPageY: 0,
-    scrollTop: 0
+    scrollTop: 0,
+    styleHidden: true
   },
   onLoad: function (options) {
     // 生命周期函数--监听页面加载
     var that = this;
-    wx.request({
-      url: 'http://open.3vcar.com/system/brand',
-      data: {
-
-      },
-      method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-      header: {
-        'content-type': 'application/json'
-      }, // 设置请求的 header
-      success: function(res){
+    wx.getStorage({
+      key: 'brand',
+      success: function (res) {
         that.setData({
-            brand:res.data
+          brand: res.data,
         })
       }
     });
-    console.log(this.data.brand)
+    this.setData({
+      category: options.category,
+    })
+  },
+  onShow: function () {
+
+  },
+  onReady: function () {
     var searchLetter = ["A", "B", "C", "D", "E", "F", "G", "H", "J", "K", "L", "M", "N", "P", "Q", "R", "S", "T", "W", "X", "Y", "Z"];
     // 获取系统信息
     var sysInfo = wx.getSystemInfoSync();
@@ -62,14 +63,13 @@ Page({
           group.brands.push(brand);
         }
       }
-    groups.push(group);
-    this.setData({
-      category: options.category,
-      winHeight: winHeight,
-      itemH: itemH,
-      searchLetter: tempObj,
-      brands: groups
-    })
+      groups.push(group);
+      this.setData({
+        winHeight: winHeight,
+        itemH: itemH,
+        searchLetter: tempObj,
+        brands: groups
+      })
     }
   },
 
@@ -134,7 +134,7 @@ Page({
     })
   },
 
-bindScroll: function (e) {
+  bindScroll: function (e) {
     console.log(e.detail)
   },
   setScrollTop: function (that, showLetter) {
@@ -156,11 +156,97 @@ bindScroll: function (e) {
       scrollTop: scrollTop
     })
   },
-  bindCity: function (e) {
-    var brand = JSON.parse(e.target.dataset.json);
-    app.globalData[this.data.category].Name = brand.name;
-    app.globalData[this.data.category].Code = brand.code;
-    wx.navigateBack();
-  }
 
+  showModal: function () {
+    // 显示遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+      showModalStatus: true
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export()
+      })
+    }.bind(this), 200)
+  },
+  hideModal: function () {
+    // 隐藏遮罩层
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export(),
+    })
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation.export(),
+        showModalStatus: false
+      })
+    }.bind(this), 200)
+  },
+  //模态框
+  setModalStatus: function (e) {
+    console.log("设置显示状态，1显示0不显示", e.currentTarget.dataset.status);
+    var that = this;
+    app.send("/system/brand", "GET", { code: e.currentTarget.dataset.id }, "", function (res) {
+      that.setData({
+        style: res.data
+      })
+    })
+    var animation = wx.createAnimation({
+      duration: 200,
+      timingFunction: "linear",
+      delay: 0
+    })
+    this.animation = animation
+    animation.translateY(300).step()
+    this.setData({
+      animationData: animation.export()
+    })
+    if (e.currentTarget.dataset.status == 1) {
+      this.setData(
+        {
+          showModalStatus: true
+        }
+      );
+    }
+    setTimeout(function () {
+      animation.translateY(0).step()
+      this.setData({
+        animationData: animation
+      })
+      if (e.currentTarget.dataset.status == 0) {
+        this.setData(
+          {
+            showModalStatus: false
+          }
+        );
+      }
+    }.bind(this), 200)
+  },
+
+  brandStyle: function (e) {
+    for (var i = 0; i < this.data.style.length; i++) {
+      if (this.data.style[i].code == e.currentTarget.dataset.code) {
+        app.globalData.title = this.data.style[i].title
+        app.globalData.style = this.data.style[i].style
+      }
+    }
+    wx.navigateBack({
+      delta: 1
+    });
+  },
 })

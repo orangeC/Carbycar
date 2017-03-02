@@ -105,7 +105,8 @@
     <view hidden="{{hiddenPricing}}" class="pricingH">
       <view>
         <text class="pricingH-topText">{{QuoteInfos.CarrierName}}</text>
-        <text><text class="iconfont icon-smallTime"> </text> {{QuoteInfos.ExpiredTime}}</text>
+        <text>
+          <text class="iconfont icon-smallTime"> </text> {{QuoteInfos.ExpiredTime}}</text>
       </view>
       <view class="pricingC">
         <view class="pricingC-header">
@@ -164,14 +165,14 @@
           <text class="black">身份证：</text>{{Checker.Number}}</text>
       </view>
       <view>
-        <image class="getCarX-img" src="/images/phone.png" mode="scaleToFill" bindtap="bindCallsb"></image>
+        <view class="getCarX-img iconfont icon-phone" bindtap="bindCallsb"></view>
       </view>
     </view>
     <view>
       <text>
         <text class="black">板车司机：</text>{{Driver.Name}} {{Driver.Phone}}
       </text>
-      <image class="getCarX-img" src="/images/phone.png" mode="scaleToFill" bindtap="bindCallDriver"></image>
+      <view class="getCarX-img iconfont icon-phone" bindtap="bindCallDriver"></view>
     </view>
   </view>
   <view hidden="{{hiddenQuote}}" class="certificate normal" bindtap="bindHiddenSix">
@@ -183,22 +184,42 @@
   <view hidden="{{hiddenCertificate}}" class="certificateX">
     <view>
       <view hidden="{{imgOneLength == 0}}" class="certificateX-circle">{{imgOneLength}}</view>
-      <image src="{{imgSrcOne}}" bindtap="enterPreviewModeOne"></image>
+      <view class="noImage" wx:if="{{imgOneLength == 0}}">
+        <view class="iconfont icon-camera noImageCamera"></view>
+        <text>承运方</text>
+        <text>提车时提供</text>
+      </view>
+      <image wx:else src="{{imgSrcOne}}" bindtap="enterPreviewModeOne"></image>
       <text>合同</text>
     </view>
     <view>
       <view hidden="{{imgTwoLength == 0}}" class="certificateX-circle">{{imgTwoLength}}</view>
-      <image src="{{imgSrcTwo}}" bindtap="enterPreviewModeTwo"></image>
+      <view class="noImage" wx:if="{{imgTwoLength == 0}}">
+        <view class="iconfont icon-camera noImageCamera"></view>
+        <text>承运方</text>
+        <text>提车时提供</text>
+      </view>
+      <image wx:else src="{{imgSrcTwo}}" bindtap="enterPreviewModeTwo"></image>
       <text>验车单</text>
     </view>
     <view>
       <view hidden="{{imgThreeLength == 0}}" class="certificateX-circle">{{imgThreeLength}}</view>
-      <image src="{{imgSrcThree}}" bindtap="enterPreviewModeThree"></image>
+      <view class="noImage" wx:if="{{imgThreeLength == 0}}">
+        <view class="iconfont icon-camera noImageCamera"></view>
+        <text>承运方</text>
+        <text>提车时提供</text>
+      </view>
+      <image wx:else src="{{imgSrcThree}}" bindtap="enterPreviewModeThree"></image>
       <text>保险单</text>
     </view>
     <view>
       <view hidden="{{imgFourLength == 0}}" class="certificateX-circle">{{imgFourLength}}</view>
-      <image src="{{imgSrcFour}}" bindtap="enterPreviewModeFour"></image>
+      <view class="noImage" wx:if="{{imgFourLength == 0}}">
+        <view class="iconfont icon-camera noImageCamera"></view>
+        <text>承运方</text>
+        <text>交车时提供</text>
+      </view>
+      <image wx:else src="{{imgSrcFour}}" bindtap="enterPreviewModeFour"></image>
       <text>交车单</text>
     </view>
   </view>

@@ -95,10 +95,21 @@ detail
     font-size: 11pt;
     color: #707070;
     padding: 15rpx 15rpx;
+    background-color: #ffffff
 }
 .detail>view image{
     width: 25rpx;
     height: 25rpx;
+}
+.detailList{
+    display: flex;
+    flex-direction: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.amount{
+    display: block;
+    line-height: 40rpx
 }
 .carDetail{
     border-bottom: 1rpx solid #b2b2b2;
@@ -124,6 +135,7 @@ require
     font-size: 10pt;
     color: #707070;
     padding: 15rpx 15rpx;
+    background-color: #ffffff;
 }
 .requireDetail>view{
     display: flex;

@@ -1,123 +1,148 @@
 /* pages/mine/mine.wxss */
-.user{
-    background-color: #ffffff;
-    width: 100%;
-    height: 80px;
-    margin-top: 10px;
-    display: flex;
-    align-items: center;
+
+.user {
+  background-color: #fff;
+  width: 100%;
+  height: 80px;
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
 }
 
-.userleft{
-    display: inline-block; 
+.userleft {
+  display: inline-block;
 }
 
-.head{
-    width: 30px;
-    height: 30px;
-    margin-left: 10px;
+.head {
+  width: 30px;
+  height: 30px;
+  margin-left: 10px;
 }
 
-.userright{
-    margin-left: 20px;
+.userright {
+  margin-left: 20px;
 }
 
-.order{
-    height: 110px;
-    width: 100%;
-    background-color: white;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    
+.order {
+  height: 110px;
+  width: 100%;
+  background-color: white;
+  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
-.allOrder{
-    height: 40px;
-    display: flex;
-    align-items: center; 
-    background-color: #f8f8f8;
+.allOrder {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  background-color: #f8f8f8;
 }
 
-.myOrder{
-    width: 47%;
-    margin-left: 3%;
+.myOrder {
+  width: 47%;
+  margin-left: 3%;
 }
 
-.allOfMyOrder{
-    width: 27%;
-    margin-left: 23%;
+.allOfMyOrder {
+  width: 27%;
+  margin-left: 23%;
 }
 
-.status{
-    padding: 15rpx 15rpx;
-    display: flex;
-    flex-direction: flex;
-    justify-content: space-between;
-    align-items: center;
+.status {
+  padding: 15rpx 15rpx;
+  display: flex;
+  flex-direction: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.statusicon{
-    display: inline-block;
-    height: 70px;
-    width: 25%;
+.statusicon {
+  display: inline-block;
+  height: 70px;
+  width: 25%;
 }
 
-.statusiconN{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    justify-content: center;
+.statusiconN {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
 }
 
-.statusIconImg{
-    width: 30px;
-    height: 30px;
+.statusIconImg {
+  width: 30px;
+  height: 30px;
 }
 
-.statusIconText{
-
-
+.myEditPassword {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: white;
 }
 
-.publish{
-    display: flex;
-    align-items: center;
-    height: 40px;
-    width: 100%;
-    margin-bottom: 10px;
-    background-color: white;
+.publishText {
+  margin-left: 10px;
 }
 
-.publishText{
-    margin-left: 10px;
+.myEditPassword {
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: white;
 }
 
-.myEditPassword{
-    display: flex;
-    align-items: center;
-    height: 40px;
-    width: 100%;
-    margin-bottom: 10px;
-    background-color: white;
+.myEditPasswordText {
+  margin-left: 10px;
 }
 
-.myEditPasswordText{
-    margin-left: 10px;
+.about {
+  height: 40px;
+  width: 100%;
+  margin-top: 10px;
+  background-color: white;
+  display: flex;
+  align-items: center;
 }
 
-.about{
-    height: 40px;
-    width: 100%;
-    margin-top: 10px;
-    background-color: white;
-    display: flex;
-    align-items: center;
+.abouttext {
+  margin-left: 10px;
 }
 
-.abouttext{
-    margin-left:10px;
+.logOut {
+  margin-top: 10px;
 }
 
-.logOut{
-    margin-top: 10px;
+.icon-offer:before {
+  font-size: 1.5em;
+  color: #767676;
+  content: "\e61d";
+}
+
+.icon-pay:before {
+  font-size: 1.5em;
+  color: #767676;
+  content: "\e67c";
+}
+
+.icon-delivery:before {
+  font-size: 1.5em;
+  color: #767676;
+  content: "\e619";
+}
+
+.icon-yes:before {
+  font-size: 1.5em;
+  color: #767676;
+  content: "\e6ba";
+}
+
+.icon-plaint:before {
+  font-size: 1.5em;
+  color: #767676;
+  content: "\e60d";
 }

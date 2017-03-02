@@ -3,7 +3,7 @@
 <view class="container">
     <view>
         <view>品牌型号</view>
-        <text class="font" data-index="{{brand}}" data-style="{{style}}">{{brand}}{{style}}</text>
+        <text class="font" data-index="{{brand}}" data-style="{{style}}" bindtap="brand">{{brand}}</text>
     </view>
     <view>
         <view>单车估值（万）</view>
@@ -25,9 +25,9 @@
         <view class="font">需要单车险？<switch type="checkbox" bindchange="needInsurance"/></view>
     </view>
     <view>
-        说明：XXXXXXXXXXXXXXXXXX
+        <text>说明：单车险是指在车辆运输过程中除物流板车本身购买的运输保险之外，物流公司或车主为每辆运输的车单独购买的保险，一般可以委托物流公司或自己向物流公司购买。</text>
     </view>
 </view>
 
-<button type="primary" bindtap="save" wx:if="{{hide}}">保存</button>
-<button type="primary" bindtap="edit" wx:else>修改</button>
+<button type="primary" bindtap="edit" wx:if="{{submit}}">修改</button>
+<button type="primary" bindtap="save" wx:else >保存</button>

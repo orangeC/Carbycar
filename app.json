@@ -1,6 +1,7 @@
 {
-  "pages":[
+  "pages": [
     "pages/index/index",
+    "pages/publish/publish",
     "pages/details/details",
     "pages/status/status",
     "pages/publish/brand/brand",
@@ -12,32 +13,34 @@
     "pages/myorder/myorder",
     "pages/statuslist/statuslist",
     "pages/editpassword/editpassword",
-    "pages/publish/publish",
-    "pages/publish/consignCar/consignCar" 
+    "pages/publish/consignCar/consignCar"
   ],
-  "window":{
-    "backgroundColor":"efeff4",
-    "backgroundTextStyle":"white",
+  "window": {
+    "backgroundColor": "efeff4",
+    "backgroundTextStyle": "white",
     "navigationBarTitleText": "车拉车",
-    "enablePullDownRefresh":"true",
+    "enablePullDownRefresh": "true",
     "navigationBarBackgroundColor": "#3d93e3",
-    "navigationBarTextStyle":"white"
+    "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color":"#636363",
+    "color": "#636363",
     "selectedColor": "#1b1a1a",
     "backgroundColor": "#ffffff",
-    "borderStyle":"white",
-    "list": [{
-      "pagePath": "pages/index/index",
-      "text": "发车",
-      "iconPath":"images/u177.png",
-      "selectedIconPath":"images/u177.png"
-    },{
-      "pagePath": "pages/me/me",
-      "text": "我的",
-      "iconPath":"images/u177.png",
-      "selectedIconPath":"images/u177.png"     
-    }]
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "发车",
+        "iconPath": "images/u177.png",
+        "selectedIconPath": "images/u177.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "images/u177.png",
+        "selectedIconPath": "images/u177.png"
+      }
+    ]
   }
 }

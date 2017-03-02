@@ -1,5 +1,4 @@
 /* pages/status/status.wxss */
-
 page {
   width: 100%;
   overflow: hidden;

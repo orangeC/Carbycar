@@ -19,6 +19,11 @@ App({
     this.send("/order/consign/", "GET", {}, "", function (res) {
       console.log(res)
     });
+
+    this.send("/system/brand/", "GET", {}, "", function (res) {
+      wx.setStorageSync('brand', res.data);
+    });
+
     //调用API从本地缓存中获取数据
     var routes = wx.getStorageSync('route') || [];
     this.globalData.searchs = routes;
@@ -29,9 +34,9 @@ App({
     wx.setStorageSync('version', 'WMP1.0.3');
     //用户访问版本信息,每天只要一次
     var date = new Date();
-    wx.setStorageSync('versionDate',date);
-    
-    
+    wx.setStorageSync('versionDate', date);
+
+
   },
 
   //请求city文件中城市信息
@@ -87,9 +92,9 @@ App({
   user: function () {
     wx.setStorageSync('user', this.globalData.user);
   },
-  
-  cars:function(){
-    var i = this.globalData.id;
+
+  cars: function () {
+    var id = this.globalData.id + 1;
   },
 
   globalData: {
@@ -98,16 +103,9 @@ App({
     starting: { Name: '始发', Code: 0 },
     ending: { Name: '终点', Code: 0 },
     user: { Code: '', Expires: 0 },
-    consignCar:[],
-    id:{},
-    // brand:'',
-    // style:'',
-    // valuation:'',
-    // amount:'',
-    // newCar:'',
-    // canDrive:'',
-    // needInsurance:''
-    userName:''
-
+    consignCar: [],
+    title:'请选择品牌',
+    style:'',
+    userName: ''
   }
 })

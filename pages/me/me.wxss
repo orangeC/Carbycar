@@ -11,16 +11,24 @@
 
 .userleft {
   display: inline-block;
-}
-
-.head {
-  width: 30px;
-  height: 30px;
   margin-left: 10px;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  text-align: center;
+  background-color: #e8e8e8;
 }
 
 .userright {
-  margin-left: 20px;
+  margin-left: 10px;
+}
+
+.loginStatus{
+  font-size: 0.9em;
+}
+
+.identity{
+  font-size: 0.9em;
 }
 
 .order {
@@ -39,17 +47,19 @@
 }
 
 .myOrder {
-  width: 47%;
-  margin-left: 3%;
+  width: 48%;
+  margin-left: 2%;
+  font-size: 0.9em;
 }
 
 .allOfMyOrder {
-  width: 27%;
-  margin-left: 23%;
+  width: 25%;
+  margin-left: 25%;
+  font-size: 0.9em;
 }
 
 .status {
-  padding: 15rpx 15rpx;
+  padding: 15rpx 30rpx;
   display: flex;
   flex-direction: flex;
   justify-content: space-between;
@@ -69,9 +79,10 @@
   justify-content: center;
 }
 
-.statusIconImg {
-  width: 30px;
-  height: 30px;
+.statusIconText{
+  display: inline-block;
+  margin-top: 5px;
+  font-size: 0.8em;
 }
 
 .myEditPassword {
@@ -83,8 +94,22 @@
   background-color: white;
 }
 
+.myEditPasswordText{
+  font-size: 0.9em;
+}
+
+.publish{
+  display: flex;
+  align-items: center;
+  height: 40px;
+  width: 100%;
+  margin-bottom: 10px;
+  background-color: white;
+}
+
 .publishText {
   margin-left: 10px;
+  font-size: 0.9em;
 }
 
 .myEditPassword {
@@ -111,10 +136,34 @@
 
 .abouttext {
   margin-left: 10px;
+  font-size: 0.9em;
 }
 
 .logOut {
   margin-top: 10px;
+  font-size: 0.9em;
+}
+
+.logOutButton{
+  background-color: white;
+  font-size: 1em;
+  border: none;
+}
+
+.icon-head:before{
+  font-size: 2em;
+  color: #c7c8ca;
+  content:"\e672";
+  padding-top: 7px;
+  display: inline-block;
+}
+
+.icon-info:before{
+  font-size: 1em;
+  color: #767676;
+  content: "\e607";
+  padding-left: 10px;
+  display: inline-block;
 }
 
 .icon-offer:before {
@@ -141,8 +190,26 @@
   content: "\e6ba";
 }
 
+.icon-edit:before{
+  font-size: 1em;
+  color: #767676;
+  content: "\e657";
+  padding-left: 10px;
+  display: inline-block;
+}
+
+.icon-publish:before{
+  font-size: 1em;
+  color: #767676;
+  content: "\e617";
+  padding-left: 10px;
+  display: inline-block;
+}
+
 .icon-plaint:before {
-  font-size: 1.5em;
+  font-size: 1em;
   color: #767676;
   content: "\e60d";
+  padding-left: 10px;
+  display: inline-block;
 }

@@ -239,10 +239,25 @@ Page({
   },
 
   brandStyle: function (e) {
+
     for (var i = 0; i < this.data.style.length; i++) {
       if (this.data.style[i].code == e.currentTarget.dataset.code) {
         app.globalData.title = this.data.style[i].title
         app.globalData.style = this.data.style[i].style
+        switch (this.data.style[i].style) {
+          case 'Normal':
+            app.globalData.style = '标准轿车';
+            break;
+          case 'Large':
+            app.globalData.style = '标准SUV';
+            break;
+          case 'Huge':
+            app.globalData.style = '大型SUV';
+            break;
+          case 'Other':
+            app.globalData.style = '其他';
+            break;
+        }
       }
     }
     wx.navigateBack({

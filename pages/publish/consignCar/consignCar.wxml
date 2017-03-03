@@ -30,4 +30,4 @@
 </view>
 
 <button type="primary" bindtap="edit" wx:if="{{submit}}">修改</button>
-<button type="primary" bindtap="save" wx:else >保存</button>
+<button bindtap="save" wx:else class="button">保存</button>

@@ -50,6 +50,7 @@ Page({
                     console.log(res.data)
                     wx.setStorageSync('code', res.data.Code);
                     wx.setStorageSync('name', res.data.Name);
+                    wx.setStorageSync('phone', res.data.Phone);
                 });
                 wx.switchTab({
                     url: '../me/me',

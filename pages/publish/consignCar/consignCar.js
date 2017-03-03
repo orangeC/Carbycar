@@ -60,7 +60,8 @@ Page({
       })
     };
     this.setData({
-      valuation: parseInt(e.detail.value)
+      valuation: parseInt(e.detail.value),
+      valuationN:e.detail.value
     });
     console.log('获取输入价格为', parseInt(e.detail.value));
     console.log('获取输入品牌为', this.data.brand);
@@ -69,7 +70,8 @@ Page({
   //获取汽车数量
   amount: function (e) {
     this.setData({
-      amount: parseInt(e.detail.value)
+      amount: parseInt(e.detail.value),
+      amountN:e.detail.value
     });
   },
   //获取汽车状态
@@ -96,6 +98,30 @@ Page({
   save: function () {
     var that = this;
     var apply = that.data;
+    if(apply.brand=='请选择品牌'){
+      wx.showToast({
+        title: '请选择品牌',
+        icon: 'loading',
+        duration: 2000
+      });
+      return;
+    };
+    // if(apply.valuationN.length==0){
+    //   wx.showToast({
+    //     title: '请估值',
+    //     icon: 'loading',
+    //     duration: 2000
+    //   });
+    //   return;
+    // };
+    // if(apply.amountN==0){
+    //   wx.showToast({
+    //     title: '请填写数量',
+    //     icon: 'loading',
+    //     duration: 2000
+    //   });
+    //   return;
+    // };
     this.setData({
       consignCar: [
         {
@@ -109,7 +135,8 @@ Page({
         }
       ]
     });
-    app.globalData.consignCar = apply.consignCar
+     wx.setStorageSync('consignCar', this.data.consignCar)
+    // app.globalData.consignCar = apply.consignCar
     console.log(app.globalData.consignCar);
     wx.navigateBack({
       delta: 1

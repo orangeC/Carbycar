@@ -247,23 +247,14 @@ page {
   align-items: center;
 }
 
-.pricingC-header>text {
-  padding-left: 10rpx;
-}
-
 .pricingC>text {
   width: 33%;
 }
 
-.pricingC image {
-  width: 17px;
-  height: 17px;
-  display: flex;
-  align-items: center;
-}
-
 .pricingC-center {
-  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
   border-right: 1px solid #eaeeef;
   border-left: 1px solid #eaeeef;
 }
@@ -470,4 +461,10 @@ swiper-item {
   font-size: 1.5em;
   color: #767676;
   content: "\e7eb";
+}
+.icon-star:before {
+  font-size: 1em;
+  color: #feb200;
+  content: "\e627";
+  padding-right: 10rpx;
 }

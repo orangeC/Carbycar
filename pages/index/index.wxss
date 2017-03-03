@@ -26,6 +26,7 @@
     display: block;
     color: #777;
     font-size: 0.875em;
+    margin-bottom: 5px;
 }
 
 .textT{
@@ -85,4 +86,37 @@
     font-size: 0.9em;
     margin-left: 5px;
     padding: 1px 4px;
+}
+
+.icon-arrow:before{
+    font-size: 1em;
+    color: #e18e58;
+    content: "\e603";
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.icon-start:before{
+    font-size: 0.95em;
+    color: #999;
+    content: "\e65a";
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.icon-carinfo:before{
+    content:"\e65e";
+    font-size: 0.95em;
+    color: #999;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.icon-remark:before{
+    content:"\e61c";
+    font-size: 0.95em;
+    color: #999;
+    margin-left: 5px;
+    margin-right: 5px;
 }

@@ -110,15 +110,13 @@
       </view>
       <view class="pricingC">
         <view class="pricingC-header">
-          <block wx:for="{{QuoteInfos.CarrierScore}}" wx:for-item="star" wx:key="i">
-            <image src="/images/light.png" mode="scaleToFill"></image>
-          </block>
-          <block wx:for="{{5-QuoteInfos.CarrierScore}}" wx:for-item="star" wx:key="i">
-            <image src="/images/dark.png" mode="scaleToFill"></image>
-          </block>
-          <text>{{QuoteInfos.CarrierScore}}.0</text>
+          <text>{{QuoteInfos.CarrierPhone}}</text>
         </view>
-        <text class="pricingC-center">承运：{{QuoteInfos.CarryTimes}}单</text>
+        <text class="pricingC-center">
+          <text class="iconfont icon-star"></text>
+          <text>{{QuoteInfos.CarrierScore}}</text>
+          <text>（{{QuoteInfos.CarryTimes}}单）</text>
+        </text>
         <text wx:if="{{ConsignorCode == Code}}" class="pricingC-right">￥{{QuoteInfos.QuoteAmount}}元</text>
         <text wx:else class="pricingC-right"></text>
       </view>

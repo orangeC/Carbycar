@@ -21,7 +21,7 @@ Page({
     takeDistrict: '',
     takeAddress: '',
     contactName: '',
-    contactphone: '',
+    contactPhone: '',
     remark: '',
     info: [],
     startingCode: '',
@@ -31,49 +31,58 @@ Page({
   },
   onLoad: function (options) {
     // 页面初始化 options为页面跳转所带来的参数
+    var phone = wx.getStorageSync('phone')
     this.setData({
-      startTime: date.formatTime(new Date)
+      startTime: date.formatTime(new Date),
+      contactPhone: phone
     })
   },
   //页面显示
   onShow: function (e) {
-    if (this.data.setCategory) {
-      for (var i = 0; i < app.globalData.consignCar.length; i++) {
-        this.data.cars.push(app.globalData.consignCar[i])
-      }
-      this.setData({
-        consignCar: this.data.cars
-      })
+    var that = this;
+    console.log(this.data.cars)
+    wx.getStorage({
+      key: 'consignCar',
+      success: function (res) {
+        if (that.data.setCategory) {
+          for (var i = 0; i < res.data.length; i++) {
+            that.data.consignCar.push(res.data[i])
+          }
+          that.setData({
+            consignCar: that.data.consignCar
+          })
 
-      var that = this;
-      if (app.globalData.starting.Code !== 0) {
-        wx.request({
-          url: 'http://open.3vcar.com/system/city',
-          data: {
-            code: app.globalData.starting.Code
-          },
-          method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-          header: { 'content-type': 'application/json' }, // 设置请求的 header
-          success: function (res) {
-            var areas = new Array();
-            for (var i = 0; i < res.data.length; i++) {
-              areas.push(res.data[i].name);
-            };
-            that.setData({
-              area: areas
-            });
-            console.log(areas);
-          },
-        })
+        }
       }
-    }
+    });
+
     this.setData({
       starting: app.globalData.starting,
       ending: app.globalData.ending,
       startingCode: app.globalData.starting.Code.toString(),
       endingCode: app.globalData.ending.Code.toString()
     })
-
+    var that = this;
+    if (app.globalData.starting.Code !== 0) {
+      wx.request({
+        url: 'http://open.3vcar.com/system/city',
+        data: {
+          code: app.globalData.starting.Code
+        },
+        method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
+        header: { 'content-type': 'application/json' }, // 设置请求的 header
+        success: function (res) {
+          var areas = new Array();
+          for (var i = 0; i < res.data.length; i++) {
+            areas.push(res.data[i].name);
+          };
+          that.setData({
+            area: areas
+          });
+          console.log(areas);
+        },
+      })
+    }
   },
   //事件处理函数
   starting: function () {
@@ -145,59 +154,80 @@ Page({
   // },
   deleteCar: function (e) {
     var that = this;
+    var eId = e.currentTarget.dataset.id;
+    this.setData({ eId: eId });
     wx.showModal({
       title: '提示',
       content: '确定删除？',
       success: function (res) {
+        that.setData({ confirm: res.confirm })
+        console.log(that.data.confirm)
+        console.log(that.data.eId)
+        console.log(that.data.cars)
         if (res.confirm) {
-          for (var i = 0; i < that.data.cars.length; i++) {
-            if (i == e.currentTarget.dataset.id) {
-              that.data.cars.splice(i, 1)
-            }
-          };
-          wx.redirectTo({
-            url: '/pages/publish/publish'
-          })
+          that.data.consignCar.splice(eId, 1);
+          wx.setStorageSync('consignCar', that.data.consignCar)
+          that.setData({ consignCar: that.data.consignCar });
+
         }
+
       }
     })
+  },
+  onReady: function () {
   },
   //订单信息
   homeTake: function (e) {
     if (app.globalData.starting.Code !== 0) {
       this.setData({
-        takeCar: e.detail.value
+        takeCar: true,
+        homeTake: true
       })
     } else {
       wx.showToast({
         title: '请选择始发地',
+        icon: 'loading',
         duration: 2000
       });
     }
-    this.setData({
-      homeTake: e.detail.value
-    })
-    console.log('上门提车：', e.detail.value)
   },
 
   needInvoice: function (e) {
     this.setData({
-      needInvoice: e.detail.value
+      needInvoice: true
     });
-    console.log('需要发票：', e.detail.value)
   },
-  //提车区域(待修改)
+  //提车区域
   takeDistrict: function (e) {
     this.setData({
       index: e.detail.value
     });
+
+    for(var i=0;i<this.data.area.length;i++){
+      if(i==e.detail.value){
+        this.setData({
+          takeDistrict:this.data.area[i]
+        })
+      }
+    }
   },
   //提车地点
   takeAddress: function (e) {
     this.setData({
       takeAddress: e.detail.value
     });
-    console.log('提车地点：', e.detail.value)
+  },
+
+  noHomeTake: function () {
+    this.setData({
+      homeTake: false,
+      takeAddress: ''
+    });
+  },
+  noNeedInvoice: function () {
+    this.setData({
+      needInvoice: false
+    });
   },
   //联系人
   contactName: function (e) {
@@ -233,19 +263,39 @@ Page({
         NeedInvoice: this.data.needInvoice
       }
     });
-    wx.showToast({
-      title: '234',
-      duration: 2000
-    });
-    this.setData({
-      info: {
-        HomeTake: this.data.homeTake,
-        TakeAddress: this.data.takeAddress,
-        TakeDistrict: this.data.takeDistrict,
-        NeedInvoice: this.data.needInvoice
-      }
-    });
-
+    if (app.globalData.starting.Code == 0) {
+      wx.showToast({
+        title: '请选择始发地',
+        icon: 'loading',
+        duration: 2000
+      });
+      return;
+    };
+    if (app.globalData.ending.Code == 0) {
+      wx.showToast({
+        title: '请选择目的地',
+        icon: 'loading',
+        duration: 2000
+      });
+      return;
+    };
+    if (this.data.date == '请选择发车时间') {
+      wx.showToast({
+        title: '请选择发车时间',
+        icon: 'loading',
+        duration: 2000
+      });
+      return;
+    };
+    console.log(this.data.consignCar)
+    if (this.data.consignCar.length == 0) {
+      wx.showToast({
+        title: '请添加车辆信息',
+        icon: 'loading',
+        duration: 2000
+      });
+      return;
+    };
     wx.showToast({
       title: '正在提交',
       icon: 'loading',
@@ -266,7 +316,7 @@ Page({
               Remark: apply.remark,
               Cars: apply.consignCar,
               Info: apply.info
-            }, res.data, function (res) { 
+            }, res.data, function (res) {
               console.log('上传成功')
               wx.switchTab({
                 url: '/pages/index/index',

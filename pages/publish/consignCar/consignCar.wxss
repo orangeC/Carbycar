@@ -29,3 +29,7 @@
 .carStatus>view{
     padding: 1rpx 0;
 }
+button {
+  background-color: #368cdf;
+  color: #fff;
+}

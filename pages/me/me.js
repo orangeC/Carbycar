@@ -109,6 +109,12 @@ Page({
         wx.navigateTo({
           url: '../editpassword/editpassword',
         })
+  },
+
+//关于车拉车
+  about:function(){
+        wx.navigateTo({
+          url: '../about/about',
+        })
   }
-  
 })

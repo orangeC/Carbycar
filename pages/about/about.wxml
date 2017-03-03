@@ -1,0 +1,12 @@
+<!--pages/about/about.wxml-->
+<view class="logo">
+    <image src="../../images/logo.png" class="logopic"></image>
+</view>
+<view class="aboutText">
+    <view>车拉车 1.0.3</view>
+</view>
+<view class="info">
+    <text class="address">网址：www.carbycar.com.cn</text>
+    <text class="phone">电话：022-25320896</text>
+    <text class="company">天津快车源信息技术有限公司</text>
+</view>

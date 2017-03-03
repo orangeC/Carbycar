@@ -1,19 +1,20 @@
 {
   "pages": [
-    "pages/publish/publish",
     "pages/index/index",
-    "pages/details/details",
     "pages/status/status",
-    "pages/publish/brand/brand",
-    "pages/city/city",
-    "pages/me/me",
-    "pages/login/login",
+    "pages/details/details",
     "pages/register/register",
-    "pages/forgetpassword/forgetpassword",
-    "pages/myorder/myorder",
     "pages/statuslist/statuslist",
     "pages/editpassword/editpassword",
-    "pages/publish/consignCar/consignCar"
+    "pages/forgetpassword/forgetpassword",
+    "pages/me/me",
+    "pages/city/city",
+    "pages/login/login",
+    "pages/myorder/myorder",
+    "pages/publish/publish",
+    "pages/publish/brand/brand",
+    "pages/publish/consignCar/consignCar",
+    "pages/about/about"
   ],
   "window": {
     "backgroundColor": "efeff4",
@@ -24,22 +25,22 @@
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
-    "color": "#636363",
-    "selectedColor": "#1b1a1a",
+    "color": "#818181",
+    "selectedColor": "#1983cd",
     "backgroundColor": "#ffffff",
     "borderStyle": "white",
     "list": [
       {
         "pagePath": "pages/index/index",
         "text": "发车",
-        "iconPath": "images/u177.png",
-        "selectedIconPath": "images/u177.png"
+        "iconPath": "images/car.png",
+        "selectedIconPath": "images/carselect.png"
       },
       {
         "pagePath": "pages/me/me",
         "text": "我的",
-        "iconPath": "images/u177.png",
-        "selectedIconPath": "images/u177.png"
+        "iconPath": "images/head.png",
+        "selectedIconPath": "images/headselect.png"
       }
     ]
   }

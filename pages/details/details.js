@@ -82,6 +82,10 @@ Page({
           for (var i = 0; i < QuoteData.length; i++) {
             var fromTime = QuoteData[i].QuoteTime;
             QuoteData[i].ExpiredTime = moment.getFromnow(fromTime);
+            //为整数字符串在末尾添加.00
+            if (!/\./.test(QuoteData[i].CarrierScore)) {
+              QuoteData[i].CarrierScore += '.0';
+            }
           }
         }
         if (CarryData) {
@@ -279,7 +283,6 @@ Page({
         wx.hideToast();  //隐藏Toast
       }
     })
-    console.log(this.data.arrSrcTwo)
   },
   onShow: function () {
     console.log("onshow")

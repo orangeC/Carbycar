@@ -1,6 +1,6 @@
 function send(url, method, data, token, success) {
   wx.request({
-    url: "http://open.3vcar.com" + url,
+    url: "https://api.carbycar.com.cn" + url,
     method: method,
     data: data,
     header: {

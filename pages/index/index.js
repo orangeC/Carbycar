@@ -9,7 +9,7 @@ Page({
   onLoad:function(){
       var that = this;
       wx.request({
-          url: 'http://open.3vcar.com/order/consign',
+          url: 'https://api.carbycar.com.cn/order/consign',
           data: {
 
           },

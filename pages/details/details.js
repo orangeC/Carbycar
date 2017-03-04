@@ -199,10 +199,10 @@ Page({
           arrCate.push(CarryData.Checkouts, CarryData.Contracts, CarryData.Deliveries, CarryData.Insurances)
           //分别插入4个图片（很没有效率）
           if (arrCate[0] != "") {
-            var imgSrcOne = "http://image.3vcar.com" + JSON.parse(arrCate[0])[0].Url;
+            var imgSrcOne = "https://image.carbycar.com.cn" + JSON.parse(arrCate[0])[0].Url;
             var arrSrcOne = [];
             for (var i = 0; i < JSON.parse(arrCate[0]).length; i++) {
-              arrSrcOne.push("http://image.3vcar.com" + JSON.parse(arrCate[0])[i].Url)
+              arrSrcOne.push("https://image.carbycar.com.cn" + JSON.parse(arrCate[0])[i].Url)
             }
             that.setData({
               imgOneLength: JSON.parse(arrCate[0]).length,
@@ -215,10 +215,10 @@ Page({
             })
           };
           if (arrCate[1] != "") {
-            var imgSrcTwo = "http://image.3vcar.com" + JSON.parse(arrCate[1])[0].Url;
+            var imgSrcTwo = "https://image.carbycar.com.cn" + JSON.parse(arrCate[1])[0].Url;
             var arrSrcTwo = [];
             for (var i = 0; i < JSON.parse(arrCate[1]).length; i++) {
-              arrSrcTwo.push("http://image.3vcar.com" + JSON.parse(arrCate[1])[i].Url)
+              arrSrcTwo.push("https://image.carbycar.com.cn" + JSON.parse(arrCate[1])[i].Url)
             }
             that.setData({
               imgTwoLength: JSON.parse(arrCate[1]).length,
@@ -231,10 +231,10 @@ Page({
             })
           };
           if (arrCate[2] != "") {
-            var imgSrcThree = "http://image.3vcar.com" + JSON.parse(arrCate[2])[0].Url;
+            var imgSrcThree = "https://image.carbycar.com.cn" + JSON.parse(arrCate[2])[0].Url;
             var arrSrcThree = [];
             for (var i = 0; i < JSON.parse(arrCate[2]).length; i++) {
-              arrSrcThree.push("http://image.3vcar.com" + JSON.parse(arrCate[2])[i].Url)
+              arrSrcThree.push("https://image.carbycar.com.cn" + JSON.parse(arrCate[2])[i].Url)
             }
             that.setData({
               imgThreeLength: JSON.parse(arrCate[2]).length,
@@ -247,10 +247,10 @@ Page({
             })
           };
           if (arrCate[3] != "") {
-            var imgSrcFour = "http://image.3vcar.com" + JSON.parse(arrCate[3])[0].Url;
+            var imgSrcFour = "https://image.carbycar.com.cn" + JSON.parse(arrCate[3])[0].Url;
             var arrSrcFour = [];
             for (var i = 0; i < JSON.parse(arrCate[3]).length; i++) {
-              arrSrcFour.push("http://image.3vcar.com" + JSON.parse(arrCate[3])[i].Url)
+              arrSrcFour.push("https://image.carbycar.com.cn" + JSON.parse(arrCate[3])[i].Url)
             }
             that.setData({
               imgFourLength: JSON.parse(arrCate[3]).length,

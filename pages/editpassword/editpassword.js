@@ -44,7 +44,7 @@ Page({
       if(that.data.oldPassword !='' && that.data.newPassword !='' && that.data.checkNewPassword !=''){
           if(that.data.newPassword == that.data.checkNewPassword){
               wx.request({
-                  url: 'http://open.3vcar.com/account/password',
+                  url: 'https://api.carbycar.com.cn/account/password',
                   data: {
                       OldPassword:that.data.oldPassword,
                       NewPassword:that.data.newPassword,

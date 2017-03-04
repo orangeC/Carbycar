@@ -41,7 +41,7 @@ Page({
       if(length != ''){
             if(length == 11){
                 wx.request({
-                    url: 'http://open.3vcar.com/message/valid',
+                    url: 'https://api.carbycar.com.cn/message/valid',
                     data: {
                       phone:this.data.userName,
                     },
@@ -80,7 +80,7 @@ Page({
       if(this.data.userName != '' && this.data.validCode != '' && this.data.newPassword != ''){
           if(this.data.userName.length == 11){
               wx.request({
-                    url: 'http://open.3vcar.com/system/findpassword',
+                    url: 'https://api.carbycar.com.cn/system/findpassword',
                     data: {
                         UserName:this.data.userName,
                         ValidCode:this.data.validCode,

@@ -28,7 +28,7 @@ Page({
   logIn:function(){  
     var that = this  
     wx.request({  
-        url: 'http://open.3vcar.com/system/login',  
+        url: 'https://api.carbycar.com.cn/system/login',  
         data: {  
             username: this.data.userName,  
             password: this.data.userPassword,

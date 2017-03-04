@@ -65,7 +65,7 @@ Page({
     var that = this;
     if (app.globalData.starting.Code !== 0) {
       wx.request({
-        url: 'http://open.3vcar.com/system/city',
+        url: 'https://api.carbycar.com.cn/system/city',
         data: {
           code: app.globalData.starting.Code
         },

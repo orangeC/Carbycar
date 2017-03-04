@@ -62,7 +62,7 @@ Page({
             if (length == 11) {
                 console.log(length)
                 wx.request({
-                    url: 'http://open.3vcar.com/message/valid',
+                    url: 'https://api.carbycar.com.cn/message/valid',
                     data: {
                         phone: this.data.userName,
                     },
@@ -102,7 +102,7 @@ Page({
             if (this.data.validCode != '') {
                 if (this.data.userName != '') {
                     wx.request({
-                        url: 'http://open.3vcar.com/system/signup',
+                        url: 'https://api.carbycar.com.cn/system/signup',
                         data: {
                             UserName: this.data.userName,
                             Password: this.data.userPassword,

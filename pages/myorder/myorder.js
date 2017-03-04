@@ -25,7 +25,7 @@ Page({
       }
       if(value != ''){
           wx.request({
-              url: 'http://open.3vcar.com/consignor/order',
+              url: 'https://api.carbycar.com.cn/consignor/order',
               data: {
                   category:0,
               },
@@ -128,7 +128,7 @@ Page({
       var that = this;
       var category = e.currentTarget.id;
       wx.request({
-        url: 'http://open.3vcar.com/consignor/order',
+        url: 'https://api.carbycar.com.cn/consignor/order',
         data: {
             category:category,
         },

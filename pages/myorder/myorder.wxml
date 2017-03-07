@@ -1,25 +1,43 @@
 <!--pages/myalloforder/myalloforder.wxml-->
-<view class="category">
-    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id='0'>全部</view>
-    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id="1">进行中</view>
-    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id="2">已完成</view>
-    <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id="3">已关闭</view>
-</view>
-<view class="order" wx:for="{{apply}}" bindtap="toDetails" id="{{item.Code}}">
-    <view class="header">
-        <text class="city">{{item.Starting}}→{{item.Ending}}</text><text class="time" >{{item.Status}}</text>
+<view class="categoryA">
+    <view class="category">
+        <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id='0'>
+            全部
+        </view>
+        <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id="1">
+            进行中
+        </view>
+        <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id="2">
+            已完成
+        </view>
+        <view hover="true" hover-stay-time="99999999" class="categoryB" hover-class="tapCategoryB" bindtap="getStatus" id="3">
+            已关闭
+        </view>
     </view>
-    <view class="middle">
-        <text class="text">要求发车时间:{{item.DepartTime}}</text>
-        <text class="text">车辆信息:{{item.Car}}</text>
-        <text class="text">备注:{{item.Remark}}</text>
-    </view>
-    <view class="bottom">
-        <view wx:if="{{item.Type}}" class="bidding">竞</view>
-        <view wx:else class="pricing">定</view>
-        <text wx:if="{{item.Type}}"></text>
-        <view wx:else>¥{{item.Price}}</view>
-        <view wx:if="{{item.Type}}" class="quoteAmount">{{item.QuoteAmount}}条报价</view>
-        <view wx:else class="quoteAmount">{{item.QuoteAmount}}家接单</view>
-    </view>      
 </view>
+<view class="home">
+    <view class="order" wx:for="{{apply}}" bindtap="toDetails" id="{{item.Code}}">
+        <view class="header">
+            <view class="city">
+                <text class="cityText">{{item.Starting}}<text class="iconfont icon-arrow"></text>{{item.Ending}}</text><text class="fromnow">({{item.Fromnow}})</text>
+            </view>
+            <view class="time">
+                <view class="timeText"><text class="iconfont icon-time"></text>{{item.Status}}</view>
+            </view>
+        </view>
+        <view class="middle">
+            <text class="text"><text class="iconfont icon-start"></text>要求发车时间:<text class="textT">{{item.DepartTime}}</text></text>
+            <text class="text"><text class="iconfont icon-carinfo"></text>车辆信息:<text class="textT">{{item.Car}}</text></text>
+            <text class="text"><text class="iconfont icon-remark"></text>备注:<text class="textT">{{item.Remark}}</text></text>
+        </view>
+        <view class="bottom">
+            <view wx:if="{{item.Estimate}}" class="bidding">竞</view>
+            <view wx:else class="pricing">定</view>
+            <text wx:if="{{item.Estimate}}"></text>
+            <view wx:else class="price">¥{{item.Price}}</view>
+            <view wx:if="{{item.Estimate}}" class="quoteAmount">{{item.QuoteAmount}}条报价</view>
+            <view wx:else class="quoteAmount">{{item.QuoteAmount}}家接单</view>
+        </view>      
+    </view>
+</view>
+

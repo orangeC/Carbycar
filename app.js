@@ -17,11 +17,7 @@ App({
     });
 
     this.send("/order/consign/", "GET", {}, "", function (res) {
-      console.log(res)
-    });
 
-    this.send("/system/brand/", "GET", {}, "", function (res) {
-      wx.setStorageSync('brand', res.data);
     });
 
     //调用API从本地缓存中获取数据
@@ -31,10 +27,29 @@ App({
     var user = wx.getStorageSync('user') || { Code: '', Expires: 0 };
     this.globalData.user = user;
     //调用API将版本信息存入本地缓存
-    wx.setStorageSync('version', 'WMP1.0.3');
+    wx.setStorageSync('version', 'WMP1.0.4');
     //用户访问版本信息,每天只要一次
-    var date = new Date();
-    wx.setStorageSync('versionDate', date);
+    var versionDate = wx.getStorageSync('versionDate');
+    if(versionDate){
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var date = year.toString() + month + day;
+        if(parseInt(date) > parseInt(versionDate)){
+            var version = wx.getStorageSync('version');
+            this.send('/account/visit','POST',{Version:version,},'',function(){
+                
+            })
+        }
+    }else{
+        var date = new Date();
+        var year = date.getFullYear();
+        var month = date.getMonth() + 1;
+        var day = date.getDate();
+        var date = year.toString() + month + day;
+        wx.setStorageSync('versionDate', date);
+    }
 
 
   },
@@ -106,6 +121,7 @@ App({
     consignCar: [],
     title:'请选择品牌',
     style:'',
-    userName: ''
+    name: '',
+    token:''
   }
 })

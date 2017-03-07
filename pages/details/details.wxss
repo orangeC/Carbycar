@@ -42,7 +42,13 @@ page {
 
 .flexRight {
   color: #8e8f93;
-  flex: 0.1;
+  flex: 0.18;
+  text-align: right;
+}
+
+.flexRight-right {
+  color: #8e8f93;
+  flex: 0.18;
 }
 
 .blue {
@@ -66,7 +72,6 @@ page {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex: 0.5;
   color: #e8eced;
 }
 
@@ -153,7 +158,7 @@ page {
 
 .carInfoRight {
   font-size: 0.55em;
-  font-weight: bold;
+  font-weight: 900;
 }
 
 .carDetail {
@@ -194,14 +199,13 @@ page {
 }
 
 .consignInfoX-car {
-  width: 30%;
   margin-right: 15rpx;
-  padding: 8rpx;
+  padding: 8rpx 30rpx;
   display: flex;
   justify-content: space-around;
   align-items: center;
   color: #fc7229;
-  font-size: 1.3em;
+  font-size: 1em;
   border: 1px solid #fc7229;
   border-radius: 25px;
 }
@@ -319,7 +323,6 @@ page {
   flex-direction: column;
 }
 
-
 .certificateX {
   width: 100%;
   padding: 30rpx 30rpx;
@@ -336,7 +339,8 @@ page {
   align-items: center;
   position: relative;
 }
-.noImage{
+
+.noImage {
   width: 75px;
   height: 115px;
   border: 1px dashed #d3d3d3;
@@ -349,10 +353,12 @@ page {
   font-size: 0.9em;
   padding-top: 20rpx;
 }
-.noImageCamera{
+
+.noImageCamera {
   padding: 20rpx 0;
   font-size: 2.3em;
 }
+
 .certificateX image {
   width: 75px;
   height: 125px;
@@ -396,72 +402,103 @@ swiper-item {
   width: 70%;
   height: 70%;
 }
+
 .icon-time:before {
   font-size: 0.8em;
   color: #ff722a;
   content: "\e66a";
+  margin: 0 5px 0 15px;
 }
+
 .icon-arrow:before {
   content: "\e603";
   color: #ea8e4d;
   font-size: 1.1em;
-  margin: 0 10rpx;  
+  margin: 0 10rpx;
 }
+
 .icon-car:before {
   content: "\e613";
   color: #656766;
   font-size: 1em;
 }
+
 .icon-smallCar:before {
   content: "\e65e";
   color: #626262;
   font-size: 1em;
 }
+
 .icon-truck:before {
   content: "\e608";
   color: #656567;
   font-size: 1.05em;
 }
+
 .icon-gift:before {
   content: "\e646";
   color: #656565;
   font-size: 1.05em;
 }
+
 .icon-yes-dark:before {
-  content: "\e6ba";
+  content: "\e619";
   color: #989898;
-  font-size: 1.1em;
+  font-size: 0.9em;
+  margin-right: 5px;
 }
+
 .icon-yes-light:before {
-  content: "\e6ba";
+  content: "\e619";
   color: #fe712a;
-  font-size: 1.1em;
+  font-size: 0.9em;
+  margin-right: 5px;
 }
+
+.icon-bill-light:before {
+  content: "\e60e";
+  color: #fe712a;
+  font-size: 0.9em;
+  margin-right: 5px;
+}
+
+.icon-bill-dark:before {
+  content: "\e60e";
+  color: #989898;
+  font-size: 0.9em;
+  margin-right: 5px;
+}
+
 .icon-site:before {
   content: "\e6cb";
   color: #686765;
   font-size: 1.1em;
 }
+
 .icon-camera:before {
   content: "\e609";
   color: #626262;
   font-size: 1.1em;
 }
+
 .icon-info:before {
   content: "\e607";
   color: #626262;
   font-size: 1.1em;
 }
+
 .icon-smallTime:before {
   font-size: 0.7em;
-  color: #999999;
+  color: #999;
   content: "\e66a";
 }
+
 .icon-phone:before {
   font-size: 1.5em;
   color: #767676;
   content: "\e7eb";
 }
+
 .icon-star:before {
   font-size: 1em;
   color: #feb200;

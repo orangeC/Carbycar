@@ -2,16 +2,27 @@
 .category{
     display: flex;
     align-items: center;
-    height: 35px;
+    height: 37px;
+    width: 100%;  
+}
+
+.categoryA{
+    display: inline-block;
+    width: 100%;
+    position: fixed;
+    height: 37px;
+    margin: -1px;
 }
 
 .categoryB{
     width: 25%;
     height: 28px;
     text-align: center;
-    margin-top: 7px;
-    font-size: 13pt;
+    padding-top: 7px;
+    font-size: 0.9em;
     vertical-align: center;
+    display: inline-block;
+    background-color: #ffffff;
 }
 
 .tapCategoryB{
@@ -21,33 +32,67 @@
     border-bottom-width: 2px;
 }
 
+.home{
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+    margin-top: 37px;
+}
+
 .order{
-    width: 90%;
-    height: 160px;
-    margin: auto;  
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .header{
-    height: 20%;
+    height: 32px;
     background-color: white;
     border-top-left-radius:10px;
     border-top-right-radius:10px;
     display: flex;
     align-items: center;
-    padding-left: 5px;
-    margin-top: 10px;
+    box-shadow: 1px 3px 2px 0px #999;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.city{
+    width: 70%;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.fromnow{
+    font-size: 0.8em;
+    color: #818181;
+}
+
+.time{
+    width: 30%;
+    color: #ff732e;
+    font-size: 0.875em;
+    text-align: right;
+    display: inline-block;
+    padding-right: 15px;
 }
 
 .middle{
-    height: 60%;
+    height: 50%;
     background-color: white;
     padding-left: 5px;
+    box-shadow: 1px 3px 2px 0px #999;
+    text-align: left;
 }
 
 .text{
     display: block;
     color: #777;
     font-size: 0.875em;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 
 .textT{
@@ -55,26 +100,16 @@
     font-size: 0.875em;
 }
 
-.city{
-    width: 50%;
-}
-
-.time{
-    width: 25%;
-    margin-left: 25%;
-    color: #777;
-    font-size: 0.875em;
-}
-
 .bottom{
-    height: 20%;
+    height: 35px;
     border-top: 1px solid #f8f8f8;
     background-color: #f8f8f8;
     border-bottom-left-radius:10px;
     border-bottom-right-radius:10px;
     display: flex;
     align-items: center;
-    padding-left: 5px; 
+    padding-left: 5px;
+    box-shadow: 1px 1px 2px 0px #999;
 }
 
 .price{
@@ -107,4 +142,42 @@
     font-size: 0.9em;
     margin-left: 5px;
     padding: 1px 4px;
+}
+
+/*以下都是图标样式图标*/
+.icon-arrow:before{
+    font-size: 1em;
+    color: #e18e58;
+    content: "\e603";
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.icon-start:before{
+    font-size: 0.95em;
+    color: #999;
+    content: "\e65a";
+    margin-right: 5px;
+}
+
+.icon-carinfo:before{
+    content:"\e65e";
+    font-size: 0.95em;
+    color: #999;
+    margin-right: 5px;
+}
+
+.icon-remark:before{
+    content:"\e61c";
+    font-size: 0.95em;
+    color: #999;
+    margin-right: 5px;
+}
+
+.icon-time:before{
+    content:"\e66a";
+    font-size: 0.95em;
+    color: #ff732e;
+    margin-right: 5px;
 }

@@ -47,10 +47,11 @@
 
 .item_letter {
   display: flex;
-  background-color: #b2b2b2;
+  background-color: #ebeeef;
   height: 30px;
   padding-left: 10px;
   align-items: center;
+  color: #444
 }
 
 .item_city {
@@ -59,7 +60,8 @@
   height: 40px;
   padding-left: 10px;
   align-items: center;
-  border-bottom: 1px solid #ececec;
+  border-bottom: 1px solid #ebeeef;
+  color: #444
 }
 
 /***/
@@ -115,8 +117,11 @@
 }
 
 .drawer_desc {
-  font-size: 26rpx;
-  margin: 20rpx;
+  font-size: 1em;
+  margin: 0 20rpx;
+  color: #444;
+  border-bottom: 1rpx solid #ebeeef;
+  line-height: 100rpx
 }
 
 .btn {

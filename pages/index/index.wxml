@@ -1,20 +1,26 @@
 <!--index.wxml-->
-<view class="order" wx:for="{{apply}}" bindtap="toDetails" id="{{item.Code}}" wx:key="">
-  <view class="header">
-    <text class="city">{{item.Starting}}<text class="iconfont icon-arrow"></text>{{item.Ending}}</text>
-    <text class="time">{{item.Fromnow}}</text>
-  </view>
-  <view class="middle">
-    <text class="text"><text class="iconfont icon-start"></text>要求发车时间:<text class="textT">{{item.DepartTime}}</text></text>
-    <text class="text"><text class="iconfont icon-carinfo"></text>车辆信息:<text class="textT">{{item.Car}}</text></text>
-    <text class="text"><text class="iconfont icon-remark"></text>备注:<text class="textT">{{item.Remark}}</text></text>
-  </view>
-  <view class="bottom">
-    <view wx:if="{{item.Estimate}}" class="bidding">竞</view>
-    <view wx:else class="pricing">定</view>
-    <text wx:if="{{item.Estimate}}"></text>
-    <view wx:else class="price">¥{{item.Price}}</view>
-    <view wx:if="{{item.Estimate}}" class="quoteAmount">{{item.QuoteAmount}}条报价</view>
-    <view wx:else class="quoteAmount">{{item.QuoteAmount}}家接单</view>
+<view class="home">
+  <view class="order" wx:for="{{apply}}" wx:key="" bindtap="toDetails" id="{{item.Code}}">
+    <view class="header">
+      <view class="city">
+        <text class="cityText">{{item.Starting}}<text class="iconfont icon-arrow"></text>{{item.Ending}}</text>
+      </view>
+      <view class="time">
+        <view class="timeText"><text class="iconfont icon-time"></text>{{item.Fromnow}}</view>
+      </view>
+    </view>
+    <view class="middle">
+      <text class="text"><text class="iconfont icon-start"></text>要求发车时间: <text class="textT">{{item.DepartTime}}</text></text>
+      <text class="text"><text class="iconfont icon-carinfo"></text>车辆信息: <text class="textT">{{item.Car}}</text></text>
+      <text class="text"><text class="iconfont icon-remark"></text>备注: <text class="textT">{{item.Remark}}</text></text>
+    </view>
+    <view class="bottom">
+      <view wx:if="{{item.Estimate}}" class="bidding">竞</view>
+      <view wx:else class="pricing">定</view>
+      <text wx:if="{{item.Estimate}}"></text>
+      <view wx:else class="price">¥{{item.Price}}</view>
+      <view wx:if="{{item.Estimate}}" class="quoteAmount">{{item.QuoteAmount}}条报价</view>
+      <view wx:else class="quoteAmount">{{item.QuoteAmount}}家接单</view>
+    </view>
   </view>
 </view>

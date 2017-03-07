@@ -1,51 +1,88 @@
 // pages/mine/mine.js
+var app = getApp();
 Page({
   data:{
-      token:'',
-      userName:'未登录'
+      token   :'',
+      userName:'未登录',
+      pricing:0,       //报价中
+      pendingPay:0,    //待付款
+      pendingSend:0,   //待发货
+      pendingReceive:0,//待收货
   },
   onLoad:function(){
-
+      var that = this;
+      var value = wx.getStorageSync('id_token');
+      var name = wx.getStorageSync('name');
+      if(value != ''){
+          that.setData({
+             token:value,
+             userName:name
+          });
+          app.send(
+             '/consignor/summary',
+             'GET',
+             {},
+             that.data.token,
+             function(res){
+                 that.setData({
+                     pricing:res.data.Pricing,
+                     pendingPay:res.data.PendingPay,
+                     pendingSend:res.data.PendingSend,
+                     pendingReceive:res.data.PendingReceive,
+                 })
+             }
+          )
+      } 
   },
   onShow:function(){
         var that = this;
-        try {
-            var value = wx.getStorageSync('id_token');
-            var name = wx.getStorageSync('name');
-            if(value != ''){
-                that.setData({
-                    token:value,
-                    userName:name
-                });
-            }else{
-                that.setData({
-                    token:'',
-                    userName:'未登录'
-                })
-            }
-        } catch (e) {
-        }
+        var value = wx.getStorageSync('id_token');
+        var name = wx.getStorageSync('name');
+        if(value != ''){
+            that.setData({
+                token:value,
+                userName:name
+            });
+            app.send(
+                '/consignor/summary',
+                'GET',
+                {},
+                that.data.token,
+                function(res){
+                    that.setData({
+                        pricing:res.data.Pricing,
+                        pendingPay:res.data.PendingPay,
+                        pendingSend:res.data.PendingSend,
+                        pendingReceive:res.data.PendingReceive,
+                    })
+                }
+            )
+        }else{
+            that.setData({
+                token:'',
+                userName:'未登录',
+            })
+        }       
   },
 
   onHide:function(){
         var that = this;
-        try {
-            var value = wx.getStorageSync('id_token');
-            var name = wx.getStorageSync('name');
-            if(value != ''){
-                that.setData({
-                    token:value,
-                    userName:name
-                });
-            }else{
-                that.setData({
-                    token:'',
-                    userName:'未登录'
-                })
-            }
-
-        } catch (e) {
-
+        var value = wx.getStorageSync('id_token');
+        var name = wx.getStorageSync('name');
+        if(value != ''){
+            that.setData({
+                token:value,
+                userName:name
+            });
+        }else{
+            that.setData({
+                token:'',
+                userName:'未登录',
+                pricing:0,       
+                pendingPay:0,   
+                pendingSend:0,   
+                pendingReceive:0,
+            })
         }
   },
 //去登录页面
@@ -61,9 +98,16 @@ Page({
   },
 //去发布页面
   publish:function(){
-    wx.navigateTo({
-          url: '../publish/publish',
-      })
+        var that = this;
+        if(that.data.token){
+            wx.navigateTo({
+                url: '../publish/publish',
+            })
+        }else{
+            wx.navigateTo({
+                url: '../login/login',
+            })
+        } 
   },
 //我的订单
   myOrder:function(){
@@ -81,7 +125,10 @@ Page({
 //退出登陆
   logOut:function(){
         try {
-            wx.removeStorageSync('id_token','userName')
+            wx.removeStorageSync('id_token');
+            wx.removeStorageSync('code');
+            wx.removeStorageSync('name');
+            wx.removeStorageSync('phone');
         } catch(e) {
 
         }
@@ -116,5 +163,7 @@ Page({
         wx.navigateTo({
           url: '../about/about',
         })
-  }
+  },
+
+
 })

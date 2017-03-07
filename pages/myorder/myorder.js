@@ -24,73 +24,49 @@ Page({
       } catch (e) {
       }
       if(value != ''){
-          wx.request({
-              url: 'https://api.carbycar.com.cn/consignor/order',
-              data: {
-                  category:0,
-              },
-              method: 'GET', 
-              header: {
-                  'content-type': 'application/json',
-                  'Authorization': that.data.token
-              }, 
-              success: function(res){
-                  if(res){
-                    console.log(res.data);
-                    console.log(that.data.token)
-                    var apply = res.data;
-                    for (var i = 0;i < apply.length;i++){
-                        apply[i].Starting = site.getCity(apply[i].Starting); 
-                        apply[i].Ending   = site.getCity(apply[i].Ending);
-                        apply[i].DepartTime = moment.getFormat(apply[i].DepartTime,"yyyy-MM-dd");
-                        apply[i].Fromnow;
-                        apply[i].Fromnow = moment.getFromnow(apply[i].CreateTime);
-                        apply[i].Type == 'Bidding'?apply[i].Estimate = true:apply[i].Estimate = false;
-                        switch(apply[i].Status){
-                            case "Publish":
-                                apply[i].Status = "发布中";
-                                break;
-                            case "Quote":
-                                apply[i].Status = "报价中";   
-                                break;
-                            case "Refuse":
-                                apply[i].Status = "已拒绝";
-                                break;
-                            case "Confirm":
-                                apply[i].Status = "确认中";
-                                break;
-                            case "Pay":
-                                apply[i].Status = "付款中";
-                                break;
-                            case "Send":
-                                apply[i].Status = "发货中";
-                                break;
-                            case "Delivery":
-                                apply[i].Status = "已送达";
-                                break;
-                            case "Receipt":
-                                apply[i].Status = "已收款";
-                                break;
-                            case "Finish":
-                                apply[i].Status = "已结束";   
-                                break;
-                            case "Cancel":
-                                apply[i].Status = "已取消";   
-                                break;
-                            case "Refund":
-                                apply[i].Status = "已退款";
-                                break;
+          app.send(
+                '/consignor/order',
+                'GET',
+                {category:0,},
+                that.data.token,
+                function(res){
+                    if(res){
+                        console.log(res.data);
+                        console.log(that.data.token)
+                        var apply = res.data;
+                        for (var i = 0;i < apply.length;i++){
+                            apply[i].Starting = site.getCity(apply[i].Starting); 
+                            apply[i].Ending   = site.getCity(apply[i].Ending);
+                            apply[i].DepartTime = moment.getFormat(apply[i].DepartTime,"yyyy-MM-dd");
+                            apply[i].Fromnow;
+                            apply[i].Fromnow = moment.getFromnow(apply[i].CreateTime);
+                            apply[i].Type == 'Bidding'?apply[i].Estimate = true:apply[i].Estimate = false;
+                            apply[i].Remark == null?apply[i].Remark = "无":apply[i].Remark=apply[i].Remark;
+                            var thatStatus = {
+                                "Publish" : "发布中",
+                                "Quote"   : "报价中",
+                                "Refuse"  : "已拒绝",
+                                "Confirm" : "确认中",
+                                "Pay"     : "付款中",
+                                "Send"    : "发货中",
+                                "Delivery": "已送达",
+                                "Receive" : "已收货",
+                                "Receipt" : "已收款",
+                                "Finish"  : "已结束",
+                                "Cancel"  : "已取消",
+                                "Refund"  : "已退款"
+                            };
+                            apply[i].Status = thatStatus[apply[i].Status];
                         }
-                    }
-                    that.setData({
-                        apply:apply,
-                    });   
-                  } 
-              },
-              fail: function() {
-                console.log('error')
-              },
-          })
+                        that.setData({
+                            apply:apply,
+                        });   
+                    } 
+                },
+                function(res){
+                    console.log('error');
+                }
+          )
       }else{
           wx.redirectTo({
             url: '../login/login',
@@ -113,8 +89,9 @@ Page({
   toDetails:function(e){
       var that = this;
       var Code = e.currentTarget.id;
+      var me = 13911006493;
       wx.navigateTo({
-        url: '../details/details?Code='+ Code,
+        url: '../details/details?Code='+ Code + '&me='+ me,
         success: function(res){
            
         },
@@ -127,73 +104,49 @@ Page({
   getStatus:function(e){
       var that = this;
       var category = e.currentTarget.id;
-      wx.request({
-        url: 'https://api.carbycar.com.cn/consignor/order',
-        data: {
-            category:category,
-        },
-        method: 'GET', 
-        header: {
-            'content-type': 'application/json',
-            'Authorization': that.data.token
-        }, 
-        success: function(res){
-            if(res){
-                console.log(res.data);
-                console.log(that.data.token)
-                var apply = res.data;
-                for (var i = 0;i < apply.length;i++){
-                    apply[i].Starting = site.getCity(apply[i].Starting); 
-                    apply[i].Ending   = site.getCity(apply[i].Ending);
-                    apply[i].DepartTime = moment.getFormat(apply[i].DepartTime,"yyyy-MM-dd");
-                    apply[i].Fromnow;
-                    apply[i].Fromnow = moment.getFromnow(apply[i].CreateTime);
-                    apply[i].Type == 'Bidding'?apply[i].Estimate = true:apply[i].Estimate = false;
-                    switch(apply[i].Status){
-                        case "Publish":
-                            apply[i].Status = "发布中";
-                            break;
-                        case "Quote":
-                            apply[i].Status = "报价中";   
-                            break;
-                        case "Refuse":
-                            apply[i].Status = "已拒绝";
-                            break;
-                        case "Confirm":
-                            apply[i].Status = "确认中";
-                            break;
-                        case "Pay":
-                            apply[i].Status = "付款中";
-                            break;
-                        case "Send":
-                            apply[i].Status = "发货中";
-                            break;
-                        case "Delivery":
-                            apply[i].Status = "已送达";
-                            break;
-                        case "Receipt":
-                            apply[i].Status = "已收款";
-                            break;
-                        case "Finish":
-                            apply[i].Status = "已结束";   
-                            break;
-                        case "Cancel":
-                            apply[i].Status = "已取消";   
-                            break;
-                        case "Refund":
-                            apply[i].Status = "已退款";
-                            break;
+      app.send(
+          '/consignor/order',
+          'GET',
+          {category:category,},
+          that.data.token,
+          function(res){
+                if(res){
+                    console.log(res.data);
+                    console.log(that.data.token)
+                    var apply = res.data;
+                    for (var i = 0;i < apply.length;i++){
+                        apply[i].Starting = site.getCity(apply[i].Starting); 
+                        apply[i].Ending   = site.getCity(apply[i].Ending);
+                        apply[i].DepartTime = moment.getFormat(apply[i].DepartTime,"yyyy-MM-dd");
+                        apply[i].Fromnow;
+                        apply[i].Fromnow = moment.getFromnow(apply[i].CreateTime);
+                        apply[i].Type == 'Bidding'?apply[i].Estimate = true:apply[i].Estimate = false;
+                        apply[i].Remark == null?apply[i].Remark = "无":apply[i].Remark=apply[i].Remark;
+                        var thatStatus = {
+                            "Publish" : "发布中",
+                            "Quote"   : "报价中",
+                            "Refuse"  : "已拒绝",
+                            "Confirm" : "确认中",
+                            "Pay"     : "付款中",
+                            "Send"    : "发货中",
+                            "Delivery": "已送达",
+                            "Receive" : "已收货",
+                            "Receipt" : "已收款",
+                            "Finish"  : "已结束",
+                            "Cancel"  : "已取消",
+                            "Refund"  : "已退款"
+                        };
+                        apply[i].Status = thatStatus[apply[i].Status];
                     }
+                    that.setData({
+                        apply:apply,
+                    });   
                 }
-                that.setData({
-                    apply:apply,
-                });   
-            } 
-        },
-        fail: function() {
-            console.log('error');
-        },
-    })
+          },
+          function(res){
+                console.log('error');
+          }
+      )
   },
   
 })

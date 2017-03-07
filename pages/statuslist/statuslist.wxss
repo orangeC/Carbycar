@@ -1,58 +1,74 @@
 /* pages/index/index.wxss */
+.home{
+    text-align: center;
+}
 .order{
-    width: 90%;
-    height: 160px;
-    margin: auto;  
+    margin-top: 10px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .header{
-    height: 20%;
+    height: 32px;
     background-color: white;
     border-top-left-radius:10px;
     border-top-right-radius:10px;
     display: flex;
     align-items: center;
-    padding-left: 5px;
-    margin-top: 10px;
+    box-shadow: 1px 3px 2px 0px #999;
+    text-align: left;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.city{
+    width: 50%;
+    margin-left: 10px;
+    display: inline-block;
+}
+
+.time{
+    width: 50%;
+    color: #777;
+    font-size: 0.875em;
+    text-align: right;
+    display: inline-block;
+    padding-right: 15px;
 }
 
 .middle{
-    height: 60%;
+    height: 50%;
     background-color: white;
     padding-left: 5px;
+    box-shadow: 1px 3px 2px 0px #999;
+    text-align: left;
 }
 
 .text{
     display: block;
     color: #777;
     font-size: 0.875em;
+    margin-bottom: 5px;
+    margin-left: 5px;
 }
 
 .textT{
     color:  #999;
     font-size: 0.875em;
-}
-
-.city{
-    width: 50%;
-}
-
-.time{
-    width: 25%;
-    margin-left: 25%;
-    color: #777;
-    font-size: 0.875em;
+    overflow-wrap: break-word;
 }
 
 .bottom{
-    height: 20%;
+    height: 35px;
     border-top: 1px solid #f8f8f8;
     background-color: #f8f8f8;
     border-bottom-left-radius:10px;
     border-bottom-right-radius:10px;
     display: flex;
     align-items: center;
-    padding-left: 5px; 
+    padding-left: 5px;
+    box-shadow: 1px 1px 2px 0px #999;
 }
 
 .price{
@@ -85,4 +101,42 @@
     font-size: 0.9em;
     margin-left: 5px;
     padding: 1px 4px;
+}
+
+/*以下都是图标样式图标*/
+.icon-arrow:before{
+    font-size: 1em;
+    color: #e18e58;
+    content: "\e603";
+    display: inline-block;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.icon-start:before{
+    font-size: 0.95em;
+    color: #999;
+    content: "\e65a";
+    margin-right: 5px;
+}
+
+.icon-carinfo:before{
+    content:"\e65e";
+    font-size: 0.95em;
+    color: #999;
+    margin-right: 5px;
+}
+
+.icon-remark:before{
+    content:"\e61c";
+    font-size: 0.95em;
+    color: #999;
+    margin-right: 5px;
+}
+
+.icon-time:before{
+    content:"\e66a";
+    font-size: 0.95em;
+    color: #999;
+    margin-right: 5px;
 }

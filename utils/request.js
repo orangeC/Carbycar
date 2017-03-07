@@ -1,4 +1,4 @@
-function send(url, method, data, token, success) {
+function send(url, method, data, token, success,fail) {
   wx.request({
     url: "https://api.carbycar.com.cn" + url,
     method: method,

@@ -19,13 +19,10 @@ Page({
   onLoad: function (options) {
     // 生命周期函数--监听页面加载
     var that = this;
-    wx.getStorage({
-      key: 'brand',
-      success: function (res) {
-        that.setData({
-          brand: res.data,
-        })
-      }
+    app.send('/system/brand/', 'GET', {}, '', function (res) {
+      that.setData({
+        brand: res.data,
+      });
     });
     this.setData({
       category: options.category,
@@ -199,7 +196,6 @@ Page({
   },
   //模态框
   setModalStatus: function (e) {
-    console.log("设置显示状态，1显示0不显示", e.currentTarget.dataset.status);
     var that = this;
     app.send("/system/brand", "GET", { code: e.currentTarget.dataset.id }, "", function (res) {
       that.setData({

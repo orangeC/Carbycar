@@ -21,24 +21,28 @@
         <text class="allOfMyOrder">全部订单 ></text>
     </view>
     <view class="status">
-            <view class="statusiconN" bindtap="statusList" id='11'>
-                <view class="iconfont icon-offer"></view>
-                <text class="statusIconText">报价中</text>
-            </view>
-            <view class="statusiconN" bindtap="statusList" id='12'>
-                <view class="iconfont icon-pay"></view>
-                <text class="statusIconText">待付款</text>
-            </view>
-        
-            <view class="statusiconN" bindtap="statusList" id='13'>
-                <view class="iconfont icon-delivery"></view>
-                <text class="statusIconText">待发货</text>
-            </view>
-        
-            <view class="statusiconN" bindtap="statusList" id='14'>
-                <view class="iconfont icon-yes"></view>
-                <text class="statusIconText">待收货</text>
-            </view>
+        <view class="statusiconN" bindtap="statusList" id='11'>
+            <view class="iconfont icon-offer"></view>
+            <view class="statusIconText">报价中</view>
+            <view class="pricing" wx:if="{{pricing > 0}}">{{pricing}}</view>
+        </view>
+        <view class="statusiconN" bindtap="statusList" id='12'>
+            <view class="iconfont icon-pay"></view>
+            <view class="statusIconText">待付款</view>
+            <view class="pendingPay" wx:if="{{pendingPay > 0}}">{{pendingPay}}</view>
+        </view>
+    
+        <view class="statusiconN" bindtap="statusList" id='13'>
+            <view class="iconfont icon-delivery"></view>
+            <view class="statusIconText">待发货</view>
+            <view class="pendingSend" wx:if="{{pendingSend > 0}}">{{pendingSend}}</view>
+        </view>
+    
+        <view class="statusiconN" bindtap="statusList" id='14'>
+            <view class="iconfont icon-yes"></view>
+            <view class="statusIconText">待收货</view>
+            <view class="pendingReceive" wx:if="{{pendingReceive > 0}}">{{pendingReceive}}</view>
+        </view>
     </view>
 </view>
 
@@ -50,7 +54,7 @@
 </view>
 
 <view>
-    <view class="publish" wx:if="{{token}}" bindtap="publish">
+    <view class="publish" bindtap="publish">
         <view class="iconfont icon-publish"></view>
         <text class="publishText">发布委托</text>
     </view>

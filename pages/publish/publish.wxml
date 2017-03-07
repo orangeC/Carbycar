@@ -1,115 +1,126 @@
 
 <!--pages/publish/publish.wxml-->
-<view class="title">
-  <view>
-    <view class="iconfont icon-rocket border"></view>
-    <text>发布需求</text>
+<scroll-view scroll-y="true" class="body">
+  <view class="title">
+    <view>
+      <view class="iconfont icon-rocket border"></view>
+      <text>发布需求</text>
+    </view>
+    -
+    <view>
+      <view class="iconfont icon-prices border"></view>
+      <text>商家报价</text>
+    </view>
+    -
+    <view>
+      <view class="iconfont icon-cards border"></view>
+      <text>选择付款</text>
+    </view>
+    -
+    <view>
+      <view class="iconfont icon-drive border"></view>
+      <text>提车配送</text>
+    </view>
+    -
+    <view>
+      <view class="iconfont icon-money border"></view>
+      <text>安全送达</text>
+    </view>
   </view>
-  -
-  <view>
-    <view class="iconfont icon-prices border"></view>
-    <text>商家报价</text>
+  <view class="pullOut">
+    <view bindtap="starting">
+      <text class="start">始</text>
+      <text>{{starting.Name}}</text>
+    </view>
+    <view bindtap="ending">
+      <text class="end">终</text>
+      <text>{{ending.Name}}</text>
+    </view>
   </view>
-  -
-  <view>
-    <view class="iconfont icon-cards border"></view>
-    <text>选择付款</text>
+  <view class="departTime">
+    <view>
+      <view class="iconfont icon-calen"></view>
+      <picker mode="date" value="{{date}}" start="{{startTime}}" end="" bindchange="bindDateChange">
+        <view class="dateInput">{{date}}</view>
+      </picker>
+    </view>
   </view>
-  -
-  <view>
-    <view class="iconfont icon-drive border"></view>
-    <text>提车配送</text>
+  <view class="price">
+    <view class="prices">
+      <view class="{{bidding}}">竞价</view>
+      <switch type="switch" color="#ff732e" bindchange="priceChange" />
+      <view class="{{pricing}}">定价</view>
+    </view>
+    <view>
+      <text wx:if="{{offer}}" class="bidding">发布后等待报价</text>
+      <input wx:else type="number" placeholder="输入定价，等待接单" focus="true" bindinput="pricing" />
+    </view>
   </view>
-  -
-  <view>
-    <view class="iconfont icon-money border"></view>
-    <text>安全送达</text>
-  </view>
-</view>
-<view class="pullOut">
-  <view>
-    <text class="start">始</text>
-    <text bindtap="starting">{{starting.Name}}</text>
-  </view>
-  <view>
-    <text class="end">终</text>
-    <text bindtap="ending">{{ending.Name}}</text>
-  </view>
-</view>
-<view class="departTime">
-  <view>
-    <view class="iconfont icon-calen"></view>
-    <picker mode="date" value="{{date}}" start="{{startTime}}" end="" bindchange="bindDateChange">
-      <view class="dateInput">{{date}}</view>
-    </picker>
-  </view>
-</view>
-<view class="price">
-  <view class="prices">
-    <view class="{{bidding}}">竞价</view>
-    <switch type="switch" color="#ff732e" bindchange="priceChange" />
-    <view class="{{pricing}}">定价</view>
-  </view>
-  <view>
-    <text wx:if="{{offer}}">发布后等待报价</text>
-    <input wx:else type="number" placeholder="输入定价，等待接单" focus="true" bindinput="pricing" />
-  </view>
-</view>
-<view class="detail">
-  <view wx:for="{{consignCar}}" wx:key="" class="carDetail">
-    <view class="detailList">
-      <view bindtap="editCar" data-id="{{index}}">
-        <view>{{item.Brand}}【{{item.Style}}】</view>
-        <view>汽车状态：
-          <text wx:if="{{item.NewCar}}">能开</text>
-          <text wx:else>不能开</text>/
-          <text wx:if="{{item.CanDrive}}">新车</text>
-          <text wx:else>二手车</text> 单车估值：{{item.Valuation}}万</view>
-        <view>保险：
-          <text wx:if="{{item.NeedInsurance}}">需要保险</text>
-          <text wx:else>不需要保险</text>
+  <view class="detail">
+    <view wx:for="{{consignCar}}" wx:key="" class="carDetail">
+      <view class="detailList">
+        <view data-id="{{index}}">
+          <view class="infoTitle">
+            <text class="iconfont icon-cars"></text> {{item.Brand}}【{{item.Style}}】</view>
+          <view class="infoCar">汽车状态：
+            <text wx:if="{{item.NewCar}}">新车</text>
+            <text wx:else>二手车</text>/
+            <text wx:if="{{item.CanDrive}}">能开</text>
+            <text wx:else>不能开</text> 单车估值：{{item.Valuation}}万</view>
+          <view class="infoCar">保险：
+            <text wx:if="{{item.NeedInsurance}}">需要保险</text>
+            <text wx:else>不需要保险</text>
+          </view>
+        </view>
+        <view class="infoCarR">
+          <text class="amount">{{item.Amount}}辆</text>
+          <text bindtap="deleteCar" data-id="{{index}}" class="iconfont icon-del"></text>
         </view>
       </view>
-      <view>
-        <text class="amount">{{item.Amount}}辆</text>
-        <text bindtap="deleteCar" data-id="{{index}}">删除</text>
+    </view>
+  </view>
+  <view bindtap="addCar" class="addCar">
+    <text class="iconfont icon-add add"></text> 添加需要托运的车辆信息
+    <text class="horn">></text>
+  </view>
+  <view class="require">
+    <text class="iconfont icon-car"></text> 运输要求</view>
+  <view class="requireDetail">
+    <view>
+      <view wx:if="{{homeTake}}" class="consignInfoX-car" bindtap="noHomeTake">
+        <text>
+          <text class="iconfont icon-yes-light"></text> 上门提车</text>
+      </view>
+      <view wx:else class="consignInfoX-car dark" bindtap="homeTake">
+        <text>
+          <text class="iconfont icon-yes-dark"></text> 不上门提车</text>
+      </view>
+      <view wx:if="{{needInvoice}}" class="consignInfoX-car" bindtap="noNeedInvoice">
+        <text>
+          <text class="iconfont icon-Invoice-light"></text> 需要发票</text>
+      </view>
+      <view wx:else class="consignInfoX-car dark" bindtap="needInvoice">
+        <text>
+          <text class="iconfont icon-Invoice-dark"></text> 不需要发票</text>
       </view>
     </view>
   </view>
-  <view bindtap="addCar">
-    <text class="iconfont icon-add add">添加需要托运的车辆信息</text>
-  </view>
-</view>
-<view class="require iconfont icon-car">运输要求</view>
-<view class="requireDetail">
-  <view>
-    <view wx:if="{{homeTake}}" class="consignInfoX-car" bindtap="noHomeTake">
-      <text class="iconfont icon-yes-light">上门提车</text>
-    </view>
-    <view wx:else class="consignInfoX-car dark" bindtap="homeTake">
-      <text class="iconfont icon-yes-dark">不上门提车</text>
-    </view>
-
-    <view wx:if="{{needInvoice}}" class="consignInfoX-car" bindtap="noNeedInvoice">
-      <text class="iconfont icon-Invoice-light">需要发票</text>
-    </view>
-    <view wx:else class="consignInfoX-car dark" bindtap="needInvoice">
-      <text class="iconfont icon-Invoice-dark">不需要发票</text>
+  <view wx:if="{{takeCar}}">
+    <picker bindchange="takeDistrict" value="{{index}}" range="{{area}}">
+      <view class="area">提车区域：{{area[index]}}</view>
+    </picker>
+    <view class="address">
+      <input placeholder="请输入提车地点" bindinput="takeAddress" />
     </view>
   </view>
-</view>
-<view wx:if="{{takeCar}}">
-  <picker bindchange="takeDistrict" value="{{index}}" range="{{area}}">
-    <view>提车区域：{{area[index]}}</view>
-  </picker>
-  <input placeholder="请输入提车地点" bindinput="takeAddress" />
-</view>
-<view class="carInfo iconfont icon-doc">提车信息</view>
-<view class="carInfoDet">
-  <input placeholder="联系人" bindinput="contactName" value="{{contactName}}"/>
-  <input placeholder="手机号" bindinput="contactPhone" value="{{contactPhone}}"/>
-  <input placeholder="备注" bindinput="remark" />
-</view>
-<view>
+  <view class="carInfo">
+    <text class="iconfont icon-doc"></text> 提车信息</view>
+  <view class="carInfoDet">
+    <input placeholder="联系人" bindinput="contactName" value="{{contactName}}" />
+    <input placeholder="手机号" bindinput="contactPhone" value="{{contactPhone}}" />
+    <input placeholder="备注" bindinput="remark" />
+  </view>
+</scroll-view>
+<view class="buttonA">
   <button bindtap="submit" class="button">发布委托</button>
 </view>

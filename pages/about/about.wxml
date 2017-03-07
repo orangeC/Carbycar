@@ -3,7 +3,7 @@
     <image src="../../images/logo.png" class="logopic"></image>
 </view>
 <view class="aboutText">
-    <view>车拉车 1.0.3</view>
+    <text>车拉车 1.0.4</text>
 </view>
 <view class="info">
     <text class="address">网址：www.carbycar.com.cn</text>

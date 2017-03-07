@@ -1,4 +1,5 @@
 // pages/register/register.js  
+var app = getApp();
 Page({
     data: {
         registerStatus: true,
@@ -50,35 +51,37 @@ Page({
     //获取验证码
     checkNumber: function () {
         var that = this;
-        // that.setData({
-        //     attrC: true,
-        //     attrR: false
-        // })
-        // setTimeout(function(){that.countdown();}, 1000);
-
         var length = this.data.userName.length;
         console.log(length)
         if (length != '') {
             if (length == 11) {
                 console.log(length)
-                wx.request({
-                    url: 'https://api.carbycar.com.cn/message/valid',
-                    data: {
-                        phone: this.data.userName,
-                    },
-                    method: 'GET',
-                    header: {
-                        'content-type': 'application/json'
-                    },
-                    success: function (res) {
-                        console.log(res.data)
-                        that.setData({
-                            attrC: true,
-                            attrR: false
-                        })
-                        setTimeout(function(){that.countdown();}, 1000);
-                    },
+                app.send('/message/valid','GET',{phone: this.data.userName,},'',function(res){
+                    console.log(res.data)
+                    that.setData({
+                        attrC: true,
+                        attrR: false
+                    })
+                    setTimeout(function(){that.countdown();}, 1000);
                 })
+                // wx.request({
+                //     url: 'https://api.carbycar.com.cn/message/valid',
+                //     data: {
+                //         phone: this.data.userName,
+                //     },
+                //     method: 'GET',
+                //     header: {
+                //         'content-type': 'application/json'
+                //     },
+                //     success: function (res) {
+                //         console.log(res.data)
+                //         that.setData({
+                //             attrC: true,
+                //             attrR: false
+                //         })
+                //         setTimeout(function(){that.countdown();}, 1000);
+                //     },
+                // })
             } else {
                 wx.showToast({
                     title: '手机号码有误请重新输入',
@@ -101,27 +104,30 @@ Page({
         if (this.data.userPassword != '') {
             if (this.data.validCode != '') {
                 if (this.data.userName != '') {
-                    wx.request({
-                        url: 'https://api.carbycar.com.cn/system/signup',
-                        data: {
-                            UserName: this.data.userName,
-                            Password: this.data.userPassword,
-                            ValidCode: this.data.validCode,
-                            AccountType: this.data.accountType
-                        },
-                        method: 'POST',
-                        header: {
-                            'content-type': 'application/json'
-                        },
-                        success: function (res) {
-                            wx.redirectTo({
-                                url: '../login/login',
-                            })
-                        },
-                        fail: function () {
-                            console.log('shibai')
-                        }
-                    })
+                    if(this.data.userPassword.length >= 6 && this.data.userPassword.length <=20){
+                        app.send(
+                                '/system/signup',
+                                'POST',
+                                {
+                                    UserName: this.data.userName,
+                                    Password: this.data.userPassword,
+                                    ValidCode: this.data.validCode,
+                                    AccountType: this.data.accountType
+                                },
+                                '',
+                                function(res){
+                                    wx.redirectTo({
+                                        url: '../login/login',
+                                    })
+                                }
+                        )
+                    }else {
+                        wx.showToast({
+                            title: '密码长度6-20',
+                            icon: 'loading',
+                            duration: 1500
+                        })
+                    }
                 } else {
                     wx.showToast({
                         title: '请填写手机号码',

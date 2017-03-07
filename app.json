@@ -20,7 +20,7 @@
     "backgroundColor": "efeff4",
     "backgroundTextStyle": "white",
     "navigationBarTitleText": "车拉车",
-    "enablePullDownRefresh": "true",
+    "enablePullDownRefresh": "false",
     "navigationBarBackgroundColor": "#3d93e3",
     "navigationBarTextStyle": "white"
   },

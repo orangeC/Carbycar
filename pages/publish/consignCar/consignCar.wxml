@@ -1,33 +1,41 @@
-<!--pages/publish/consignCar/consignCar.wxml-->
-<view class="warning" wx:if="{{warning}}">确认估值单位是万</view>
-<view class="container">
-    <view>
-        <view>品牌型号</view>
-        <text class="font" data-index="{{brand}}" data-style="{{style}}" bindtap="brand">{{brand}}</text>
-    </view>
-    <view>
-        <view>单车估值（万）</view>
-        <input placeholder="未填写" value="{{valuation}}" class="input" bindinput="valuation" type="number"/>
-    </view>
-    <view>
-        <view>数量（辆）</view>
-        <input placeholder="未填写" value="{{amount}}" class="input" bindinput="amount" type="number"/>
-    </view>
-    <view>
-        <view>汽车状态</view>
-        <view class="carStatus">
-            <view class="font">二手车<switch type="switch" color="#4093ee" bindchange="newCar" checked="{{newCar}}"/>新车</view>
-            <view class="font">不能开<switch type="switch" color="#4093ee" bindchange="canDrive" checked="{{canDrive}}"/>能开</view>
-        </view>
-    </view>
-    <view>
-        <view>单车险</view>
-        <view class="font">需要单车险？<switch type="checkbox" bindchange="needInsurance"/></view>
-    </view>
-    <view>
-        <text>说明：单车险是指在车辆运输过程中除物流板车本身购买的运输保险之外，物流公司或车主为每辆运输的车单独购买的保险，一般可以委托物流公司或自己向物流公司购买。</text>
-    </view>
-</view>
 
+<!--pages/publish/consignCar/consignCar.wxml-->
+<view wx:if="{{warning}}" class="noWarning"></view>
+<view class="warning" wx:else>确认估值单位是万</view>
+<view class="container">
+  <view class="brand">
+    <view>品牌型号</view>
+    <text class="font" data-index="{{brand}}" data-style="{{style}}" bindtap="brand">{{brand}}<text class="horn">　></text></text>
+  </view>
+  <view class="brand">
+    <view>单车估值（万）</view>
+    <input placeholder="未填写" value="{{valuation}}" class="input" bindinput="valuation" type="number" />
+  </view>
+  <view class="brand">
+    <view>数量（辆）</view>
+    <input placeholder="未填写" value="{{amount}}" class="input" bindinput="amount" type="number" />
+  </view>
+  <view class="newCar">
+    <view>汽车状态</view>
+    <view class="carStatus">
+      <view class="font">二手车
+        <switch type="switch" color="#4093ee" bindchange="newCar" checked="{{newCar}}" />新车</view>
+      <view class="font">不能开
+        <switch type="switch" color="#4093ee" bindchange="canDrive" checked="{{canDrive}}" />能开</view>
+    </view>
+  </view>
+  <view class="need">
+    <view>单车险</view>
+    <view wx:if="{{needInsurance}}" class="consignInfoX-car" bindtap="noNeedInsurance">
+      <text><text class="iconfont icon-yes-light"></text> 需要单车险</text>
+    </view>
+    <view wx:else class="consignInfoX-car dark" bindtap="needInsurance">
+      <text><text class="iconfont icon-yes-dark"></text> 不需要单车险</text>
+    </view>
+  </view>
+  <view class="need">
+    <text>说明：单车险是指在车辆运输过程中除物流板车本身购买的运输保险之外，物流公司或车主为每辆运输的车单独购买的保险，一般可以委托物流公司或自己向物流公司购买。</text>
+  </view>
+</view>
 <button type="primary" bindtap="edit" wx:if="{{submit}}">修改</button>
 <button bindtap="save" wx:else class="button">保存</button>

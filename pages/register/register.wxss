@@ -10,7 +10,8 @@
 
 .identityText{
     width: 27%;
-    padding-left: 3%;
+    padding-left: 10px;
+    font-size: 1em;
 }
 
 .username{
@@ -24,7 +25,7 @@
 
 .usernameText{
     width: 27%;
-    padding-left: 3%;
+    padding-left: 10px;
 }
 
 .password{
@@ -38,7 +39,7 @@
 
 .passwordText{
     width: 27%;
-    padding-left: 3%;
+    padding-left: 10px;
 }
 
 .checknumber{
@@ -52,11 +53,13 @@
 
 .checkoutText{
     width: 50%;
-    padding-left: 5%;
+    padding-left: 10px;
 }
 
 .getValidCode{
     color:deepskyblue;
+    font-size: 1em;
+    text-align: right;
 }
 
 .checkout{
@@ -67,6 +70,7 @@
 .protocol{
     display: flex;
     align-items: center;
+    font-size: 1em;
 }
 
 .protocolUrl{

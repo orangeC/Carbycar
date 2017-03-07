@@ -15,12 +15,13 @@ Page({
     Title: "",
     tipsTime: "",
     Cars: [],
-    hiddenCarDetail: true,
-    hiddenConsignInfo: true,
-    hiddenPricing: true,
-    hiddenAcceptInfo: true,
-    hiddenGetCar: true,
-    hiddenCertificate: true,
+    hiddenCarDetail: false,
+    hiddenConsignInfo: false,
+    hiddenPricing: false,
+    hiddenPricingControl: false,//为了控制当前报价模块在某些订单状态下是否可见
+    hiddenAcceptInfo: false,
+    hiddenGetCar: false,
+    hiddenCertificate: false,
     hiddenQuote: true,
     switchTabOne: true,
     switchTabTwo: true,
@@ -51,81 +52,143 @@ Page({
   onLoad: function (e) {
     var eCode = e.Code;
     var that = this;
-    //获取token
-    wx.getStorage({
-      key: 'id_token',
-      success: function (res) {
-        app.send("/consignor/profile/", "GET", {}, res.data, function (res) {
-          that.setData({
-            Code: res.data.Code
-          })
-        });
-      }
-    });
+    var me = e.me
     //50425344
     //51723776
-    app.send("/order/consign/", "GET", { code: eCode }, "", function (res) {
-      if (res) {
-        console.log(res.data);
-        var apply = res.data;
-        //解析车辆信息
-        var arr = apply.Cars;
-        var arrC = JSON.parse(arr);
-        var arrI = JSON.parse(apply.Info);
-        var QuoteData = apply.QuoteInfos;
-        var CarryData = apply.CarryInfo;
-        var arrInfo = JSON.parse(apply.Info);
-        console.log(arrInfo)
+    //57805312
+    var token = wx.getStorageSync('id_token')
+    if (token && me) {
+      app.send("/consignor/profile/", "GET", {}, token, function (res) {
+        that.setData({
+          Code: res.data.Code
+        })
+      });
+      app.send("/order/consign/", "GET", { code: eCode }, token, function (res) {
+        if (res) {
+          console.log(res.data);
+          var apply = res.data;
+          //解析车辆信息
+          var arr = apply.Cars;
+          var arrC = JSON.parse(arr);
+          var arrI = JSON.parse(apply.Info);
+          var QuoteData = apply.QuoteInfos;
+          var CarryData = apply.CarryInfo;
+          var arrInfo = JSON.parse(apply.Info);
+          console.log(arrInfo)
 
-        if (QuoteData) {
-          //时间转换(处理接收到的数据多少小时前)
-          for (var i = 0; i < QuoteData.length; i++) {
-            var fromTime = QuoteData[i].QuoteTime;
-            QuoteData[i].ExpiredTime = moment.getFromnow(fromTime);
-            //为整数字符串在末尾添加.00
-            if (!/\./.test(QuoteData[i].CarrierScore)) {
-              QuoteData[i].CarrierScore += '.0';
+          if (QuoteData) {
+            //时间转换(处理接收到的数据多少小时前)
+            for (var i = 0; i < QuoteData.length; i++) {
+              var fromTime = QuoteData[i].QuoteTime;
+              QuoteData[i].ExpiredTime = moment.getFromnow(fromTime);
+              //为整数字符串在末尾添加.00
+              if (!/\./.test(QuoteData[i].CarrierScore)) {
+                QuoteData[i].CarrierScore += '.0';
+              }
             }
           }
-        }
-        if (CarryData) {
-          var arrQ = JSON.parse(CarryData.QuoteInfo);
-        }
+          if (CarryData) {
+            var arrQ = JSON.parse(CarryData.QuoteInfo);
+          }
 
-        //时间转换(年月日 时间)
-        var timeCreate = apply.CreateTime;
-        var timeTraceInfo = apply.TraceInfo.CreateTime;
-        var timeDepart = apply.DepartTime;
-        timeCreate = moment.getFormat(timeCreate, "yyyy-MM-dd hh:mm");
-        timeTraceInfo = moment.getFormat(timeTraceInfo, "yyyy-MM-dd hh:mm");
-        timeDepart = moment.getFormat(timeDepart, "yyyy-MM-dd");
-        //设置data值
-        that.setData({
-          ConsignorCode: apply.ConsignorCode,
-          OrderNo: apply.OrderNo,
-          Status: apply.Status,
-          Type: apply.Type,
-          CreateTime: timeCreate,
-          Starting: apply.Starting,
-          Ending: apply.Ending,
-          Price: apply.Price,
-          Cars: arrC,
-          Title: apply.TraceInfo.Title,
-          tipsTime: timeTraceInfo,
-          DepartTime: timeDepart,
-          ContactName: apply.ContactName,
-          Info: arrI,
-          Remark: apply.Remark,
-          QuoteInfos: QuoteData,
-          CarryInfo: CarryData,
-          TakePlace: apply.TakePlace,
-          QuoteInfo: arrQ,
-          eCode: eCode,
-          arrInfo: arrInfo,
-          CarryData: CarryData
-        })
-      }
-    })
+          //时间转换(年月日 时间)
+          var timeCreate = apply.CreateTime;
+          var timeTraceInfo = apply.TraceInfo.CreateTime;
+          var timeDepart = apply.DepartTime;
+          timeCreate = moment.getFormat(timeCreate, "yyyy-MM-dd hh:mm");
+          timeTraceInfo = moment.getFormat(timeTraceInfo, "yyyy-MM-dd hh:mm");
+          timeDepart = moment.getFormat(timeDepart, "yyyy-MM-dd");
+          //设置data值
+          that.setData({
+            ConsignorCode: apply.ConsignorCode,
+            OrderNo: apply.OrderNo,
+            Status: apply.Status,
+            Type: apply.Type,
+            CreateTime: timeCreate,
+            Starting: apply.Starting,
+            Ending: apply.Ending,
+            Price: apply.Price,
+            Cars: arrC,
+            Title: apply.TraceInfo.Title,
+            tipsTime: timeTraceInfo,
+            DepartTime: timeDepart,
+            ContactName: apply.ContactName,
+            Info: arrI,
+            Remark: apply.Remark,
+            QuoteInfos: QuoteData,
+            CarryInfo: CarryData,
+            TakePlace: apply.TakePlace,
+            QuoteInfo: arrQ,
+            eCode: eCode,
+            arrInfo: arrInfo,
+            CarryData: CarryData
+          })
+        }
+      })
+    } else {
+      app.send("/order/consign/", "GET", { code: eCode }, "", function (res) {
+        if (res) {
+          console.log(res.data);
+          var apply = res.data;
+          //解析车辆信息
+          var arr = apply.Cars;
+          var arrC = JSON.parse(arr);
+          var arrI = JSON.parse(apply.Info);
+          var QuoteData = apply.QuoteInfos;
+          var CarryData = apply.CarryInfo;
+          var arrInfo = JSON.parse(apply.Info);
+          console.log(arrInfo)
+
+          if (QuoteData) {
+            //时间转换(处理接收到的数据多少小时前)
+            for (var i = 0; i < QuoteData.length; i++) {
+              var fromTime = QuoteData[i].QuoteTime;
+              QuoteData[i].ExpiredTime = moment.getFromnow(fromTime);
+              //为整数字符串在末尾添加.00
+              if (!/\./.test(QuoteData[i].CarrierScore)) {
+                QuoteData[i].CarrierScore += '.0';
+              }
+            }
+          }
+          if (CarryData) {
+            var arrQ = JSON.parse(CarryData.QuoteInfo);
+          }
+
+          //时间转换(年月日 时间)
+          var timeCreate = apply.CreateTime;
+          var timeTraceInfo = apply.TraceInfo.CreateTime;
+          var timeDepart = apply.DepartTime;
+          timeCreate = moment.getFormat(timeCreate, "yyyy-MM-dd hh:mm");
+          timeTraceInfo = moment.getFormat(timeTraceInfo, "yyyy-MM-dd hh:mm");
+          timeDepart = moment.getFormat(timeDepart, "yyyy-MM-dd");
+          //设置data值
+          that.setData({
+            ConsignorCode: apply.ConsignorCode,
+            OrderNo: apply.OrderNo,
+            Status: apply.Status,
+            Type: apply.Type,
+            CreateTime: timeCreate,
+            Starting: apply.Starting,
+            Ending: apply.Ending,
+            Price: apply.Price,
+            Cars: arrC,
+            Title: apply.TraceInfo.Title,
+            tipsTime: timeTraceInfo,
+            DepartTime: timeDepart,
+            ContactName: apply.ContactName,
+            Info: arrI,
+            Remark: apply.Remark,
+            QuoteInfos: QuoteData,
+            CarryInfo: CarryData,
+            TakePlace: apply.TakePlace,
+            QuoteInfo: arrQ,
+            eCode: eCode,
+            arrInfo: arrInfo,
+            CarryData: CarryData
+          })
+        }
+      })
+    }
   },
   onReady: function () {
     var that = this;
@@ -155,8 +218,23 @@ Page({
           Status: thatStatus[that.data.Status]
         })
         //设置隐藏状态
-        if (that.data.Status == "付款中" || that.data.Status == "发货中" || that.data.Status == "送达" || that.data.Status == "收货" || that.data.Status == "收款" || that.data.Status == "结束" || that.data.Status == "取消" || that.data.Status == "退款") {
-          that.setData({ hiddenQuote: false });
+        if (that.data.Status == "确认中" || that.data.Status == "付款中" || that.data.Status == "发货中" || that.data.Status == "送达" || that.data.Status == "收货" || that.data.Status == "收款") {
+          that.setData({
+            hiddenQuote: false,
+          });
+        }
+        if (that.data.Status == "发布中" || that.data.Status == "报价中" || that.data.Status == "拒绝" || that.data.Status == "结束" || that.data.Status == "取消" || that.data.Status == "退款") {
+          that.setData({
+            hiddenQuote: true,
+            hiddenAcceptInfo: true,
+            hiddenGetCar: true,
+            hiddenCertificate: true,
+          });
+        }
+        if (that.data.Status == "确认中" || that.data.Status == "付款中" || that.data.Status == "发货中" || that.data.Status == "送达" || that.data.Status == "收货" || that.data.Status == "收款" || that.data.Status == "结束" || that.data.Status == "取消" || that.data.Status == "退款") {
+          that.setData({
+            hiddenPricingControl: true
+          });
         }
         //设置type
         var typeControl = {
@@ -196,13 +274,16 @@ Page({
           }
           //初始化一个新数组将物流凭证信息Push
           var arrCate = [];
-          arrCate.push(CarryData.Checkouts, CarryData.Contracts, CarryData.Deliveries, CarryData.Insurances)
+          arrCate.push(CarryData.Checkouts, CarryData.Contracts, CarryData.Deliveries, CarryData.Insurances);
+          //测试换 "https://image.carbycar.com.cn"
+          //       http://open.3vcar.com
+          var imgHTTP = "https://image.carbycar.com.cn";
           //分别插入4个图片（很没有效率）
           if (arrCate[0] != "") {
-            var imgSrcOne = "https://image.carbycar.com.cn" + JSON.parse(arrCate[0])[0].Url;
+            var imgSrcOne = imgHTTP + JSON.parse(arrCate[0])[0].Url;
             var arrSrcOne = [];
             for (var i = 0; i < JSON.parse(arrCate[0]).length; i++) {
-              arrSrcOne.push("https://image.carbycar.com.cn" + JSON.parse(arrCate[0])[i].Url)
+              arrSrcOne.push(imgHTTP + JSON.parse(arrCate[0])[i].Url)
             }
             that.setData({
               imgOneLength: JSON.parse(arrCate[0]).length,
@@ -215,10 +296,10 @@ Page({
             })
           };
           if (arrCate[1] != "") {
-            var imgSrcTwo = "https://image.carbycar.com.cn" + JSON.parse(arrCate[1])[0].Url;
+            var imgSrcTwo = imgHTTP + JSON.parse(arrCate[1])[0].Url;
             var arrSrcTwo = [];
             for (var i = 0; i < JSON.parse(arrCate[1]).length; i++) {
-              arrSrcTwo.push("https://image.carbycar.com.cn" + JSON.parse(arrCate[1])[i].Url)
+              arrSrcTwo.push(imgHTTP + JSON.parse(arrCate[1])[i].Url)
             }
             that.setData({
               imgTwoLength: JSON.parse(arrCate[1]).length,
@@ -231,10 +312,10 @@ Page({
             })
           };
           if (arrCate[2] != "") {
-            var imgSrcThree = "https://image.carbycar.com.cn" + JSON.parse(arrCate[2])[0].Url;
+            var imgSrcThree = imgHTTP + JSON.parse(arrCate[2])[0].Url;
             var arrSrcThree = [];
             for (var i = 0; i < JSON.parse(arrCate[2]).length; i++) {
-              arrSrcThree.push("https://image.carbycar.com.cn" + JSON.parse(arrCate[2])[i].Url)
+              arrSrcThree.push(imgHTTP + JSON.parse(arrCate[2])[i].Url)
             }
             that.setData({
               imgThreeLength: JSON.parse(arrCate[2]).length,
@@ -247,10 +328,10 @@ Page({
             })
           };
           if (arrCate[3] != "") {
-            var imgSrcFour = "https://image.carbycar.com.cn" + JSON.parse(arrCate[3])[0].Url;
+            var imgSrcFour = imgHTTP + JSON.parse(arrCate[3])[0].Url;
             var arrSrcFour = [];
             for (var i = 0; i < JSON.parse(arrCate[3]).length; i++) {
-              arrSrcFour.push("https://image.carbycar.com.cn" + JSON.parse(arrCate[3])[i].Url)
+              arrSrcFour.push(imgHTTP + JSON.parse(arrCate[3])[i].Url)
             }
             that.setData({
               imgFourLength: JSON.parse(arrCate[3]).length,

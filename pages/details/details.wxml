@@ -2,7 +2,7 @@
 <!--pages/details/details.wxml-->
 <view class="container">
   <view class="header">
-    <text>订单号：{{OrderNo}}</text>
+    <text class="orderNo">订单号：{{OrderNo}}</text>
     <view>|
       <text class="iconfont icon-time"></text>
       <text class="header-text">{{Status}}</text>
@@ -19,7 +19,9 @@
       <view class="iconfont icon-arrow"></view>
       <text>{{Ending}}</text>
     </view>
-    <view class="siteRight">
+    <view class="siteRight" wx:if="{{whichType}}">
+
+      <!--我改的-->
       <text>总价：</text>
       <text class="siteRight-text">￥{{Price}}</text>
     </view>
@@ -32,7 +34,7 @@
       <text>{{Title}}</text>
       <text>{{tipsTime}}</text>
     </view>
-    <text class="flexRight">></text>
+    <text class="flexRight-right">></text>
   </view>
   <view class="carInfo normal" bindtap="bindHiddenOne">
     <text class="iconfont icon-car flexLeft"></text>
@@ -74,11 +76,11 @@
       <view wx:if="{{arrInfo.HomeTake}}" class="consignInfoX-car">
         <text class="iconfont icon-yes-light"></text>上门提车</view>
       <view wx:else class="consignInfoX-car dark">
-        <text class="iconfont icon-yes-dark"></text>上门提车</view>
+        <text class="iconfont icon-yes-dark"></text>不上门提车</view>
       <view wx:if="{{arrInfo.NeedInvoice}}" class="consignInfoX-car">
-        <text class="iconfont icon-yes-light"></text>需要发票</view>
+        <text class="iconfont icon-bill-light"></text>需要发票</view>
       <view wx:else class="consignInfoX-car dark">
-        <text class="iconfont icon-yes-dark"></text>需要发票</view>
+        <text class="iconfont icon-bill-dark"></text>不需要发票</view>
     </view>
     <text>要求发车时间：{{DepartTime}}</text>
     <text>
@@ -92,7 +94,7 @@
     <text wx:if="{{Remark == null}}">备注：无</text>
     <text wx:else>备注：{{Remark}}</text>
   </view>
-  <view class="pricing normal" bindtap="bindHiddenThree">
+  <view class="pricing normal" bindtap="bindHiddenThree" hidden="{{hiddenPricingControl}}">
     <text class="iconfont icon-gift flexLeft"></text>
     <text class="flexCenter">
       <text>当前报价</text>
@@ -181,8 +183,8 @@
   </view>
   <view hidden="{{hiddenCertificate}}" class="certificateX">
     <view>
-      <view hidden="{{imgOneLength == 0}}" class="certificateX-circle">{{imgOneLength}}</view>
-      <view class="noImage" wx:if="{{imgOneLength == 0}}">
+      <view hidden="{{!imgOneLength}}" class="certificateX-circle">{{imgOneLength}}</view>
+      <view class="noImage" wx:if="{{!imgOneLength}}">
         <view class="iconfont icon-camera noImageCamera"></view>
         <text>承运方</text>
         <text>提车时提供</text>
@@ -191,8 +193,8 @@
       <text>合同</text>
     </view>
     <view>
-      <view hidden="{{imgTwoLength == 0}}" class="certificateX-circle">{{imgTwoLength}}</view>
-      <view class="noImage" wx:if="{{imgTwoLength == 0}}">
+      <view hidden="{{!imgTwoLength}}" class="certificateX-circle">{{imgTwoLength}}</view>
+      <view class="noImage" wx:if="{{!imgTwoLength}}">
         <view class="iconfont icon-camera noImageCamera"></view>
         <text>承运方</text>
         <text>提车时提供</text>
@@ -201,8 +203,8 @@
       <text>验车单</text>
     </view>
     <view>
-      <view hidden="{{imgThreeLength == 0}}" class="certificateX-circle">{{imgThreeLength}}</view>
-      <view class="noImage" wx:if="{{imgThreeLength == 0}}">
+      <view hidden="{{!imgThreeLength}}" class="certificateX-circle">{{imgThreeLength}}</view>
+      <view class="noImage" wx:if="{{!imgThreeLength}}">
         <view class="iconfont icon-camera noImageCamera"></view>
         <text>承运方</text>
         <text>提车时提供</text>
@@ -211,8 +213,8 @@
       <text>保险单</text>
     </view>
     <view>
-      <view hidden="{{imgFourLength == 0}}" class="certificateX-circle">{{imgFourLength}}</view>
-      <view class="noImage" wx:if="{{imgFourLength == 0}}">
+      <view hidden="{{!imgFourLength}}" class="certificateX-circle">{{imgFourLength}}</view>
+      <view class="noImage" wx:if="{{!imgFourLength}}">
         <view class="iconfont icon-camera noImageCamera"></view>
         <text>承运方</text>
         <text>交车时提供</text>

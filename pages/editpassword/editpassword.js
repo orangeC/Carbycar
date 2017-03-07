@@ -43,35 +43,66 @@ Page({
       var that = this;
       if(that.data.oldPassword !='' && that.data.newPassword !='' && that.data.checkNewPassword !=''){
           if(that.data.newPassword == that.data.checkNewPassword){
-              wx.request({
-                  url: 'https://api.carbycar.com.cn/account/password',
-                  data: {
-                      OldPassword:that.data.oldPassword,
-                      NewPassword:that.data.newPassword,
-                  },
-                  method: 'POST', 
-                  header: {
-                      'content-type': 'application/json'
-                  },
-                  success: function(res){
-                      if(res){
-                          console.log(res.data)
-                          wx.showToast({  
-                              title: '修改成功',  
-                              icon : 'loading',  
-                              duration : 1000,
-                              success:function(res){
-                                  wx.switchTab({
-                                      url: '../me/me',
-                                  })
-                              }  
-                          })
-                      }
-                  },
-                  fail: function(res) {
-                      console.log(res.data)
-                  },
-              })
+                if(this.data.newPassword.length >= 6 && this.data.newPassword.length <=20){
+                    app.send(
+                                '/account/password',
+                                'POST',
+                                {
+                                    OldPassword:that.data.oldPassword,
+                                    NewPassword:that.data.newPassword,
+                                },'',
+                                function(){
+                                    if(res){
+                                        console.log(res.data)
+                                        wx.showToast({  
+                                            title: '修改成功',  
+                                            icon : 'loading',  
+                                            duration : 1000,
+                                            success:function(res){
+                                                wx.switchTab({
+                                                    url: '../me/me',
+                                                })
+                                            }  
+                                        })
+                                    }
+                                }
+                    )
+                }else{
+                    wx.showToast({
+                        title: '密码长度6-20',
+                        icon: 'loading',
+                        duration: 1500
+                    })
+                }
+            //   wx.request({
+            //       url: 'https://api.carbycar.com.cn/account/password',
+            //       data: {
+            //           OldPassword:that.data.oldPassword,
+            //           NewPassword:that.data.newPassword,
+            //       },
+            //       method: 'POST', 
+            //       header: {
+            //           'content-type': 'application/json'
+            //       },
+            //       success: function(res){
+            //           if(res){
+            //               console.log(res.data)
+            //               wx.showToast({  
+            //                   title: '修改成功',  
+            //                   icon : 'loading',  
+            //                   duration : 1000,
+            //                   success:function(res){
+            //                       wx.switchTab({
+            //                           url: '../me/me',
+            //                       })
+            //                   }  
+            //               })
+            //           }
+            //       },
+            //       fail: function(res) {
+            //           console.log(res.data)
+            //       },
+            //   })
           }else{
               wx.showToast({  
                   title: '新密码与确认密码必须相同',  

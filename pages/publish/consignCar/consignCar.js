@@ -2,11 +2,13 @@
 var app = getApp();
 Page({
   data: {
-    warning: false,
+    warning: true,
     brand: '请选择品牌',
     style: '',
-    valuation: 1,
+    valuation: '',
+    valuationN: 1,
     amount: 1,
+    amountN: 1,
     newCar: true,
     canDrive: true,
     needInsurance: false,
@@ -22,7 +24,7 @@ Page({
   },
   onShow: function () {
     // 页面显示
-    
+
     this.setData({
       brand: app.globalData.title
     })
@@ -49,29 +51,25 @@ Page({
     })
   },
   valuation: function (e) {
-    console.log('输入价格长度为', e.detail.value.length)
     if (e.detail.value.length > 3) {
       this.setData({
-        warning: true
+        warning: false
       })
     } else {
       this.setData({
-        warning: false
+        warning: true
       })
     };
     this.setData({
       valuation: parseInt(e.detail.value),
-      valuationN:e.detail.value
+      valuationN: e.detail.value
     });
-    console.log('获取输入价格为', parseInt(e.detail.value));
-    console.log('获取输入品牌为', this.data.brand);
-    console.log('获取输入类型为', this.data.style)
   },
   //获取汽车数量
   amount: function (e) {
     this.setData({
       amount: parseInt(e.detail.value),
-      amountN:e.detail.value
+      amountN: e.detail.value
     });
   },
   //获取汽车状态
@@ -79,26 +77,28 @@ Page({
     this.setData({
       newCar: e.detail.value
     });
-    console.log('是否新车', e.detail.value)
   },
   canDrive: function (e) {
     this.setData({
       canDrive: e.detail.value
     });
-    console.log('是否能开', e.detail.value)
   },
   //是否需要保险
   needInsurance: function (e) {
     this.setData({
-      needInsurance: e.detail.value
+      needInsurance: true
     });
-    console.log('是否需要单车险', e.detail.value)
+  },
+  noNeedInsurance: function (e) {
+    this.setData({
+      needInsurance: false
+    });
   },
   //保存车辆信息
   save: function () {
     var that = this;
     var apply = that.data;
-    if(apply.brand=='请选择品牌'){
+    if (apply.brand == '请选择品牌') {
       wx.showToast({
         title: '请选择品牌',
         icon: 'loading',
@@ -106,22 +106,22 @@ Page({
       });
       return;
     };
-    // if(apply.valuationN.length==0){
-    //   wx.showToast({
-    //     title: '请估值',
-    //     icon: 'loading',
-    //     duration: 2000
-    //   });
-    //   return;
-    // };
-    // if(apply.amountN==0){
-    //   wx.showToast({
-    //     title: '请填写数量',
-    //     icon: 'loading',
-    //     duration: 2000
-    //   });
-    //   return;
-    // };
+    if (apply.valuationN.length == 0 || apply.valuation == 0) {
+      wx.showToast({
+        title: '请估值',
+        icon: 'loading',
+        duration: 2000
+      });
+      return;
+    };
+    if (apply.amountN.length == 0 || apply.amount == 0) {
+      wx.showToast({
+        title: '请填写数量',
+        icon: 'loading',
+        duration: 2000
+      });
+      return;
+    };
     this.setData({
       consignCar: [
         {
@@ -135,9 +135,7 @@ Page({
         }
       ]
     });
-     wx.setStorageSync('consignCar', this.data.consignCar)
-    // app.globalData.consignCar = apply.consignCar
-    console.log(app.globalData.consignCar);
+    wx.setStorageSync('consignCar', this.data.consignCar)
     wx.navigateBack({
       delta: 1
     });

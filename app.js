@@ -27,7 +27,7 @@ App({
     var user = wx.getStorageSync('user') || { Code: '', Expires: 0 };
     this.globalData.user = user;
     //调用API将版本信息存入本地缓存
-    wx.setStorageSync('version', 'WMP1.0.4');
+    wx.setStorageSync('version', 'WMP1.1.0');
     //用户访问版本信息,每天只要一次
     var versionDate = wx.getStorageSync('versionDate');
     if(versionDate){

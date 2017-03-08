@@ -1,6 +1,6 @@
 // pages/city/city.js
 // 城市列表
-var util = require('../../utils/citys.js')
+var util = require('../../utils/citys.js');
 var app = getApp();
 
 Page({

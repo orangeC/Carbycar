@@ -1,4 +1,5 @@
 // pages/publish/brand/brand.js
+var brandjs = require('../../../utils/brands.js');
 var app = getApp();
 Page({
   data: {
@@ -17,16 +18,19 @@ Page({
     styleHidden: true
   },
   onLoad: function (options) {
-    // 生命周期函数--监听页面加载
-    var that = this;
-    app.send('/system/brand/', 'GET', {}, '', function (res) {
-      that.setData({
-        brand: res.data,
-      });
-    });
-    this.setData({
-      category: options.category,
-    })
+    // app.send('/system/brand/', 'GET', {}, '', function (res) {
+    //   console.log(res.data);
+    //   that.setData({
+    //     brand: res.data,
+    //   });
+    //   wx.setStorageSync('brand', res.data);
+    // });
+      var dataBrand = brandjs.getCitys()
+      this.setData({
+        brand: dataBrand,
+        category: options.category,
+      })
+      wx.setStorageSync('brand', dataBrand);
   },
   onShow: function () {
 

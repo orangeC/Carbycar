@@ -1,6 +1,11 @@
-function send(url, method, data, token, success,fail) {
+
+function send(url, method, data, token, success, fail) {
+  var token = wx.getStorageSync('id_token');
+  console.log(token)
+  //https://api.carbycar.com.cn
+  //http://open.3vcar.com
   wx.request({
-    url: "https://api.carbycar.com.cn" + url,
+    url: "http://open.3vcar.com" + url,
     method: method,
     data: data,
     header: {

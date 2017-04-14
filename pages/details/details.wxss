@@ -399,8 +399,8 @@ swiper-item {
 }
 
 .swiper-container image {
-  width: 70%;
-  height: 70%;
+  width: 95%;
+  height: 95%;
 }
 
 .icon-time:before {

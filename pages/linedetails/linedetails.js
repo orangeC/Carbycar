@@ -53,138 +53,71 @@ Page({
     var eCode = e.Code;
     var that = this;
     var me = e.me
-    //50425344
-    //51723776
-    //57805312
     var token = wx.getStorageSync('id_token')
-    if (token && me) {
-      app.send("/consignor/profile/", "GET", {}, token, function (res) {
+    app.send("/consignor/profile/", "GET", {}, token, function (res) {
+      that.setData({
+        Code: res.data.Code
+      })
+    });
+    app.send("/line/order/detail", "GET", { code: eCode }, token, function (res) {
+      console.log(res)
+      if (res) {
+        var apply = res.data;
+        //解析车辆信息
+        var arr = apply.CarInfo;
+        var arrC = arr;
+        console.log(arrC)
+        var QuoteData = apply.QuoteInfos;
+        var CarryData = apply.ConsignInfo;
+        console.log(CarryData)
+
+        if (QuoteData) {
+          //时间转换(处理接收到的数据多少小时前)
+          for (var i = 0; i < QuoteData.length; i++) {
+            var fromTime = QuoteData[i].QuoteTime;
+            QuoteData[i].ExpiredTime = moment.getFromnow(fromTime);
+            //为整数字符串在末尾添加.00
+            if (!/\./.test(QuoteData[i].CarrierScore)) {
+              QuoteData[i].CarrierScore += '.0';
+            }
+          }
+        }
+
+        //时间转换(年月日 时间)
+        var timeCreate = apply.CreateTime;
+        var timeTraceInfo = apply.TraceInfo.CreateTime;
+        var timeDepart = apply.DepartTime;
+        timeCreate = moment.getFormat(timeCreate, "yyyy-MM-dd hh:mm");
+        timeTraceInfo = moment.getFormat(timeTraceInfo, "yyyy-MM-dd hh:mm");
+        timeDepart = moment.getFormat(timeDepart, "yyyy-MM-dd");
+        //设置data值
         that.setData({
-          Code: res.data.Code
+          ConsignorCode: apply.ConsignorCode,
+          OrderNo: apply.OrderNo,
+          Status: apply.Status,
+          Type: apply.Type,
+          CreateTime: timeCreate,
+          Starting: apply.Starting,
+          Ending: apply.Ending,
+          Price: apply.Price,
+          Cars: arrC,
+          CarPick: apply.CarPick,
+          Title: apply.TraceInfo.Title,
+          tipsTime: timeTraceInfo,
+          DepartTime: timeDepart,
+          ContactName: apply.ContactName,
+          ContactPhone: apply.ContactPhone,
+          TakeAddress: apply.TakeAddress,
+          TakeDistrict: apply.TakeDistrict,
+          Remark: apply.Remark,
+          QuoteInfos: QuoteData,
+          CarryInfo: CarryData,
+          TakePlace: apply.TakePlace,
+          eCode: eCode,
+          CarryData: CarryData
         })
-      });
-      app.send("/consign/order/consign/", "GET", { code: eCode }, token, function (res) {
-        if (res) {
-          var apply = res.data;
-          //解析车辆信息
-          var arr = apply.Cars;
-          var arrC = JSON.parse(arr);
-          var arrI = JSON.parse(apply.Info);
-          var QuoteData = apply.QuoteInfos;
-          var CarryData = apply.CarryInfo;
-          var arrInfo = JSON.parse(apply.Info);
-
-          if (QuoteData) {
-            //时间转换(处理接收到的数据多少小时前)
-            for (var i = 0; i < QuoteData.length; i++) {
-              var fromTime = QuoteData[i].QuoteTime;
-              QuoteData[i].ExpiredTime = moment.getFromnow(fromTime);
-              //为整数字符串在末尾添加.00
-              if (!/\./.test(QuoteData[i].CarrierScore)) {
-                QuoteData[i].CarrierScore += '.0';
-              }
-            }
-          }
-          if (CarryData) {
-            var arrQ = JSON.parse(CarryData.QuoteInfo);
-          }
-
-          //时间转换(年月日 时间)
-          var timeCreate = apply.CreateTime;
-          var timeTraceInfo = apply.TraceInfo.CreateTime;
-          var timeDepart = apply.DepartTime;
-          timeCreate = moment.getFormat(timeCreate, "yyyy-MM-dd hh:mm");
-          timeTraceInfo = moment.getFormat(timeTraceInfo, "yyyy-MM-dd hh:mm");
-          timeDepart = moment.getFormat(timeDepart, "yyyy-MM-dd");
-          //设置data值
-          that.setData({
-            ConsignorCode: apply.ConsignorCode,
-            OrderNo: apply.OrderNo,
-            Status: apply.Status,
-            Type: apply.Type,
-            CreateTime: timeCreate,
-            Starting: apply.Starting,
-            Ending: apply.Ending,
-            Price: apply.Price,
-            Cars: arrC,
-            Title: apply.TraceInfo.Title,
-            tipsTime: timeTraceInfo,
-            DepartTime: timeDepart,
-            ContactName: apply.ContactName,
-            Info: arrI,
-            Remark: apply.Remark,
-            QuoteInfos: QuoteData,
-            CarryInfo: CarryData,
-            TakePlace: apply.TakePlace,
-            QuoteInfo: arrQ,
-            eCode: eCode,
-            arrInfo: arrInfo,
-            CarryData: CarryData
-          })
-        }
-      })
-    } else {
-      app.send("/consign/order/consign/", "GET", { code: eCode }, "", function (res) {
-        if (res) {
-          var apply = res.data;
-          //解析车辆信息
-          var arr = apply.Cars;
-          var arrC = JSON.parse(arr);
-          var arrI = JSON.parse(apply.Info);
-          var QuoteData = apply.QuoteInfos;
-          var CarryData = apply.CarryInfo;
-          var arrInfo = JSON.parse(apply.Info);
-
-          if (QuoteData) {
-            //时间转换(处理接收到的数据多少小时前)
-            for (var i = 0; i < QuoteData.length; i++) {
-              var fromTime = QuoteData[i].QuoteTime;
-              QuoteData[i].ExpiredTime = moment.getFromnow(fromTime);
-              //为整数字符串在末尾添加.00
-              if (!/\./.test(QuoteData[i].CarrierScore)) {
-                QuoteData[i].CarrierScore += '.0';
-              }
-            }
-          }
-          if (CarryData) {
-            var arrQ = JSON.parse(CarryData.QuoteInfo);
-          }
-
-          //时间转换(年月日 时间)
-          var timeCreate = apply.CreateTime;
-          var timeTraceInfo = apply.TraceInfo.CreateTime;
-          var timeDepart = apply.DepartTime;
-          timeCreate = moment.getFormat(timeCreate, "yyyy-MM-dd hh:mm");
-          timeTraceInfo = moment.getFormat(timeTraceInfo, "yyyy-MM-dd hh:mm");
-          timeDepart = moment.getFormat(timeDepart, "yyyy-MM-dd");
-          //设置data值
-          that.setData({
-            ConsignorCode: apply.ConsignorCode,
-            OrderNo: apply.OrderNo,
-            Status: apply.Status,
-            Type: apply.Type,
-            CreateTime: timeCreate,
-            Starting: apply.Starting,
-            Ending: apply.Ending,
-            Price: apply.Price,
-            Cars: arrC,
-            Title: apply.TraceInfo.Title,
-            tipsTime: timeTraceInfo,
-            DepartTime: timeDepart,
-            ContactName: apply.ContactName,
-            Info: arrI,
-            Remark: apply.Remark,
-            QuoteInfos: QuoteData,
-            CarryInfo: CarryData,
-            TakePlace: apply.TakePlace,
-            QuoteInfo: arrQ,
-            eCode: eCode,
-            arrInfo: arrInfo,
-            CarryData: CarryData
-          })
-        }
-      })
-    }
+      }
+    })
   },
   onReady: function () {
     var that = this;
@@ -271,9 +204,9 @@ Page({
           arrCate.push(CarryData.Checkouts, CarryData.Contracts, CarryData.Deliveries, CarryData.Insurances);
           //测试换 "https://image.carbycar.com.cn"
           //       http://open.3vcar.com
-          var imgHTTP = "https://image.carbycar.com.cn";
+          var imgHTTP = "http://image.3vcar.com";
           //分别插入4个图片（很没有效率）
-          if (arrCate[0] != "") {
+          if (arrCate[0] != "" && JSON.parse(arrCate[0])[0].Url) {
             var imgSrcOne = imgHTTP + JSON.parse(arrCate[0])[0].Url;
             var arrSrcOne = [];
             for (var i = 0; i < JSON.parse(arrCate[0]).length; i++) {
@@ -289,7 +222,7 @@ Page({
               imgOneLength: 0
             })
           };
-          if (arrCate[1] != "") {
+          if (arrCate[1] != "" && JSON.parse(arrCate[1])[0].Url) {
             var imgSrcTwo = imgHTTP + JSON.parse(arrCate[1])[0].Url;
             var arrSrcTwo = [];
             for (var i = 0; i < JSON.parse(arrCate[1]).length; i++) {
@@ -305,7 +238,8 @@ Page({
               imgTwoLength: 0
             })
           };
-          if (arrCate[2] != "") {
+          console.log()
+          if (arrCate[2] != "" && JSON.parse(arrCate[2])[0].Url) {
             var imgSrcThree = imgHTTP + JSON.parse(arrCate[2])[0].Url;
             var arrSrcThree = [];
             for (var i = 0; i < JSON.parse(arrCate[2]).length; i++) {
@@ -321,7 +255,7 @@ Page({
               imgThreeLength: 0
             })
           };
-          if (arrCate[3] != "") {
+          if (arrCate[3] != "" && JSON.parse(arrCate[3])[0].Url) {
             var imgSrcFour = imgHTTP + JSON.parse(arrCate[3])[0].Url;
             var arrSrcFour = [];
             for (var i = 0; i < JSON.parse(arrCate[3]).length; i++) {
@@ -368,7 +302,7 @@ Page({
   },
   bindTips: function () {
     wx.navigateTo({
-      url: "/pages/status/status?code=" + this.data.eCode
+      url: "/pages/linestatus/linestatus?code=" + this.data.eCode
     })
   },
   bindHiddenOne: function () {

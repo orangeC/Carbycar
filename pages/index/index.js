@@ -8,9 +8,8 @@ Page({
   },
   onLoad:function(){
       var that = this;
-      app.send('/order/consign','GET',{},'',function(res){
+      app.send('/consign/order/consign','GET',{},'',function(res){
           if(res){
-                console.log(res.data);
                 var apply = res.data;
                 for (var i = 0;i < apply.length;i++){
                     apply[i].Starting = site.getCity(apply[i].Starting); 
@@ -29,7 +28,7 @@ Page({
 
   onShow:function(){
         var that = this;
-        app.send('/order/consign','GET',{},'',function(res){
+        app.send('/consign/order/consign','GET',{},'',function(res){
             if(res){
                 var apply = res.data;
                 for (var i = 0;i < apply.length;i++){

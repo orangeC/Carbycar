@@ -2,7 +2,9 @@
   "pages": [
     "pages/index/index",
     "pages/status/status",
+    "pages/linestatus/linestatus",
     "pages/details/details",
+    "pages/linedetails/linedetails",
     "pages/register/register",
     "pages/statuslist/statuslist",
     "pages/editpassword/editpassword",

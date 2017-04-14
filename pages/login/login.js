@@ -32,7 +32,7 @@ Page({
         {
             username: this.data.userName,  
             password: this.data.userPassword,
-            version:version
+            version: "WMP1.2.0"
         },
         '',
         function(res){
@@ -55,7 +55,7 @@ Page({
                 });
             }else{
                 wx.showToast({
-                    title: '登陆失败请重新登录',  
+                    title: res.data.Message,  
                     icon : 'loading',  
                     duration : 1000
                 })

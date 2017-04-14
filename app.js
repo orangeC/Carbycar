@@ -16,7 +16,7 @@ App({
       }
     });
 
-    this.send("/order/consign/", "GET", {}, "", function (res) {
+    this.send("/consign/order/consign/", "GET", {}, "", function (res) {
 
     });
 

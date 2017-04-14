@@ -1,0 +1,235 @@
+
+<!--pages/details/details.wxml-->
+<view class="container">
+  <view class="header">
+    <text class="orderNo">订单号：{{OrderNo}}</text>
+    <view>|
+      <text class="iconfont icon-time"></text>
+      <text class="header-text">{{Status}}</text>
+    </view>
+  </view>
+  <view class="publishTime">
+    <text class="flexLeft publishBid">专</text>
+    <text class="flexCenter">发布时间：{{CreateTime}}</text>
+  </view>
+  <view class="site">
+    <view class="siteLeft">
+      <text>{{Starting}}</text>
+      <view class="iconfont icon-arrow"></view>
+      <text>{{Ending}}</text>
+    </view>
+    <view class="siteRight" wx:if="{{whichType}}">
+
+      <!--我改的-->
+      <text>总价：</text>
+      <text class="siteRight-text">￥{{Price}}</text>
+    </view>
+  </view>
+  <view class="tips" bindtap="bindTips">
+    <view class="flexLeft">
+      <view class="circleOne"></view>
+    </view>
+    <view class="flexCenter">
+      <text>{{Title}}</text>
+      <text>{{tipsTime}}</text>
+    </view>
+    <text class="flexRight-right">></text>
+  </view>
+  <view class="carInfo normal" bindtap="bindHiddenOne">
+    <text class="iconfont icon-car flexLeft"></text>
+    <text class="flexCenter">车辆信息</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabOne}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
+  </view>
+  <block wx:for="{{Cars}}" wx:for-item="Cars" wx:key="i">
+    <view hidden="{{hiddenCarDetail}}" class="carDetail">
+      <text class="iconfont icon-smallCar flexLeft"></text>
+      <view class="flexCenter">
+        <text>{{Cars.Brand}}【{{Cars.Style}}】</text>
+        <view class="carDetail-text">
+          <text>汽车状态：</text>
+          <text wx:if="{{Cars.NewCar}}">新车</text>
+          <text wx:else>二手车</text>
+          <text>/</text>
+          <text wx:if="{{Cars.CanDrive}}">能开</text>
+          <text wx:else>不能开</text>
+          单车估值：{{Cars.Valuation}}万
+        </view>
+        <view class="carDetail-text">
+          <text>保险：</text>
+          <text wx:if="{{Cars.NeedInsurance}}">需要单车险</text>
+          <text wx:else>不需要单车险</text>
+        </view>
+      </view>
+      <text class="flexRight">{{Cars.Amount}}辆</text>
+    </view>
+  </block>
+  <view class="consignInfo normal" bindtap="bindHiddenTwo">
+    <text class="iconfont icon-truck flexLeft"></text>
+    <text class="flexCenter">托运基本信息</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabTwo}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
+  </view>
+  <view hidden="{{hiddenConsignInfo}}" class="consignInfoX">
+    <view class="consignInfoX-head">
+      <view wx:if="{{CarPick}}" class="consignInfoX-car">
+        <text class="iconfont icon-yes-light"></text>上门提车</view>
+      <view wx:else class="consignInfoX-car dark">
+        <text class="iconfont icon-yes-dark"></text>不上门提车</view>
+    </view>
+    <text>要求发车时间：{{DepartTime}}</text>
+    <text>
+      <text>联系人：</text>
+      <text class="consignInfoX-name">{{ContactName}} </text>
+      <text class="consignInfoX-name">{{ContactPhone}}</text>
+    </text>
+    <view class="consignInfoX-site">
+      <text wx:if="{{TakeDistrict == null}}">提车地点：不需要上门提车</text>
+      <text wx:else>提车地点：{{TakeDistrict}} {{TakeAddress}}</text>
+    </view>
+    <text wx:if="{{Remark == null}}">备注：无</text>
+    <text wx:else>备注：{{Remark}}</text>
+  </view>
+  <view class="pricing normal" bindtap="bindHiddenThree" hidden="{{hiddenPricingControl}}">
+    <text class="iconfont icon-gift flexLeft"></text>
+    <text class="flexCenter">
+      <text>当前报价</text>
+      <text wx:if="{{QuoteInfos}}">{{QuoteInfos.length}}</text>
+      <text wx:else>0</text>条（价格仅车主可见）</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabThree}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
+  </view>
+  <block wx:for="{{QuoteInfos}}" wx:for-item="QuoteInfos" wx:key="i">
+    <view hidden="{{hiddenPricing}}" class="pricingH">
+      <view>
+        <text class="pricingH-topText">{{QuoteInfos.CarrierName}}</text>
+        <text>
+          <text class="iconfont icon-smallTime"> </text> {{QuoteInfos.ExpiredTime}}</text>
+      </view>
+      <view class="pricingC">
+        <view class="pricingC-header">
+          <text>{{QuoteInfos.CarrierPhone}}</text>
+        </view>
+        <text class="pricingC-center">
+          <text class="iconfont icon-star"></text>
+          <text>{{QuoteInfos.CarrierScore}}</text>
+          <text>（{{QuoteInfos.CarryTimes}}单）</text>
+        </text>
+        <text wx:if="{{ConsignorCode == Code}}" class="pricingC-right">￥{{QuoteInfos.QuoteAmount}}元</text>
+        <text wx:else class="pricingC-right"></text>
+      </view>
+    </view>
+    <view hidden="{{hiddenPricing}}" class="pricingB">
+      <text>发车点：</text>{{QuoteInfos.TakePlace}}</view>
+  </block>
+  <view hidden="{{hiddenQuote}}" class="getCar normal" bindtap="bindHiddenFive">
+    <text class="iconfont icon-site flexLeft"></text>
+    <text class="flexCenter">提车信息</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabFive}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
+  </view>
+  <view hidden="{{hiddenGetCar}}" class="getCarX">
+    <view>
+      <view class="getCarX-header">
+        <text>
+          <text class="black">提车人：</text>{{Checker.Name}} {{Checker.Phone}}
+        </text>
+        <text>
+          <text class="black">身份证：</text>{{Checker.Number}}</text>
+      </view>
+      <view>
+        <view class="getCarX-img iconfont icon-phone" bindtap="bindCallsb"></view>
+      </view>
+    </view>
+    <view>
+      <text>
+        <text class="black">板车司机：</text>{{Driver.Name}} {{Driver.Phone}}
+      </text>
+      <view class="getCarX-img iconfont icon-phone" bindtap="bindCallDriver"></view>
+    </view>
+  </view>
+  <view hidden="{{hiddenQuote}}" class="certificate normal" bindtap="bindHiddenSix">
+    <text class="iconfont icon-camera flexLeft"></text>
+    <text class="flexCenter">物流凭证</text>
+    <text class="flexRight carInfoRight" wx:if="{{switchTabSix}}">∨</text>
+    <text class="flexRight carInfoRight" wx:else>∧</text>
+  </view>
+  <view hidden="{{hiddenCertificate}}" class="certificateX">
+    <view>
+      <view hidden="{{!imgOneLength}}" class="certificateX-circle">{{imgOneLength}}</view>
+      <view class="noImage" wx:if="{{!imgOneLength}}">
+        <view class="iconfont icon-camera noImageCamera"></view>
+        <text>承运方</text>
+        <text>提车时提供</text>
+      </view>
+      <image wx:else src="{{imgSrcOne}}" bindtap="enterPreviewModeOne"></image>
+      <text>合同</text>
+    </view>
+    <view>
+      <view hidden="{{!imgTwoLength}}" class="certificateX-circle">{{imgTwoLength}}</view>
+      <view class="noImage" wx:if="{{!imgTwoLength}}">
+        <view class="iconfont icon-camera noImageCamera"></view>
+        <text>承运方</text>
+        <text>提车时提供</text>
+      </view>
+      <image wx:else src="{{imgSrcTwo}}" bindtap="enterPreviewModeTwo"></image>
+      <text>验车单</text>
+    </view>
+    <view>
+      <view hidden="{{!imgThreeLength}}" class="certificateX-circle">{{imgThreeLength}}</view>
+      <view class="noImage" wx:if="{{!imgThreeLength}}">
+        <view class="iconfont icon-camera noImageCamera"></view>
+        <text>承运方</text>
+        <text>提车时提供</text>
+      </view>
+      <image wx:else src="{{imgSrcThree}}" bindtap="enterPreviewModeThree"></image>
+      <text>保险单</text>
+    </view>
+    <view>
+      <view hidden="{{!imgFourLength}}" class="certificateX-circle">{{imgFourLength}}</view>
+      <view class="noImage" wx:if="{{!imgFourLength}}">
+        <view class="iconfont icon-camera noImageCamera"></view>
+        <text>承运方</text>
+        <text>交车时提供</text>
+      </view>
+      <image wx:else src="{{imgSrcFour}}" bindtap="enterPreviewModeFour"></image>
+      <text>交车单</text>
+    </view>
+  </view>
+
+  <!-- 预览模式1 -->
+  <swiper class="swiper-container" duration="400" current="{{previewIndex}}" bindtap="leavePreviewMode" style="display:{{previewModeOne ? 'block' : 'none'}};">
+    <block wx:for="{{arrSrcOne}}" wx:key="{{i}}">
+      <swiper-item>
+        <image src="{{item}}" mode="scaleToFill"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 预览模式2 -->
+  <swiper class="swiper-container" duration="400" current="{{previewIndex}}" bindtap="leavePreviewMode" style="display:{{previewModeTwo ? 'block' : 'none'}};">
+    <block wx:for="{{arrSrcTwo}}" wx:key="{{i}}">
+      <swiper-item>
+        <image src="{{item}}" mode="scaleToFill"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 预览模式3 -->
+  <swiper class="swiper-container" duration="400" current="{{previewIndex}}" bindtap="leavePreviewMode" style="display:{{previewModeThree ? 'block' : 'none'}};">
+    <block wx:for="{{arrSrcThree}}" wx:key="{{i}}">
+      <swiper-item>
+        <image src="{{item}}" mode="scaleToFill"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+
+  <!-- 预览模式4 -->
+  <swiper class="swiper-container" duration="400" current="{{previewIndex}}" bindtap="leavePreviewMode" style="display:{{previewModeFour ? 'block' : 'none'}};">
+    <block wx:for="{{arrSrcFour}}" wx:key="{{i}}">
+      <swiper-item>
+        <image src="{{item}}" mode="scaleToFill"></image>
+      </swiper-item>
+    </block>
+  </swiper>
+</view>

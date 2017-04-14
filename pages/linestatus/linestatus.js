@@ -6,10 +6,12 @@ Page({
     Status: []
   },
   onLoad: function (options) {
+    console.log(options);
     var oCode = options.code
     var that = this;
     //50425344
-    app.send("/consign/order/trace/", "GET", { code: oCode },"", function (res) {
+    var token = wx.getStorageSync('id_token')
+    app.send("/line/order/trace", "GET", { code: oCode }, token, function (res) {
       if (res.data) {
         var apply = res.data;
         //时间转换(年月日 时间)
@@ -31,10 +33,12 @@ Page({
         setTimeout(function () {
           wx.hideToast()
         }, 2000)
+        return;
       }
     })
   },
   onReady: function () {
+    console.log(this.data.Status)
     // 页面渲染完成
   },
   onShow: function () {
